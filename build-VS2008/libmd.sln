@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd-static", "libmd-static\libmd-static.vcproj", "{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66} = {EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5", "md5\md5.vcproj", "{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,6 +12,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5", "md5\md5.vcproj", "{B
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd", "libmd\libmd.vcproj", "{5CC6B30E-41FD-44B0-8059-E25A68FCD286}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66} = {EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd-srcgen", "libmd-srcgen\libmd-srcgen.vcproj", "{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +50,14 @@ Global
 		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Release|Win32.Build.0 = Release|Win32
 		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Release|x64.ActiveCfg = Release|x64
 		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Release|x64.Build.0 = Release|x64
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|Win32.Build.0 = Debug|Win32
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|x64.ActiveCfg = Debug|x64
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|x64.Build.0 = Debug|x64
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|Win32.ActiveCfg = Release|Win32
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|Win32.Build.0 = Release|Win32
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|x64.ActiveCfg = Release|x64
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
