@@ -8,7 +8,7 @@ LDFLAGS =
 
 OBJS = md5.o
 
-LIBS = ../libmd/libbsdmd.a
+LIBS = ../libmd/libmd.a
 
 all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
 

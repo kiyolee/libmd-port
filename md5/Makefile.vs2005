@@ -10,7 +10,7 @@ LDFLAGS = -MD
 
 OBJS = $(OBJDIR)\md5.obj $(OBJDIR)\getopt.obj
 
-LIBS = ..\libmd\$(OBJDIR)\libbsdmd.lib
+LIBS = ..\libmd\$(OBJDIR)\libmd-static.lib
 
 all: MAKEDIR $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
 

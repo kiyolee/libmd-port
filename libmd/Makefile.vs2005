@@ -1,7 +1,7 @@
 OBJDIR = .\w32
 DLLOBJDIR = .\w32dll
 
-TARGET_STATIC = $(OBJDIR)\libmd.lib
+TARGET_STATIC = $(OBJDIR)\libmd-static.lib
 TARGET_DLL = $(DLLOBJDIR)\libmd.dll
 
 CFLAGS = -Ox -I. -W4 -MD -DMD_INTERNAL
