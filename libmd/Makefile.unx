@@ -3,15 +3,29 @@ TARGET_STATIC = libmd.a
 
 RANLIB = ranlib
 
-CFLAGS = -fPIC -pipe -O2 -I. -DMD_INTERNAL -DSHA1_ASM -DELF -DRMD160_ASM -DELF -Wall
+MACHINE_ARCH=$(shell uname -m)
+ifeq ($(MACHINE_ARCH),i686)
+MACHINE_ARCH=i386
+endif
+
+ifeq ($(MACHINE_ARCH),i386)
+CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM -DELF
+OBJS_X86 = rmd160.o sha.o
+else
+CFLAGS_X86 =
+OBJS_X86 =
+endif
+
+CFLAGS = -fPIC -pipe -O2 -Wall -I. -DMD_INTERNAL $(CFLAGS_X86)
 LDFLAGS_SHARED = -shared
 LDFLAGS_STATIC =
 
 OBJS = \
     md2c.o md4c.o md5c.o md2hl.o md4hl.o md5hl.o \
-    rmd160c.o rmd160hl.o rmd160.o \
-    sha0c.o sha0hl.o sha1c.o sha1hl.o sha.o \
-    sha256c.o sha256hl.o
+    rmd160c.o rmd160hl.o \
+    sha0c.o sha0hl.o sha1c.o sha1hl.o \
+    sha256c.o sha256hl.o \
+    $(OBJS_X86)
 
 SRCS_HL = \
     md2hl.c md4hl.c md5hl.c \
