@@ -1,5 +1,5 @@
-TARGET_SHARED = libbsdmd.so
-TARGET_STATIC = libbsdmd.a
+TARGET_SHARED = libmd.so
+TARGET_STATIC = libmd.a
 
 RANLIB = ranlib
 

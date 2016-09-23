@@ -1,8 +1,8 @@
 OBJDIR = .\w32
 DLLOBJDIR = .\w32dll
 
-TARGET_STATIC = $(OBJDIR)\libbsdmd.lib
-TARGET_DLL = $(DLLOBJDIR)\libbsdmd.dll
+TARGET_STATIC = $(OBJDIR)\libmd.lib
+TARGET_DLL = $(DLLOBJDIR)\libmd.dll
 
 CFLAGS = -Ox -I. -W4 -MD -DMD_INTERNAL
 
@@ -48,7 +48,7 @@ all: MAKEDIR $(TARGET_STATIC) $(TARGET_DLL)
 
 clean:
 	-del $(OBJS) $(SRCS_HL) $(TARGET_STATIC) $(DLLOBJS) $(TARGET_DLL) \
-		$(DLLOBJDIR)\libbsdmd.exp $(DLLOBJDIR)\libbsdmd.lib $(TARGET_DLL).manifest
+		$(DLLOBJDIR)\libmd.exp $(DLLOBJDIR)\libmd.lib $(TARGET_DLL).manifest
 
 MAKEDIR:
 	if not exist $(OBJDIR) mkdir $(OBJDIR)

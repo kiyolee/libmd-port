@@ -1,4 +1,4 @@
-TARGET_STATIC = libbsdmd.a
+TARGET_STATIC = libmd.a
 
 RANLIB = ranlib
 

@@ -1,6 +1,6 @@
-TARGET_SHARED = bsdmd.so
+TARGET_SHARED = libmd.so
 
-TARGET_LIB = libbsdmd.a
+TARGET_LIB = libmd.a
 TARGET_BINDER = BSDMD_BD
 
 CC = icc
@@ -45,14 +45,14 @@ clean:
 	$(RM) $(SRCS_HL) $(OBJS) $(TARGET_SHARED) $(TARGET_LIB) $(REFS)
 
 $(TARGET_SHARED): $(OBJS)
-	system "cpyfrmstmf fromstmf('bsdmd.isb') tombr('/QSYS.LIB/$(OUTPUTDIR).LIB/QSRVSRC.FILE/BSDMD.MBR') MBROPT(*REPLACE)"
+	system "cpyfrmstmf fromstmf('libmd.isb') tombr('/QSYS.LIB/$(OUTPUTDIR).LIB/QSRVSRC.FILE/BSDMD.MBR') MBROPT(*REPLACE)"
 	$(LD) $(LDFLAGS_SHARED) $^ -o $@
 
 $(TARGET_LIB): $(TARGET_SHARED)
 	$(RM) $@
 	-system "dltbnddir $(OUTPUTDIR)/$(TARGET_BINDER)"
 	system "crtbnddir $(OUTPUTDIR)/$(TARGET_BINDER)"
-	system "addbnddire bnddir($(OUTPUTDIR)/$(TARGET_BINDER)) obj(bsdmd)"
+	system "addbnddire bnddir($(OUTPUTDIR)/$(TARGET_BINDER)) obj(libmd)"
 	ln -s "/QSYS.LIB/$(OUTPUTDIR).LIB/$(TARGET_BINDER).BNDDIR" $@
 
 %.o: %.c
