@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="bsdmd_lib"
+	Name="libmd-static"
 	ProjectGUID="{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}"
-	RootNamespace="bsdmd_lib"
+	RootNamespace="libmd-static"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -20,8 +20,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)lib\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)\lib"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
 			>
@@ -64,74 +64,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\libbsdmd.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)lib\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)\lib"
-			ConfigurationType="4"
-			CharacterSet="0"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="MD_INTERNAL"
-				StringPooling="true"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				WarningLevel="4"
-				SuppressStartupBanner="false"
-				DebugInformationFormat="3"
-				CompileAs="0"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\libbsdmd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -153,7 +85,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="$(SolutionDir)lib\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -198,7 +130,72 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\libbsdmd.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+				SuppressStartupBanner="false"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="false"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="0"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				PreprocessorDefinitions="MD_INTERNAL"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				WarningLevel="4"
+				SuppressStartupBanner="false"
+				DebugInformationFormat="3"
+				CompileAs="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -220,7 +217,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="$(SolutionDir)lib\$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -266,7 +263,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\libbsdmd.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -296,47 +292,38 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\md2c.c"
+				RelativePath="..\..\libmd\md2c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\md2hl.c"
+				RelativePath="..\..\libmd\md2hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\md4c.c"
+				RelativePath="..\..\libmd\md4c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\md4hl.c"
+				RelativePath="..\..\libmd\md4hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\md5c.c"
+				RelativePath="..\..\libmd\md5c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\md5hl.c"
+				RelativePath="..\..\libmd\md5hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\mdXhl.c"
+				RelativePath="..\..\libmd\mdXhl.c"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputFileName) ) &gt; md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputFileName) ) &gt; md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputFileName) ) &gt; md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputFileName) ) &gt; sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputFileName) ) &gt; sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputFileName) ) &gt; sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputFileName) ) &gt; rmd160hl.c&#x0D;&#x0A;"
-						Outputs="md2hl.c;md4hl.c;md5hl.c;sha0hl.c;sha1hl.c;sha256hl.c;rmd160hl.c"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputFileName) ) &gt; md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputFileName) ) &gt; md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputFileName) ) &gt; md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputFileName) ) &gt; sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputFileName) ) &gt; sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputFileName) ) &gt; sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputFileName) ) &gt; rmd160hl.c&#x0D;&#x0A;"
+						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputPath) ) &gt; $(InputDir)md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputPath) ) &gt; $(InputDir)md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputPath) ) &gt; $(InputDir)md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputPath) ) &gt; $(InputDir)sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputPath) ) &gt; $(InputDir)sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputPath) ) &gt; $(InputDir)sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputPath) ) &gt; $(InputDir)rmd160hl.c&#x0D;&#x0A;"
 						Outputs="md2hl.c;md4hl.c;md5hl.c;sha0hl.c;sha1hl.c;sha256hl.c;rmd160hl.c"
 					/>
 				</FileConfiguration>
@@ -345,7 +332,16 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputFileName) ) &gt; md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputFileName) ) &gt; md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputFileName) ) &gt; md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputFileName) ) &gt; sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputFileName) ) &gt; sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputFileName) ) &gt; sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputFileName) ) &gt; rmd160hl.c&#x0D;&#x0A;"
+						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputPath) ) &gt; $(InputDir)md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputPath) ) &gt; $(InputDir)md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputPath) ) &gt; $(InputDir)md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputPath) ) &gt; $(InputDir)sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputPath) ) &gt; $(InputDir)sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputPath) ) &gt; $(InputDir)sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputPath) ) &gt; $(InputDir)rmd160hl.c&#x0D;&#x0A;"
+						Outputs="md2hl.c;md4hl.c;md5hl.c;sha0hl.c;sha1hl.c;sha256hl.c;rmd160hl.c"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputPath) ) &gt; $(InputDir)md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputPath) ) &gt; $(InputDir)md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputPath) ) &gt; $(InputDir)md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputPath) ) &gt; $(InputDir)sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputPath) ) &gt; $(InputDir)sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputPath) ) &gt; $(InputDir)sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputPath) ) &gt; $(InputDir)rmd160hl.c&#x0D;&#x0A;"
 						Outputs="md2hl.c;md4hl.c;md5hl.c;sha0hl.c;sha1hl.c;sha256hl.c;rmd160hl.c"
 					/>
 				</FileConfiguration>
@@ -354,41 +350,41 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputFileName) ) &gt; md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputFileName) ) &gt; md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputFileName) ) &gt; md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputFileName) ) &gt; sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputFileName) ) &gt; sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputFileName) ) &gt; sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputFileName) ) &gt; rmd160hl.c&#x0D;&#x0A;"
+						CommandLine="( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md2/g&quot; -e &quot;s/MDX/MD2/g&quot; $(InputPath) ) &gt; $(InputDir)md2hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdX/md4/g&quot; -e &quot;s/MDX/MD4/g&quot; $(InputPath) ) &gt; $(InputDir)md4hl.c&#x0D;&#x0A;( echo #define LENGTH 16&amp;&amp; sed -e &quot;s/mdXhl/md5hl/g&quot; -e &quot;s/mdX/md5/g&quot; -e &quot;s/MDX/MD5/g&quot; $(InputPath) ) &gt; $(InputDir)md5hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA_/g&quot; -e &quot;s/SHA__/SHA_/g&quot; $(InputPath) ) &gt; $(InputDir)sha0hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/sha/g&quot; -e &quot;s/MDX/SHA1_/g&quot; -e &quot;s/SHA1__/SHA1_/g&quot; $(InputPath) ) &gt; $(InputDir)sha1hl.c&#x0D;&#x0A;( echo #define LENGTH 32&amp;&amp; sed -e &quot;s/mdX/sha256/g&quot; -e &quot;s/MDX/SHA256_/g&quot; -e  &quot;s/SHA256__/SHA256_/g&quot; $(InputPath) ) &gt; $(InputDir)sha256hl.c&#x0D;&#x0A;( echo #define LENGTH 20&amp;&amp; sed -e &quot;s/mdX/ripemd/g&quot; -e &quot;s/MDX/RIPEMD160_/g&quot; -e &quot;s/RIPEMD160__/RIPEMD160_/g&quot; $(InputPath) ) &gt; $(InputDir)rmd160hl.c&#x0D;&#x0A;"
 						Outputs="md2hl.c;md4hl.c;md5hl.c;sha0hl.c;sha1hl.c;sha256hl.c;rmd160hl.c"
 					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\rmd160c.c"
+				RelativePath="..\..\libmd\rmd160c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\rmd160hl.c"
+				RelativePath="..\..\libmd\rmd160hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha0c.c"
+				RelativePath="..\..\libmd\sha0c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha0hl.c"
+				RelativePath="..\..\libmd\sha0hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha1c.c"
+				RelativePath="..\..\libmd\sha1c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha1hl.c"
+				RelativePath="..\..\libmd\sha1hl.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha256c.c"
+				RelativePath="..\..\libmd\sha256c.c"
 				>
 			</File>
 			<File
-				RelativePath=".\sha256hl.c"
+				RelativePath="..\..\libmd\sha256hl.c"
 				>
 			</File>
 		</Filter>
@@ -398,46 +394,46 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\md2.h"
+				RelativePath="..\..\libmd\md2.h"
 				>
 			</File>
 			<File
-				RelativePath=".\md4.h"
+				RelativePath="..\..\libmd\md4.h"
 				>
 			</File>
 			<File
-				RelativePath=".\md5.h"
+				RelativePath="..\..\libmd\md5.h"
 				>
 			</File>
 			<File
-				RelativePath=".\ripemd.h"
+				RelativePath="..\..\libmd\ripemd.h"
 				>
 			</File>
 			<File
-				RelativePath=".\rmd_locl.h"
+				RelativePath="..\..\libmd\rmd_locl.h"
 				>
 			</File>
 			<File
-				RelativePath=".\rmdconst.h"
+				RelativePath="..\..\libmd\rmdconst.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sha.h"
+				RelativePath="..\..\libmd\sha.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sha256.h"
+				RelativePath="..\..\libmd\sha256.h"
 				>
 			</File>
 			<File
-				RelativePath=".\sha_locl.h"
+				RelativePath="..\..\libmd\sha_locl.h"
 				>
 			</File>
 			<Filter
 				Name="supp"
 				>
 				<File
-					RelativePath=".\supp\w32defs.h"
+					RelativePath="..\..\libmd\supp\w32defs.h"
 					>
 				</File>
 			</Filter>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bsdmd_lib", "libmd\bsdmd_lib.vcproj", "{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd-static", "libmd-static\libmd-static.vcproj", "{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5", "md5\md5.vcproj", "{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5", "md5\md5.vcproj", "{B
 		{75F6FCE6-44EC-45F8-9F24-5C58F79508C7} = {75F6FCE6-44EC-45F8-9F24-5C58F79508C7}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bsdmd", "libmd\bsdmd.vcproj", "{5CC6B30E-41FD-44B0-8059-E25A68FCD286}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd", "libmd\libmd.vcproj", "{5CC6B30E-41FD-44B0-8059-E25A68FCD286}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
