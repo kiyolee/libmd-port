@@ -2,7 +2,7 @@
 
 libmd Windows build with Visual Studio.
 
-This version is from FreeBSD-10.3.
+This version is from FreeBSD-8.x or earlier. (exact version unkown)
 
 See win-build-info for general information about the
 win-build effort.
