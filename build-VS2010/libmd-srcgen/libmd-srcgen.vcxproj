@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}</ProjectGuid>
+    <RootNamespace>libmd-srcgen</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\libmd\mdXhl.c">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
+( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
+( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
+( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
+( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
+</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
