@@ -8,7 +8,7 @@ MACHINE_ARCH=i386
 endif
 
 ifeq ($(MACHINE_ARCH),i386)
-CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM -DELF
+CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM
 OBJS_X86 = rmd160.o sha.o
 else
 CFLAGS_X86 =
@@ -46,7 +46,7 @@ $(TARGET_STATIC): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 %.o: i386/%.S
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -DELF -c -o $@ $<
 
 md2hl.c: mdXhl.c
 	(echo '#define LENGTH 16'; \
