@@ -50,7 +50,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -67,7 +66,6 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib"
-				SuppressStartupBanner="false"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -76,15 +74,12 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -130,7 +125,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -147,7 +141,6 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib"
-				SuppressStartupBanner="false"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -156,15 +149,12 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -210,7 +200,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -227,7 +216,6 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib"
-				SuppressStartupBanner="false"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -236,15 +224,12 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -291,7 +276,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -308,7 +292,6 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib"
-				SuppressStartupBanner="false"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -317,15 +300,12 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"

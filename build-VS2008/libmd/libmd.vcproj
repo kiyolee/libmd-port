@@ -49,7 +49,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -64,7 +63,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -74,11 +72,9 @@
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -122,7 +118,6 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -137,7 +132,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				SuppressStartupBanner="false"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -148,11 +142,9 @@
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -196,7 +188,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -211,7 +202,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -221,11 +211,9 @@
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -270,7 +258,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
-				SuppressStartupBanner="false"
 				DebugInformationFormat="3"
 				CompileAs="0"
 			/>
@@ -285,7 +272,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				SuppressStartupBanner="false"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -296,11 +282,9 @@
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCBscMakeTool"
-				SuppressStartupBanner="false"
 			/>
 			<Tool
 				Name="VCFxCopTool"
