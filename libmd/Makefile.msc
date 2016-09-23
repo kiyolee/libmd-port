@@ -1,0 +1,127 @@
+OBJDIR = .\w32.vc6
+DLLOBJDIR = .\w32dll.vc6
+
+TARGET_STATIC = $(OBJDIR)\libbsdmd.lib
+TARGET_DLL = $(DLLOBJDIR)\libbsdmd.dll
+
+CFLAGS = -Ox -G6 -I. -W4 -MD -DMD_INTERNAL
+
+CC = cl
+
+OBJS = \
+    $(OBJDIR)\md2c.obj \
+    $(OBJDIR)\md4c.obj \
+    $(OBJDIR)\md5c.obj \
+    $(OBJDIR)\md2hl.obj \
+    $(OBJDIR)\md4hl.obj \
+    $(OBJDIR)\md5hl.obj \
+    $(OBJDIR)\rmd160c.obj \
+    $(OBJDIR)\rmd160hl.obj \
+    $(OBJDIR)\sha0c.obj \
+    $(OBJDIR)\sha0hl.obj \
+    $(OBJDIR)\sha1c.obj \
+    $(OBJDIR)\sha1hl.obj \
+    $(OBJDIR)\sha256c.obj \
+    $(OBJDIR)\sha256hl.obj
+
+DLLOBJS = \
+    $(DLLOBJDIR)\md2c.obj \
+    $(DLLOBJDIR)\md4c.obj \
+    $(DLLOBJDIR)\md5c.obj \
+    $(DLLOBJDIR)\md2hl.obj \
+    $(DLLOBJDIR)\md4hl.obj \
+    $(DLLOBJDIR)\md5hl.obj \
+    $(DLLOBJDIR)\rmd160c.obj \
+    $(DLLOBJDIR)\rmd160hl.obj \
+    $(DLLOBJDIR)\sha0c.obj \
+    $(DLLOBJDIR)\sha0hl.obj \
+    $(DLLOBJDIR)\sha1c.obj \
+    $(DLLOBJDIR)\sha1hl.obj \
+    $(DLLOBJDIR)\sha256c.obj \
+    $(DLLOBJDIR)\sha256hl.obj
+
+SRCS_HL = \
+    md2hl.c md4hl.c md5hl.c \
+    rmd160hl.c sha0hl.c sha1hl.c sha256hl.c
+
+all: MAKEDIR $(TARGET_STATIC) $(TARGET_DLL)
+
+clean:
+	-del $(OBJS) $(SRCS_HL) $(TARGET_STATIC) $(DLLOBJS) $(TARGET_DLL) \
+		$(DLLOBJDIR)\libbsdmd.exp $(DLLOBJDIR)\libbsdmd.lib
+
+MAKEDIR:
+	if not exist $(OBJDIR) mkdir $(OBJDIR)
+	if not exist $(DLLOBJDIR) mkdir $(DLLOBJDIR)
+
+$(TARGET_STATIC): $(OBJS)
+	lib /out:$@ $(OBJS)
+
+$(TARGET_DLL): $(DLLOBJS)
+	$(CC) -Fe$@ $(DLLOBJS) -link /DLL
+
+.c{$(OBJDIR)}.obj:
+	$(CC) $(CFLAGS) -c -Fo$@ $<
+
+.c{$(DLLOBJDIR)}.obj:
+	$(CC) $(CFLAGS) -DMD_DLL -c -Fo$@ $<
+
+md2hl.c: mdXhl.c
+	( echo #define LENGTH 16&& \
+	sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" $** ) > $@
+
+md4hl.c: mdXhl.c
+	( echo #define LENGTH 16&& \
+	sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" $** ) > $@
+
+md5hl.c: mdXhl.c
+	( echo #define LENGTH 16&& \
+	sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" $** ) > $@
+
+sha0hl.c: mdXhl.c
+	( echo #define LENGTH 20&& \
+	sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" $** ) > $@
+
+sha1hl.c: mdXhl.c
+	( echo #define LENGTH 20&& \
+	sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" $** ) > $@
+
+sha256hl.c: mdXhl.c
+	( echo #define LENGTH 32&& \
+	sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" $** ) > $@
+
+rmd160hl.c: mdXhl.c
+	( echo #define LENGTH 20&& \
+	sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" $** ) > $@
+
+$(OBJDIR)\md2c.obj: md2c.c
+$(OBJDIR)\md2hl.obj: md2hl.c
+$(OBJDIR)\md4c.obj: md4c.c
+$(OBJDIR)\md4hl.obj: md4hl.c
+$(OBJDIR)\md5c.obj: md5c.c
+$(OBJDIR)\md5hl.obj: md5hl.c
+$(OBJDIR)\rmd160c.obj: rmd160c.c
+$(OBJDIR)\rmd160hl.obj: rmd160hl.c
+$(OBJDIR)\sha0c.obj: sha0c.c
+$(OBJDIR)\sha0hl.obj: sha0hl.c
+$(OBJDIR)\sha1c.obj: sha1c.c
+$(OBJDIR)\sha1hl.obj: sha1hl.c
+$(OBJDIR)\sha256c.obj: sha256c.c
+$(OBJDIR)\sha256hl.obj: sha256hl.c
+
+$(DLLOBJDIR)\md2c.obj: md2c.c
+$(DLLOBJDIR)\md2hl.obj: md2hl.c
+$(DLLOBJDIR)\md4c.obj: md4c.c
+$(DLLOBJDIR)\md4hl.obj: md4hl.c
+$(DLLOBJDIR)\md5c.obj: md5c.c
+$(DLLOBJDIR)\md5hl.obj: md5hl.c
+$(DLLOBJDIR)\rmd160c.obj: rmd160c.c
+$(DLLOBJDIR)\rmd160hl.obj: rmd160hl.c
+$(DLLOBJDIR)\sha0c.obj: sha0c.c
+$(DLLOBJDIR)\sha0hl.obj: sha0hl.c
+$(DLLOBJDIR)\sha1c.obj: sha1c.c
+$(DLLOBJDIR)\sha1hl.obj: sha1hl.c
+$(DLLOBJDIR)\sha256c.obj: sha256c.c
+$(DLLOBJDIR)\sha256hl.obj: sha256hl.c
+
+#---eof---

@@ -1,0 +1,61 @@
+TARGET = md5
+TARGET_RMD160 = rmd160
+TARGET_SHA1 = sha1
+TARGET_SHA256 = sha256
+
+CC = icc
+RM = del -f
+
+CFLAGS = \
+	-v -g -O \
+	-I../libmd \
+	-DMD_INTERNAL \
+	-qTGTRLS=V6R1M0 \
+	-qAUT='*USE' \
+	-qTGTCCSID='*JOB'
+LDFLAGS = \
+	-v \
+	-qDUPPROC \
+	-qDUPVAR \
+	-qNOWARN \
+	-qTGTRLS=V6R1M0 \
+	-qACTGRP='*CALLER' \
+	-qUSRPRF='*OWNER' \
+	-qALWRINZ='*NO'
+
+OBJS = md5.o getopt.o
+
+LIBS = ../libmd/libbsdmd.a
+
+all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+clean:
+	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+$(TARGET): $(OBJS) $(LIBS)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+$(TARGET_RMD160): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SHA1): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SHA256): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+md5.o: md5.c
+
+getopt.o: getopt/getopt.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+#---eof---

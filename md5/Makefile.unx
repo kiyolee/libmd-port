@@ -1,0 +1,35 @@
+TARGET = md5
+TARGET_RMD160 = rmd160
+TARGET_SHA1 = sha1
+TARGET_SHA256 = sha256
+
+CFLAGS = -pipe -O2 -Wall -DMD_INTERNAL -I../libmd
+LDFLAGS =
+
+OBJS = md5.o
+
+LIBS = ../libmd/libbsdmd.a
+
+all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+clean:
+	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+$(TARGET): $(OBJS) $(LIBS)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+$(TARGET_RMD160): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA1): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA256): $(TARGET)
+	ln -s $(TARGET) $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+md5.o: md5.c
+
+#---eof---

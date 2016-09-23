@@ -1,0 +1,37 @@
+EXE_EXT = .exe
+
+TARGET = md5
+TARGET_RMD160 = rmd160$(EXE_EXT)
+TARGET_SHA1 = sha1$(EXE_EXT)
+TARGET_SHA256 = sha256$(EXE_EXT)
+
+CFLAGS = -pipe -O2 -Wall -DMD_INTERNAL -I../libmd
+LDFLAGS =
+
+OBJS = md5.o
+
+LIBS = ../libmd/libbsdmd.a
+
+all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+clean:
+	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+
+$(TARGET): $(OBJS) $(LIBS)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+$(TARGET_RMD160): $(TARGET)
+	ln -s $(TARGET)$(EXE_EXT) $@
+
+$(TARGET_SHA1): $(TARGET)
+	ln -s $(TARGET)$(EXE_EXT) $@
+
+$(TARGET_SHA256): $(TARGET)
+	ln -s $(TARGET)$(EXE_EXT) $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+md5.o: md5.c
+
+#---eof---
