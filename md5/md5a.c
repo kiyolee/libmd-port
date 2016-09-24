@@ -17,6 +17,11 @@
  *  documentation and/or software.
  */
 
+/*
+ *  This is a modified version that the context structure is hidden
+ *  and allocated dynamically.
+ */
+
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
