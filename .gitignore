@@ -16,10 +16,10 @@ build-*/tests/*/x64/Release
 build-*/x64/Debug
 build-*/x64/Release
 libmd/*.ref
-libmd/md2hl.c
 libmd/md4hl.c
 libmd/md5hl.c
 libmd/rmd160hl.c
 libmd/sha0hl.c
 libmd/sha1hl.c
 libmd/sha256hl.c
+libmd/sha512hl.c

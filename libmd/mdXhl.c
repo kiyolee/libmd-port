@@ -10,7 +10,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/8.2.0/lib/libmd/mdXhl.c 154479 2006-01-17 15:35:57Z phk $");
+__FBSDID("$FreeBSD: release/10.3.0/lib/libmd/mdXhl.c 283054 2015-05-18 10:45:18Z ngie $");
 #endif
 
 #include <sys/types.h>
@@ -108,7 +108,7 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 			i = read(f, buffer, sizeof(buffer));
 		else
 			i = read(f, buffer, n);
-		if (i < 0) 
+		if (i <= 0) 
 			break;
 		MDXUpdate(&ctx, buffer, i);
 		n -= i;

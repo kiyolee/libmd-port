@@ -28,7 +28,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/8.2.0/lib/libmd/sha256c.c 154479 2006-01-17 15:35:57Z phk $");
+__FBSDID("$FreeBSD: release/10.3.0/lib/libmd/sha256c.c 154479 2006-01-17 15:35:57Z phk $");
 #endif
 
 #ifdef __FreeBSD__
@@ -73,7 +73,7 @@ be32enc(void *pp, uint32_t u)
 	p[3] = (unsigned char)(u & 0xff);
 }
 
-#endif /* def __linux__ */
+#endif /* !defined(__FreeBSD__) */
 
 /*
  * Encode a length len/4 vector of (uint32_t) into a length len vector of

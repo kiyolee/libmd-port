@@ -24,10 +24,16 @@
  * SUCH DAMAGE.
  */
 
+#ifdef unix
 #include <sys/cdefs.h>
+#endif
+#ifdef __FreeBSD__
 __FBSDID("$FreeBSD: release/10.3.0/lib/libmd/sha512c.c 220496 2011-04-09 13:56:29Z markm $");
+#endif
 
+#ifdef __FreeBSD__
 #include <sys/endian.h>
+#endif
 #include <sys/types.h>
 
 #include <string.h>
@@ -45,6 +51,34 @@ __FBSDID("$FreeBSD: release/10.3.0/lib/libmd/sha512c.c 220496 2011-04-09 13:56:2
 	memcpy((void *)dst, (const void *)src, (size_t)len)
 
 #else /* BYTE_ORDER != BIG_ENDIAN */
+
+#if !defined(__FreeBSD__)
+
+static __inline uint64_t
+be64dec(const void *pp)
+{
+	unsigned char const *p = (unsigned char const *)pp;
+
+	return (((uint64_t)(p[0]) << 56) | ((uint64_t)(p[1]) << 48) | ((uint64_t)(p[2]) << 40) | (uint64_t)(p[3]) << 32)
+	     | (((uint64_t)(p[4]) << 24) | ((uint64_t)(p[5]) << 16) | ((uint64_t)(p[6]) << 8) | (uint64_t)(p[7]));
+}
+
+static __inline void
+be64enc(void *pp, uint64_t u)
+{
+	unsigned char *p = (unsigned char *)pp;
+
+	p[0] = (unsigned char)((u >> 56) & 0xff);
+	p[1] = (unsigned char)((u >> 48) & 0xff);
+	p[2] = (unsigned char)((u >> 40) & 0xff);
+	p[3] = (unsigned char)((u >> 32) & 0xff);
+	p[4] = (unsigned char)((u >> 24) & 0xff);
+	p[5] = (unsigned char)((u >> 16) & 0xff);
+	p[6] = (unsigned char)((u >> 8) & 0xff);
+	p[7] = (unsigned char)(u & 0xff);
+}
+
+#endif /* !defined(__FreeBSD__) */
 
 /*
  * Encode a length len/4 vector of (uint64_t) into a length len vector of
@@ -206,7 +240,7 @@ SHA512_Transform(uint64_t * state, const unsigned char block[128])
 		state[i] += S[i];
 }
 
-static unsigned char PAD[128] = {
+static const unsigned char PAD[128] = {
 	0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -240,6 +274,7 @@ SHA512_Pad(SHA512_CTX * ctx)
 }
 
 /* SHA-512 initialization.  Begins a SHA-512 operation. */
+SHA512_API
 void
 SHA512_Init(SHA512_CTX * ctx)
 {
@@ -259,6 +294,7 @@ SHA512_Init(SHA512_CTX * ctx)
 }
 
 /* Add bytes into the hash */
+SHA512_API
 void
 SHA512_Update(SHA512_CTX * ctx, const void *in, size_t len)
 {
@@ -305,6 +341,7 @@ SHA512_Update(SHA512_CTX * ctx, const void *in, size_t len)
  * SHA-512 finalization.  Pads the input data, exports the hash value,
  * and clears the context state.
  */
+SHA512_API
 void
 SHA512_Final(unsigned char digest[64], SHA512_CTX * ctx)
 {

@@ -31,20 +31,61 @@
 
 #include <sys/types.h>
 
+#ifdef __linux__
+#include <stdint.h>
+#endif
+
+#ifdef _MSC_VER
+#include "supp/w32defs.h"
+#endif
+#ifdef __OS400__
+#include "supp/isdefs.h"
+#endif
+
+#ifdef MD_INTERNAL
+
 typedef struct SHA512Context {
 	uint64_t state[8];
 	uint64_t count[2];
 	unsigned char buf[128];
 } SHA512_CTX;
 
+#if !defined(SHA512_API) && defined(MD_DLL) && defined(_MSC_VER)
+#define SHA512_API __declspec(dllexport)
+#endif
+
+#else
+typedef struct SHA512Context SHA512_CTX;
+#endif
+
+#ifndef SHA512_API
+#define SHA512_API
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __FreeBSD__
 __BEGIN_DECLS
-void	SHA512_Init(SHA512_CTX *);
-void	SHA512_Update(SHA512_CTX *, const void *, size_t);
-void	SHA512_Final(unsigned char [64], SHA512_CTX *);
-char   *SHA512_End(SHA512_CTX *, char *);
-char   *SHA512_File(const char *, char *);
-char   *SHA512_FileChunk(const char *, char *, off_t, off_t);
-char   *SHA512_Data(const void *, unsigned int, char *);
+#endif
+SHA512_API void   SHA512_Init(SHA512_CTX *);
+SHA512_API void   SHA512_Update(SHA512_CTX *, const void *, size_t);
+SHA512_API void   SHA512_Final(unsigned char [64], SHA512_CTX *);
+SHA512_API char  *SHA512_End(SHA512_CTX *, char *);
+SHA512_API char  *SHA512_File(const char *, char *);
+SHA512_API char  *SHA512_FileChunk(const char *, char *, off_t, off_t);
+SHA512_API char  *SHA512_Data(const void *, unsigned int, char *);
+SHA512_API int    SHA512_ContextSize(void);
+SHA512_API SHA512_CTX *SHA512_Create(void);
+SHA512_API void   SHA512_Destroy(SHA512_CTX *);
+SHA512_API int    SHA512_DigestSize(void);
+#ifdef __FreeBSD__
 __END_DECLS
+#endif
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif /* !_SHA512_H_ */
