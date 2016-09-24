@@ -2,17 +2,22 @@ TARGET = md5
 TARGET_RMD160 = rmd160
 TARGET_SHA1 = sha1
 TARGET_SHA256 = sha256
+TARGET_SHA512 = sha512
 
 CC = icc
 RM = del -f
 
+ifeq ($(NO_INTERNAL),)
+CFLAGS_INTERNAL = -DMD_INTERNAL
+endif
+
 CFLAGS = \
 	-v -g -O \
 	-I../libmd \
-	-DMD_INTERNAL \
 	-qTGTRLS=V6R1M0 \
 	-qAUT='*USE' \
-	-qTGTCCSID='*JOB'
+	-qTGTCCSID='*JOB' \
+	$(CFLAGS_INTERNAL)
 LDFLAGS = \
 	-v \
 	-qDUPPROC \
@@ -23,14 +28,20 @@ LDFLAGS = \
 	-qUSRPRF='*OWNER' \
 	-qALWRINZ='*NO'
 
-OBJS = md5.o getopt.o
+ifeq ($(NO_INTERNAL),)
+OBJS_MD5 = md5.o
+else
+OBJS_MD5 = md5a.o
+endif
+
+OBJS = $(OBJS_MD5) getopt.o
 
 LIBS = ../libmd/libmd.a
 
-all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
 
 clean:
-	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256)
+	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
 
 $(TARGET): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) $^ -o $@
@@ -50,10 +61,16 @@ $(TARGET_SHA256): $(TARGET)
 	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
 	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
 
+$(TARGET_SHA512): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 md5.o: md5.c
+md5a.o: md5a.c
 
 getopt.o: getopt/getopt.c
 	$(CC) $(CFLAGS) -c -o $@ $<
