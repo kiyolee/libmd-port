@@ -87,6 +87,7 @@
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -120,6 +121,7 @@ copy /y $(TargetPath) $(TargetDir)sha256.exe
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -150,6 +152,7 @@ copy /y $(TargetPath) $(TargetDir)sha256.exe
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -183,6 +186,7 @@ copy /y $(TargetPath) $(TargetDir)sha256.exe
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
