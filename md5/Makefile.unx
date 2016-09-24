@@ -4,10 +4,18 @@ TARGET_SHA1 = sha1
 TARGET_SHA256 = sha256
 TARGET_SHA512 = sha512
 
-CFLAGS = -pipe -O2 -Wall -DMD_INTERNAL -I../libmd
+ifeq ($(NO_INTERNAL),)
+CFLAGS_INTERNAL = -DMD_INTERNAL
+endif
+
+CFLAGS = -pipe -O2 -Wall -I../libmd $(CFLAGS_INTERNAL)
 LDFLAGS =
 
+ifeq ($(NO_INTERNAL),)
 OBJS = md5.o
+else
+OBJS = md5a.o
+endif
 
 LIBS = ../libmd/libmd.a
 
@@ -35,5 +43,6 @@ $(TARGET_SHA512): $(TARGET)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 md5.o: md5.c
+md5a.o: md5a.c
 
 #---eof---
