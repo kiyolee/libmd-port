@@ -1,4 +1,4 @@
-.\" $FreeBSD: src/lib/libmd/md2.copyright,v 1.5.56.1.6.1 2010/12/21 17:09:25 kensmith Exp $
+.\" $FreeBSD: release/8.2.0/lib/libmd/md2.copyright 50476 1999-08-28 00:22:10Z peter $
 Copyright (C) 1990-2, RSA Data Security, Inc. Created 1990. All
 rights reserved.
 .Pp

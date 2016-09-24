@@ -5,7 +5,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: src/lib/libmd/shadriver.c,v 1.4.22.1.6.1 2010/12/21 17:09:25 kensmith Exp $");
+__FBSDID("$FreeBSD: release/8.2.0/lib/libmd/shadriver.c 143334 2005-03-09 19:23:04Z cperciva $");
 #endif
 
 /* Copyright (C) 1990-2, RSA Data Security, Inc. Created 1990. All

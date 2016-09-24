@@ -5,7 +5,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: src/lib/libmd/md4c.c,v 1.10.10.1.6.1 2010/12/21 17:09:25 kensmith Exp $");
+__FBSDID("$FreeBSD: release/8.2.0/lib/libmd/md4c.c 154479 2006-01-17 15:35:57Z phk $");
 #endif
 
 /* Copyright (C) 1990-2, RSA Data Security, Inc. All rights reserved.
