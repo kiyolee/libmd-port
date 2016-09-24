@@ -9,11 +9,10 @@ MACHINE_ARCH=i386
 endif
 
 ifeq ($(MACHINE_ARCH),i386)
+ifeq ($(NO_ASM),)
 CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM
 OBJS_X86 = rmd160.o sha.o
-else
-CFLAGS_X86 =
-OBJS_X86 =
+endif
 endif
 
 CFLAGS = -fPIC -pipe -O2 -Wall -I. -DMD_INTERNAL $(CFLAGS_X86)
