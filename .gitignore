@@ -23,3 +23,8 @@ libmd/sha0hl.c
 libmd/sha1hl.c
 libmd/sha256hl.c
 libmd/sha512hl.c
+md5/md5
+md5/rmd160
+md5/sha1
+md5/sha256
+md5/sha512
