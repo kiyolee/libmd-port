@@ -496,8 +496,8 @@ static int strnicmp(const char *s1, const char *s2, size_t n)
 	char c2 = 0;
 	while (s1 < ep)
 	{
-		char c1 = tolower(*s1++);
-		char c2 = tolower(*s2++);
+		c1 = tolower(*s1++);
+		c2 = tolower(*s2++);
 		if (c1 != c2 || c1 == '\0' || c2 == '\0') break;
 	}
 	return (s1 < ep) ? (c1 - c2) : 0;
