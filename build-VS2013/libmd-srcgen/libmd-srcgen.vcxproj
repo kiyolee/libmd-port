@@ -72,42 +72,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\libmd\mdXhl.c">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
-( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
 ( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
 ( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 64&amp;&amp; sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha512hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
-( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
 ( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
 ( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 64&amp;&amp; sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha512hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
-( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
 ( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
 ( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 64&amp;&amp; sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha512hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md2/g" -e "s/MDX/MD2/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md2hl.c
-( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">( echo #define LENGTH 16&amp;&amp; sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md4hl.c
 ( echo #define LENGTH 16&amp;&amp; sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) ) &gt; %(RootDir)%(Directory)md5hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha0hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha1hl.c
 ( echo #define LENGTH 32&amp;&amp; sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha256hl.c
+( echo #define LENGTH 64&amp;&amp; sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)sha512hl.c
 ( echo #define LENGTH 20&amp;&amp; sed -e "s/mdX/ripemd/g" -e "s/MDX/RIPEMD160_/g" -e "s/RIPEMD160__/RIPEMD160_/g" %(FullPath) ) &gt; %(RootDir)%(Directory)rmd160hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RootDir)%(Directory)md2hl.c;%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)rmd160hl.c;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -139,8 +139,6 @@
     <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\libmd\md2c.c" />
-    <ClCompile Include="..\..\libmd\md2hl.c" />
     <ClCompile Include="..\..\libmd\md4c.c" />
     <ClCompile Include="..\..\libmd\md4hl.c" />
     <ClCompile Include="..\..\libmd\md5c.c" />
@@ -153,9 +151,10 @@
     <ClCompile Include="..\..\libmd\sha1hl.c" />
     <ClCompile Include="..\..\libmd\sha256c.c" />
     <ClCompile Include="..\..\libmd\sha256hl.c" />
+    <ClCompile Include="..\..\libmd\sha512c.c" />
+    <ClCompile Include="..\..\libmd\sha512hl.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\libmd\md2.h" />
     <ClInclude Include="..\..\libmd\md4.h" />
     <ClInclude Include="..\..\libmd\md5.h" />
     <ClInclude Include="..\..\libmd\ripemd.h" />
@@ -163,6 +162,7 @@
     <ClInclude Include="..\..\libmd\rmdconst.h" />
     <ClInclude Include="..\..\libmd\sha.h" />
     <ClInclude Include="..\..\libmd\sha256.h" />
+    <ClInclude Include="..\..\libmd\sha512.h" />
     <ClInclude Include="..\..\libmd\sha_locl.h" />
     <ClInclude Include="..\..\libmd\supp\w32defs.h" />
   </ItemGroup>

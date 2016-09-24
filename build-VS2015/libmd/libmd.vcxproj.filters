@@ -18,12 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\libmd\md2c.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\libmd\md2hl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libmd\md4c.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,11 +54,14 @@
     <ClCompile Include="..\..\libmd\sha256hl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libmd\sha512c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libmd\sha512hl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\libmd\md2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\libmd\md4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -91,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="..\..\libmd\supp\w32defs.h">
       <Filter>Header Files\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\sha512.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
