@@ -26,7 +26,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/8.2.0/sbin/md5/md5.c 182672 2008-09-02 02:59:13Z kevlo $");
+__FBSDID("$FreeBSD: release/10.3.0/sbin/md5/md5.c 281513 2015-04-14 00:32:03Z delphij $");
 #endif
 
 #ifdef _MSC_VER
@@ -58,6 +58,7 @@ __FBSDID("$FreeBSD: release/8.2.0/sbin/md5/md5.c 182672 2008-09-02 02:59:13Z kev
 #include "ripemd.h"
 #include "sha.h"
 #include "sha256.h"
+#include "sha512.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,9 +86,11 @@ static int strnicmp(const char *, const char *, size_t);
 #define TEST_BLOCK_COUNT 100000
 #define MDTESTCOUNT 8
 
-int qflag;
-int rflag;
-int sflag;
+static int qflag;
+static int rflag;
+static int sflag;
+static char* checkAgainst;
+static int checksFailed;
 
 typedef struct DIGEST_CTX_t DIGEST_CTX;
 
@@ -99,6 +102,7 @@ typedef char *(DIGEST_End)(DIGEST_CTX *, char *);
 extern const char *MD5TestOutput[MDTESTCOUNT];
 extern const char *SHA1_TestOutput[MDTESTCOUNT];
 extern const char *SHA256_TestOutput[MDTESTCOUNT];
+extern const char *SHA512_TestOutput[MDTESTCOUNT];
 extern const char *RIPEMD160_TestOutput[MDTESTCOUNT];
 
 typedef struct Algorithm_t {
@@ -114,23 +118,24 @@ typedef struct Algorithm_t {
 	char *(*File)(const char *, char *);
 } Algorithm_t;
 
-static void MDString(Algorithm_t *, const char *);
+static void MDString(const Algorithm_t *, const char *);
 #ifndef __OS400__
-static void MDTimeTrial(Algorithm_t *);
+static void MDTimeTrial(const Algorithm_t *);
 #endif
-static void MDTestSuite(Algorithm_t *);
-static void MDFilter(Algorithm_t *, int);
-static void usage(Algorithm_t *);
+static void MDTestSuite(const Algorithm_t *);
+static void MDFilter(const Algorithm_t *, int);
+static void usage(const Algorithm_t *);
 
 /* max(MD5_DIGEST_LENGTH, SHA_DIGEST_LENGTH,
-	SHA256_DIGEST_LENGTH, RIPEMD160_DIGEST_LENGTH)*2+1 */
-#define HEX_DIGEST_LENGTH 65
+	SHA256_DIGEST_LENGTH, SHA512_DIGEST_LENGTH,
+	RIPEMD160_DIGEST_LENGTH)*2+1 */
+#define HEX_DIGEST_LENGTH 129
 
 #define STR_LEN_PAIR(s) s, (sizeof(s)-sizeof(""))
 
 /* algorithm function table */
 
-struct Algorithm_t Algorithm[] = {
+static const struct Algorithm_t Algorithm[] = {
 	{ STR_LEN_PAIR("md5"), "MD5", &MD5TestOutput,
 		(DIGEST_Create*)&MD5Create,
 		(DIGEST_Destroy*)&MD5Destroy,
@@ -149,6 +154,12 @@ struct Algorithm_t Algorithm[] = {
 		(DIGEST_Update*)&SHA256_Update,
 		(DIGEST_End*)&SHA256_End,
 		&SHA256_Data, &SHA256_File },
+	{ STR_LEN_PAIR("sha512"), "SHA512", &SHA512_TestOutput,
+		(DIGEST_Create*)&SHA512_Create,
+		(DIGEST_Destroy*)&SHA512_Destroy,
+		(DIGEST_Update*)&SHA512_Update,
+		(DIGEST_End*)&SHA512_End,
+		&SHA512_Data, &SHA512_File },
 	{ STR_LEN_PAIR("rmd160"), "RMD160", &RIPEMD160_TestOutput,
 		(DIGEST_Create*)&RIPEMD160_Create,
 		(DIGEST_Destroy*)&RIPEMD160_Destroy,
@@ -246,8 +257,13 @@ main(int argc, char *argv[])
 		digest = 0;
 
 	failed = 0;
-	while ((ch = getopt(argc, argv, "pqrs:tx")) != -1)
+	checkAgainst = NULL;
+	checksFailed = 0;
+	while ((ch = getopt(argc, argv, "c:pqrs:tx")) != -1)
 		switch (ch) {
+		case 'c':
+			checkAgainst = optarg;
+			break;
 		case 'p':
 			MDFilter(&Algorithm[digest], 1);
 			break;
@@ -286,12 +302,19 @@ main(int argc, char *argv[])
 				failed++;
 			} else {
 				if (qflag)
-					printf("%s\n", p);
+					printf("%s", p);
 				else if (rflag)
-					printf("%s  %s\n", p, *argv);
+					printf("%s  %s", p, *argv);
 				else
-					printf("%s (%s) = %s\n",
+					printf("%s (%s) = %s",
 					    Algorithm[digest].name, *argv, p);
+				if (checkAgainst && strcmp(checkAgainst,p))
+				{
+					checksFailed++;
+					if (!qflag)
+						printf(" [ Failed ]");
+				}
+				printf("\n");
 			}
 		} while (*++argv);
 	} else if (!sflag && (optind == 1 || qflag || rflag))
@@ -299,6 +322,8 @@ main(int argc, char *argv[])
 
 	if (failed != 0)
 		return (1);
+	if (checksFailed != 0)
+		return (2);
 
 	return (0);
 }
@@ -306,24 +331,32 @@ main(int argc, char *argv[])
  * Digests a string and prints the result.
  */
 static void
-MDString(Algorithm_t *alg, const char *string)
+MDString(const Algorithm_t *alg, const char *string)
 {
 	size_t len = strlen(string);
 	char buf[HEX_DIGEST_LENGTH];
 
+	alg->Data(string,len,buf);
 	if (qflag)
-		printf("%s\n", alg->Data(string, len, buf));
+		printf("%s", buf);
 	else if (rflag)
-		printf("%s \"%s\"\n", alg->Data(string, len, buf), string);
+		printf("%s \"%s\"", buf, string);
 	else
-		printf("%s (\"%s\") = %s\n", alg->name, string, alg->Data(string, len, buf));
+		printf("%s (\"%s\") = %s", alg->name, string, buf);
+	if (checkAgainst && strcmp(buf,checkAgainst))
+	{
+		checksFailed++;
+		if (!qflag)
+			printf(" [ failed ]");
+	}
+	printf("\n");
 }
 /*
  * Measures the time to digest TEST_BLOCK_COUNT TEST_BLOCK_LEN-byte blocks.
  */
 #ifndef __OS400__
 static void
-MDTimeTrial(Algorithm_t *alg)
+MDTimeTrial(const Algorithm_t *alg)
 {
 	DIGEST_CTX *pcontext;
 #ifdef _MSC_VER
@@ -405,7 +438,7 @@ MDTimeTrial(Algorithm_t *alg)
  * Digests a reference suite of strings and prints the results.
  */
 
-const char *MDTestInput[MDTESTCOUNT] = {
+static const char *MDTestInput[MDTESTCOUNT] = {
 	"",
 	"a",
 	"abc",
@@ -450,6 +483,17 @@ const char *SHA256_TestOutput[MDTESTCOUNT] = {
 	"e6eae09f10ad4122a0e2a4075761d185a272ebd9f5aa489e998ff2f09cbfdd9f"
 };
 
+const char *SHA512_TestOutput[MDTESTCOUNT] = {
+	"cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",
+	"1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75",
+	"ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f",
+	"107dbf389d9e9f71a3a95f6c055b9251bc5268c2be16d6c13492ea45b0199f3309e16455ab1e96118e8a905d5597b72038ddb372a89826046de66687bb420e7c",
+	"4dbff86cc2ca1bae1e16468a05cb9881c97f1753bce3619034898faa1aabe429955a1bf8ec483d7421fe3c1646613a59ed5441fb0f321389f77f48a879c7b1f1",
+	"1e07be23c26a86ea37ea810c8ec7809352515a970e9253c26f536cfc7a9996c45c8370583e0a78fa4a90041d71a4ceab7423f19c71b9d5a3e01249f0bebd5894",
+	"72ec1ef1124a45b047e8b7c75a932195135bb61de24ec0d1914042246e0aec3a2354e093d76f3048b456764346900cb130d2a4fd5dd16abb5e30bcb850dee843",
+	"e8a835195e039708b13d9131e025f4441dbdc521ce625f245a436dcd762f54bf5cb298d96235e6c6a304e087ec8189b9512cbdf6427737ea82793460c367b9c3"
+};
+
 const char *RIPEMD160_TestOutput[MDTESTCOUNT] = {
 	"9c1185a5c5e9fc54612808977ee8f548b2258d31",
 	"0bdc9d2d256b3ee9daae347be6f4dc835a467ffe",
@@ -467,7 +511,7 @@ e2acpy(char *des, const char *src);
 #endif
 
 static void
-MDTestSuite(Algorithm_t *alg)
+MDTestSuite(const Algorithm_t *alg)
 {
 	int i;
 	char buffer[HEX_DIGEST_LENGTH];
@@ -493,7 +537,7 @@ MDTestSuite(Algorithm_t *alg)
  * Digests the standard input and prints the result.
  */
 static void
-MDFilter(Algorithm_t *alg, int tee)
+MDFilter(const Algorithm_t *alg, int tee)
 {
 	DIGEST_CTX *pcontext;
 	unsigned int len;
@@ -519,10 +563,10 @@ MDFilter(Algorithm_t *alg, int tee)
 }
 
 static void
-usage(Algorithm_t *alg)
+usage(const Algorithm_t *alg)
 {
 
-	fprintf(stderr, "usage: %s [-pqrtx] [-s string] [files ...]\n", alg->progname);
+	fprintf(stderr, "usage: %s [-pqrtx] [-c string] [-s string] [files ...]\n", alg->progname);
 	exit(1);
 }
 
@@ -531,10 +575,12 @@ usage(Algorithm_t *alg)
 static int strnicmp(const char *s1, const char *s2, size_t n)
 {
 	const char* const ep = s1 + n;
+	char c1 = 0;
+	char c2 = 0;
 	while (s1 < ep)
 	{
-		const char c1 = tolower(*s1++);
-		const char c2 = tolower(*s2++);
+		c1 = tolower(*s1++);
+		c2 = tolower(*s2++);
 		if (c1 != c2 || c1 == '\0' || c2 == '\0') break;
 	}
 	return (s1 < ep) ? (c1 - c2) : 0;
