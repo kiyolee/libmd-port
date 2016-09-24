@@ -1,4 +1,4 @@
-/*	$NetBSD: getopt.c,v 1.26 2003/08/07 16:43:40 agc Exp $	*/
+/*	$NetBSD: getopt.c,v 1.29 2014/06/05 22:00:22 christos Exp $	*/
 
 /*
  * Copyright (c) 1987, 1993, 1994
@@ -12,7 +12,7 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 4. Neither the name of the University nor the names of its contributors
+ * 3. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
@@ -36,7 +36,7 @@ static char sccsid[] = "@(#)getopt.c	8.3 (Berkeley) 4/27/95";
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/8.2.0/lib/libc/stdlib/getopt.c 165903 2007-01-09 00:28:16Z imp $");
+__FBSDID("$FreeBSD: release/10.3.0/lib/libc/stdlib/getopt.c 268352 2014-07-07 02:47:41Z pfg $");
 #endif
 
 #ifdef __FreeBSD__
@@ -128,6 +128,12 @@ getopt(int nargc, char * const nargv[], const char *ostr)
 		   entire next argument. */
 		if (*place)
 			optarg = place;
+		else if (oli[2] == ':')
+			/*
+			 * GNU Extension, for optional arguments if the rest of
+			 * the argument is empty, we return NULL
+			 */
+			optarg = NULL;
 		else if (nargc > ++optind)
 			optarg = nargv[optind];
 		else {
