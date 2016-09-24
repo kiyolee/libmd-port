@@ -21,7 +21,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: src/sbin/md5/md5.c,v 1.37.2.1.6.1 2010/12/21 17:09:25 kensmith Exp $");
+__FBSDID("$FreeBSD: release/8.2.0/sbin/md5/md5.c 182672 2008-09-02 02:59:13Z kevlo $");
 #endif
 
 #ifdef _MSC_VER
