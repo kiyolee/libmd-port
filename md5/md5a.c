@@ -281,7 +281,7 @@ main(int argc, char *argv[])
 #ifndef __OS400__
 			MDTimeTrial(&Algorithm[digest]);
 #else
-			fprintf(stderr, "option -t is not functional yet on iSeries.\n");
+			fprintf(stderr, "option -t is not functional yet on IBM i.\n");
 			exit(1);
 #endif
 			break;
