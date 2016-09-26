@@ -6,13 +6,19 @@ TARGET_SHA256 = sha256
 CC = icc
 RM = del -f
 
+ifeq ($(NO_INTERNAL),)
+CFLAGS_INTERNAL = -DMD_INTERNAL
+endif
+
 CFLAGS = \
 	-v -g -O \
 	-I../libmd \
-	-DMD_INTERNAL \
+	-D_XOPEN_SOURCE=520 \
 	-qTGTRLS=V6R1M0 \
 	-qAUT='*USE' \
-	-qTGTCCSID='*JOB'
+	-qTGTCCSID='*JOB' \
+	$(CFLAGS_INTERNAL)
+
 LDFLAGS = \
 	-v \
 	-qDUPPROC \
@@ -23,7 +29,13 @@ LDFLAGS = \
 	-qUSRPRF='*OWNER' \
 	-qALWRINZ='*NO'
 
-OBJS = md5.o getopt.o
+ifeq ($(NO_INTERNAL),)
+OBJS_MD5 = md5.o
+else
+OBJS_MD5 = md5a.o
+endif
+
+OBJS = $(OBJS_MD5) getopt.o
 
 LIBS = ../libmd/libmd.a
 
@@ -54,6 +66,7 @@ $(TARGET_SHA256): $(TARGET)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 md5.o: md5.c
+md5a.o: md5a.c
 
 getopt.o: getopt/getopt.c
 	$(CC) $(CFLAGS) -c -o $@ $<

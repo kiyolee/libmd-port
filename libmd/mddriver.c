@@ -32,6 +32,11 @@ __FBSDID("$FreeBSD: release/8.2.0/lib/libmd/mddriver.c 84211 2001-09-30 21:56:22
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+
+#if defined(__OS400__)
+#include "supp/e2a.h"
+#endif
+
 #if MD == 2
 #include "md2.h"
 #define MDData MD2Data
@@ -50,9 +55,15 @@ __FBSDID("$FreeBSD: release/8.2.0/lib/libmd/mddriver.c 84211 2001-09-30 21:56:22
 static void MDString (const char *string)
 {
   char buf[33];
-
+#ifdef __OS400__
+	char asc[1024];
+	e2acpy(asc, string);
+  MDData(asc,strlen(string),buf);
+#else
+  MDData(string,strlen(string),buf);
+#endif
   printf ("MD%d (\"%s\") = %s\n", 
-	MD, string, MDData(string,strlen(string),buf));
+    MD, string, buf);
 }
 
 /* Digests a reference suite of strings and prints the results.
@@ -73,3 +84,6 @@ int main(void)
 1234567890123456789012345678901234567890");
   return 0;
 }
+
+/* vim: ts=2:sts=2:sw=2:et
+ */

@@ -32,6 +32,11 @@ __FBSDID("$FreeBSD: release/8.2.0/lib/libmd/shadriver.c 143334 2005-03-09 19:23:
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+
+#if defined(__OS400__)
+#include "supp/e2a.h"
+#endif
+
 #include "sha.h"
 #include "sha256.h"
 #if SHA == 1
@@ -45,9 +50,15 @@ __FBSDID("$FreeBSD: release/8.2.0/lib/libmd/shadriver.c 143334 2005-03-09 19:23:
 static void SHAString (const char *string)
 {
   char buf[2*32+1];
-
+#ifdef __OS400__
+	char asc[1024];
+	e2acpy(asc, string);
+  SHA_Data(asc,strlen(string),buf);
+#else
+  SHA_Data(string,strlen(string),buf);
+#endif
   printf ("SHA-%d (\"%s\") = %s\n", 
-	SHA, string, SHA_Data(string,strlen(string),buf));
+	SHA, string, buf);
 }
 
 /* Digests a reference suite of strings and prints the results.
@@ -67,3 +78,6 @@ int main(void)
 1234567890123456789012345678901234567890");
   return 0;
 }
+
+/* vim: ts=2:sts=2:sw=2:et
+ */

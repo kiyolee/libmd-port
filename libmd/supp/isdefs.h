@@ -1,8 +1,7 @@
 #ifndef ISDEFS_H
 #define ISDEFS_H
 
-typedef unsigned short uint16_t;
-typedef unsigned long uint32_t;
+#include <stdint.h>
 
 typedef uint16_t u_int16_t;
 typedef uint32_t u_int32_t;
