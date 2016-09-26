@@ -65,7 +65,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib"
+				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -140,7 +140,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib"
+				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -215,7 +215,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib"
+				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -291,7 +291,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib"
+				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
