@@ -1,18 +1,23 @@
 TARGET_SHARED = libmd.so
 
 TARGET_LIB = libmd.a
-TARGET_BINDER = LIBMD_BD
+TARGET_BINDER = LIBMD
 
 CC = icc
 RM = del -f
 
-CFLAGS = \
+CFLAGS_COMMON = \
 	-v -g -O \
 	-I. \
+	-D_XOPEN_SOURCE=520 \
 	-DMD_INTERNAL \
 	-qTGTRLS=V6R1M0 \
 	-qAUT='*USE' \
+
+CFLAGS = \
+	$(CFLAGS_COMMON) \
 	-qTGTCCSID='*JOB'
+
 LDFLAGS_SHARED = \
 	-v \
 	-qDUPPROC \
@@ -23,7 +28,20 @@ LDFLAGS_SHARED = \
 	-qUSRPRF='*OWNER' \
 	-qALWRINZ='*NO' \
 	-x -qSRCFILE=$(OUTPUTDIR)/QSRVSRC
-LDFLAGS_STATIC =
+
+CFLAGS_TEST = \
+	$(CFLAGS_COMMON)
+
+LDFLAGS_TEST =
+	-v \
+	-qDUPPROC \
+	-qDUPVAR \
+	-qNOWARN \
+	-qTGTRLS=V6R1M0 \
+	-qACTGRP='*CALLER' \
+	-qUSRPRF='*OWNER' \
+	-qALWRINZ='*NO' \
+	-x
 
 OBJS = \
     md4c.o md5c.o md4hl.o md5hl.o \
@@ -200,30 +218,30 @@ rmd160.ref:
 	@echo 'RIPEMD160 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =' \
 		'9b752e45573d4b39f4dbd3323cab82bf63326bfb' >> $@
 
-test: $(TARGET_STATIC) $(REFS)
+test: $(TARGET_LIB) $(REFS)
 	@echo if any of these test fail, the code produces wrong results
 	@echo and should NOT be used.
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DMD=4 -o mddriver mddriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DMD=4 -o mddriver mddriver.c $(TARGET_LIB)
 	./mddriver | cmp md4.ref -
 	@echo MD4 passed test
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DMD=5 -o mddriver mddriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DMD=5 -o mddriver mddriver.c $(TARGET_LIB)
 	./mddriver | cmp md5.ref -
 	@echo MD5 passed test
 	-rm -f mddriver
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -o rmddriver rmddriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -o rmddriver rmddriver.c $(TARGET_LIB)
 	./rmddriver | cmp rmd160.ref -
 	@echo RIPEMD160 passed test
 	-rm -f rmddriver
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=0 -o shadriver shadriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=0 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha0.ref -
 	@echo SHA-0 passed test
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=1 -o shadriver shadriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=1 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha1.ref -
 	@echo SHA-1 passed test
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=256 -o shadriver shadriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=256 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha256.ref -
 	@echo SHA-256 passed test
-	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=512 -o shadriver shadriver.c $(TARGET_STATIC)
+	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=512 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha512.ref -
 	@echo SHA-512 passed test
 	-rm -f shadriver

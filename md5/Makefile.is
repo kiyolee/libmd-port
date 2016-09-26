@@ -14,10 +14,12 @@ endif
 CFLAGS = \
 	-v -g -O \
 	-I../libmd \
+	-D_XOPEN_SOURCE=520 \
 	-qTGTRLS=V6R1M0 \
 	-qAUT='*USE' \
 	-qTGTCCSID='*JOB' \
 	$(CFLAGS_INTERNAL)
+
 LDFLAGS = \
 	-v \
 	-qDUPPROC \

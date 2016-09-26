@@ -24,6 +24,10 @@ __FBSDID("$FreeBSD: release/10.3.0/lib/libmd/mddriver.c 220496 2011-04-09 13:56:
 #include <time.h>
 #include <string.h>
 
+#if defined(__OS400__)
+#include "supp/e2a.h"
+#endif
+
 /* The following makes MD default to MD5 if it has not already been defined
  * with C compiler flags. */
 #ifndef MD
@@ -48,9 +52,15 @@ static void
 MDString(const char *string)
 {
 	char buf[33];
-
+#ifdef __OS400__
+	char asc[1024];
+	e2acpy(asc, string);
+	MDData(asc, strlen(string), buf);
+#else
+	MDData(string, strlen(string), buf);
+#endif
 	printf("MD%d (\"%s\") = %s\n",
-	       MD, string, MDData(string, strlen(string), buf));
+	       MD, string, buf);
 }
 
 /* Digests a reference suite of strings and prints the results. */
@@ -71,3 +81,6 @@ main(void)
 
 	return 0;
 }
+
+/* vim: ts=4:sts=4:sw=4:noet
+ */

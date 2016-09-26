@@ -24,6 +24,10 @@ __FBSDID("$FreeBSD: release/10.3.0/lib/libmd/rmddriver.c 220496 2011-04-09 13:56
 #include <time.h>
 #include <string.h>
 
+#if defined(__OS400__)
+#include "supp/e2a.h"
+#endif
+
 #include "ripemd.h"
 
 /* Digests a string and prints the result. */
@@ -31,9 +35,15 @@ static void
 RIPEMD160String(const char *string)
 {
 	char buf[2*20 + 1];
-
+#ifdef __OS400__
+	char asc[1024];
+	e2acpy(asc, string);
+	RIPEMD160_Data(asc, strlen(string), buf);
+#else
+	RIPEMD160_Data(string, strlen(string), buf);
+#endif
 	printf("RIPEMD160 (\"%s\") = %s\n",
-	       string, RIPEMD160_Data(string, strlen(string), buf));
+	       string, buf);
 }
 
 /* Digests a reference suite of strings and prints the results. */
@@ -53,3 +63,6 @@ main(void)
 
 	return 0;
 }
+
+/* vim: ts=4:sts=4:sw=4:noet
+ */
