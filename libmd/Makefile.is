@@ -227,11 +227,11 @@ test: $(TARGET_LIB) $(REFS)
 	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DMD=5 -o mddriver mddriver.c $(TARGET_LIB)
 	./mddriver | cmp md5.ref -
 	@echo MD5 passed test
-	-rm -f mddriver
+	-$(RM) mddriver mddriver.o
 	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -o rmddriver rmddriver.c $(TARGET_LIB)
 	./rmddriver | cmp rmd160.ref -
 	@echo RIPEMD160 passed test
-	-rm -f rmddriver
+	-$(RM) rmddriver rmddriver.o
 	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=0 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha0.ref -
 	@echo SHA-0 passed test
@@ -244,6 +244,6 @@ test: $(TARGET_LIB) $(REFS)
 	$(CC) $(CFLAGS_TEST) $(LDFLAGS_TEST) -DSHA=512 -o shadriver shadriver.c $(TARGET_LIB)
 	./shadriver | cmp sha512.ref -
 	@echo SHA-512 passed test
-	-rm -f shadriver
+	-$(RM) shadriver shadriver.o
 
 #---eof---
