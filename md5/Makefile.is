@@ -8,7 +8,7 @@ CC = icc
 RM = del -f
 
 ifeq ($(NO_INTERNAL),)
-CFLAGS_INTERNAL = -DMD_INTERNAL
+CFLAGS_INTERNAL = -DLIBMD_INTERNAL
 endif
 
 CFLAGS = \

@@ -34,7 +34,7 @@
 #endif
 
 /* MD4 context. */
-#ifdef MD_INTERNAL
+#ifdef LIBMD_INTERNAL
 
 typedef struct MD4Context {
   u_int32_t state[4];	/* state (ABCD) */

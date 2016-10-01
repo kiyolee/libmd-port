@@ -51,7 +51,7 @@
 #define SHA512_256_DIGEST_LENGTH	32
 #define SHA512_256_DIGEST_STRING_LENGTH	(SHA512_256_DIGEST_LENGTH * 2 + 1)
 
-#ifdef MD_INTERNAL
+#ifdef LIBMD_INTERNAL
 
 #if !defined(SHA512_224_API) && defined(MD_DLL) && defined(_MSC_VER)
 #define SHA512_224_API __declspec(dllexport)

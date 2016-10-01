@@ -38,7 +38,7 @@ extern "C"
 #endif
 #include "skein_port.h"                      /* get platform-specific definitions */
 
-#ifdef MD_INTERNAL
+#ifdef LIBMD_INTERNAL
 
 enum
     {
@@ -100,7 +100,7 @@ typedef struct _Skein_512_Ctxt_t Skein_512_Ctxt_t;
 typedef struct _Skein1024_Ctxt_t Skein1024_Ctxt_t;
 #endif
 
-#ifdef MD_INTERNAL
+#ifdef LIBMD_INTERNAL
 
 #ifndef SKEIN_INTERNAL_API
 #define SKEIN_INTERNAL_API static

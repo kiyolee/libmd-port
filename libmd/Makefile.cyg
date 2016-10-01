@@ -16,7 +16,7 @@ OBJS_X86 = rmd160.o sha.o
 endif
 endif
 
-CFLAGS = -pipe -O2 -Wall -I. -DMD_INTERNAL $(CFLAGS_X86)
+CFLAGS = -pipe -O2 -Wall -I. -DLIBMD_INTERNAL $(CFLAGS_X86)
 LDFLAGS_STATIC =
 
 OBJS = \

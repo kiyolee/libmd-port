@@ -38,7 +38,7 @@ documentation and/or software.
 #define MD5_DIGEST_LENGTH		16
 #define MD5_DIGEST_STRING_LENGTH	(MD5_DIGEST_LENGTH * 2 + 1)
 
-#ifdef MD_INTERNAL
+#ifdef LIBMD_INTERNAL
 
 #define MD5_BLOCK_LENGTH		64
 
