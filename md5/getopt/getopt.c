@@ -36,7 +36,7 @@ static char sccsid[] = "@(#)getopt.c	8.3 (Berkeley) 4/27/95";
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/10.3.0/lib/libc/stdlib/getopt.c 268352 2014-07-07 02:47:41Z pfg $");
+__FBSDID("$FreeBSD: release/11.0.0/lib/libc/stdlib/getopt.c 267745 2014-06-22 20:13:57Z pfg $");
 #endif
 
 #ifdef __FreeBSD__
