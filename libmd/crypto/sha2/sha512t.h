@@ -53,10 +53,10 @@
 
 #ifdef LIBMD_INTERNAL
 
-#if !defined(SHA512_224_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA512_224_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA512_224_API __declspec(dllexport)
 #endif
-#if !defined(SHA512_256_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA512_256_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA512_256_API __declspec(dllexport)
 #endif
 

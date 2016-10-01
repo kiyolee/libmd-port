@@ -57,7 +57,7 @@ typedef struct SHA256Context {
 	uint8_t buf[SHA256_BLOCK_LENGTH];
 } SHA256_CTX;
 
-#if !defined(SHA256_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA256_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA256_API __declspec(dllexport)
 #endif
 

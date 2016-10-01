@@ -49,7 +49,7 @@ typedef struct MD5Context {
   unsigned char buffer[64];	/* input buffer */
 } MD5_CTX;
 
-#if !defined(MD5_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(MD5_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define MD5_API __declspec(dllexport)
 #endif
 

@@ -90,10 +90,10 @@ typedef struct SHAstate_st {
 	int num;
 } SHA_CTX;
 
-#if !defined(SHA_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA_API __declspec(dllexport)
 #endif
-#if !defined(SHA1_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA1_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA1_API __declspec(dllexport)
 #endif
 

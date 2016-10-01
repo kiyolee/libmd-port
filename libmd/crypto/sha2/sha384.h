@@ -57,7 +57,7 @@ typedef struct SHA384Context {
 	uint8_t buf[SHA384_BLOCK_LENGTH];
 } SHA384_CTX;
 
-#if !defined(SHA384_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA384_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA384_API __declspec(dllexport)
 #endif
 

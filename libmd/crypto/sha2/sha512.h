@@ -57,7 +57,7 @@ typedef struct SHA512Context {
 	uint8_t buf[SHA512_BLOCK_LENGTH];
 } SHA512_CTX;
 
-#if !defined(SHA512_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SHA512_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SHA512_API __declspec(dllexport)
 #endif
 

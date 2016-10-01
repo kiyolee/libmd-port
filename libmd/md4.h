@@ -42,7 +42,7 @@ typedef struct MD4Context {
   unsigned char buffer[64];	/* input buffer */
 } MD4_CTX;
 
-#if !defined(MD4_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(MD4_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define MD4_API __declspec(dllexport)
 #endif
 

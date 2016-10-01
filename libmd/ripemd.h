@@ -93,7 +93,7 @@ typedef struct RIPEMD160state_st {
 	int num;
 } RIPEMD160_CTX;
 
-#if !defined(RIPEMD160_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(RIPEMD160_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define RIPEMD160_API __declspec(dllexport)
 #endif
 

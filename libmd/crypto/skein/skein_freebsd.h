@@ -46,13 +46,13 @@
 #define SKEIN512_BLOCK_LENGTH		SKEIN_512_BLOCK_BYTES
 #define SKEIN1024_BLOCK_LENGTH		SKEIN1024_BLOCK_BYTES
 
-#if !defined(SKEIN256_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SKEIN256_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SKEIN256_API __declspec(dllexport)
 #endif
-#if !defined(SKEIN512_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SKEIN512_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SKEIN512_API __declspec(dllexport)
 #endif
-#if !defined(SKEIN1024_API) && defined(MD_DLL) && defined(_MSC_VER)
+#if !defined(SKEIN1024_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
 #define SKEIN1024_API __declspec(dllexport)
 #endif
 
