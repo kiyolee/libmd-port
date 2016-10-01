@@ -1,5 +1,5 @@
 /* MD5.H - header file for MD5C.C
- * $FreeBSD: release/10.3.0/sys/sys/md5.h 156752 2006-03-15 19:47:12Z andre $
+ * $FreeBSD: release/11.0.0/sys/sys/md5.h 300774 2016-05-26 20:37:49Z cem $
  */
 
 /*-
@@ -27,10 +27,6 @@ documentation and/or software.
 
 #ifndef _SYS_MD5_H_
 #define _SYS_MD5_H_
-
-#ifdef unix
-#include <sys/cdefs.h>
-#endif
 
 #ifdef _MSC_VER
 #include "supp/w32defs.h"
@@ -64,6 +60,10 @@ typedef struct MD5Context MD5_CTX;
 #define MD5_API
 #endif
 
+#ifdef unix
+#include <sys/cdefs.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -71,17 +71,55 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+#ifndef _KERNEL
+
+/* Ensure libmd symbols do not clash with libcrypto */
+
+#ifndef MD5Init
+#define MD5Init		_libmd_MD5Init
+#endif
+#ifndef MD5Update
+#define MD5Update	_libmd_MD5Update
+#endif
+#ifndef MD5Pad
+#define MD5Pad		_libmd_MD5Pad
+#endif
+#ifndef MD5Final
+#define MD5Final	_libmd_MD5Final
+#endif
+#ifndef MD5Transform
+#define MD5Transform	_libmd_MD5Transform
+#endif
+#ifndef MD5End
+#define MD5End		_libmd_MD5End
+#endif
+#ifndef MD5File
+#define MD5File		_libmd_MD5File
+#endif
+#ifndef MD5FileChunk
+#define MD5FileChunk	_libmd_MD5FileChunk
+#endif
+#ifndef MD5Data
+#define MD5Data		_libmd_MD5Data
+#endif
+
+#endif
+
 MD5_API void   MD5Init (MD5_CTX *);
 MD5_API void   MD5Update (MD5_CTX *, const void *, unsigned int);
-MD5_API void   MD5Final (unsigned char [16], MD5_CTX *);
+MD5_API void   MD5Final (unsigned char[static MD5_DIGEST_LENGTH], MD5_CTX *);
+#ifndef _KERNEL
 MD5_API char * MD5End(MD5_CTX *, char *);
 MD5_API char * MD5File(const char *, char *);
 MD5_API char * MD5FileChunk(const char *, char *, off_t, off_t);
 MD5_API char * MD5Data(const void *, unsigned int, char *);
+#endif
 MD5_API int    MD5ContextSize(void);
 MD5_API MD5_CTX *MD5Create(void);
 MD5_API void   MD5Destroy(MD5_CTX *);
 MD5_API int    MD5DigestSize(void);
+
 #ifdef __FreeBSD__
 __END_DECLS
 #endif

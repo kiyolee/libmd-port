@@ -23,13 +23,15 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/10.3.0/lib/libmd/sha256.h 154479 2006-01-17 15:35:57Z phk $
+ * $FreeBSD: release/11.0.0/sys/crypto/sha2/sha256.h 300773 2016-05-26 19:29:29Z cem $
  */
 
 #ifndef _SHA256_H_
 #define _SHA256_H_
 
+#ifndef _KERNEL
 #include <sys/types.h>
+#endif
 
 #ifdef __linux__
 #include <stdint.h>
@@ -44,10 +46,14 @@
 
 #ifdef MD_INTERNAL
 
+#define SHA256_BLOCK_LENGTH		64
+#define SHA256_DIGEST_LENGTH		32
+#define SHA256_DIGEST_STRING_LENGTH	(SHA256_DIGEST_LENGTH * 2 + 1)
+
 typedef struct SHA256Context {
 	uint32_t state[8];
-	uint32_t count[2];
-	unsigned char buf[64];
+	uint64_t count;
+	uint8_t buf[SHA256_BLOCK_LENGTH];
 } SHA256_CTX;
 
 #if !defined(SHA256_API) && defined(MD_DLL) && defined(_MSC_VER)
@@ -69,17 +75,52 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+/* Ensure libmd symbols do not clash with libcrypto */
+
+#ifndef SHA256_Init
+#define SHA256_Init		_libmd_SHA256_Init
+#endif
+#ifndef SHA256_Update
+#define SHA256_Update		_libmd_SHA256_Update
+#endif
+#ifndef SHA256_Final
+#define SHA256_Final		_libmd_SHA256_Final
+#endif
+#ifndef SHA256_End
+#define SHA256_End		_libmd_SHA256_End
+#endif
+#ifndef SHA256_File
+#define SHA256_File		_libmd_SHA256_File
+#endif
+#ifndef SHA256_FileChunk
+#define SHA256_FileChunk	_libmd_SHA256_FileChunk
+#endif
+#ifndef SHA256_Data
+#define SHA256_Data		_libmd_SHA256_Data
+#endif
+
+#ifndef SHA256_Transform
+#define SHA256_Transform	_libmd_SHA256_Transform
+#endif
+#ifndef SHA256_version
+#define SHA256_version		_libmd_SHA256_version
+#endif
+
 SHA256_API void   SHA256_Init(SHA256_CTX *);
 SHA256_API void   SHA256_Update(SHA256_CTX *, const void *, size_t);
-SHA256_API void   SHA256_Final(unsigned char [32], SHA256_CTX *);
+SHA256_API void   SHA256_Final(unsigned char [static SHA256_DIGEST_LENGTH], SHA256_CTX *);
+#ifndef _KERNEL
 SHA256_API char  *SHA256_End(SHA256_CTX *, char *);
+SHA256_API char  *SHA256_Data(const void *, unsigned int, char *);
 SHA256_API char  *SHA256_File(const char *, char *);
 SHA256_API char  *SHA256_FileChunk(const char *, char *, off_t, off_t);
-SHA256_API char  *SHA256_Data(const void *, unsigned int, char *);
+#endif
 SHA256_API int    SHA256_ContextSize(void);
 SHA256_API SHA256_CTX *SHA256_Create(void);
 SHA256_API void   SHA256_Destroy(SHA256_CTX *);
 SHA256_API int    SHA256_DigestSize(void);
+
 #ifdef __FreeBSD__
 __END_DECLS
 #endif

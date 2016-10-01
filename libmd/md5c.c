@@ -30,7 +30,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/10.3.0/lib/libmd/md5c.c 154479 2006-01-17 15:35:57Z phk $");
+__FBSDID("$FreeBSD: release/11.0.0/lib/libmd/md5c.c 282774 2015-05-11 16:45:33Z thomas $");
 #endif
 
 #include <sys/types.h>
@@ -344,3 +344,20 @@ MD5Transform (u_int32_t state[4], const unsigned char block[64])
 	/* Zeroize sensitive information. */
 	memset ((void *)x, 0, sizeof (x));
 }
+
+#ifdef WEAK_REFS
+/* When building libmd, provide weak references. Note: this is not
+   activated in the context of compiling these sources for internal
+   use in libcrypt.
+ */
+#undef MD5Init
+__weak_reference(_libmd_MD5Init, MD5Init);
+#undef MD5Update
+__weak_reference(_libmd_MD5Update, MD5Update);
+#undef MD5Pad
+__weak_reference(_libmd_MD5Pad, MD5Pad);
+#undef MD5Final
+__weak_reference(_libmd_MD5Final, MD5Final);
+#undef MD5Transform
+__weak_reference(_libmd_MD5Transform, MD5Transform);
+#endif

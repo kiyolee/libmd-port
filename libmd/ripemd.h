@@ -57,7 +57,7 @@
  */
 
 /*
- * $FreeBSD: release/10.3.0/lib/libmd/ripemd.h 154479 2006-01-17 15:35:57Z phk $
+ * $FreeBSD: release/11.0.0/lib/libmd/ripemd.h 282736 2015-05-10 21:21:52Z thomas $
  */
 
 #ifndef HEADER_RIPEMD_H
@@ -110,6 +110,41 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+/* Ensure libmd symbols do not clash with libcrypto */
+
+#ifndef RIPEMD160_Init
+#define RIPEMD160_Init		_libmd_RIPEMD160_Init
+#endif
+#ifndef RIPEMD160_Update
+#define RIPEMD160_Update	_libmd_RIPEMD160_Update
+#endif
+#ifndef RIPEMD160_Final
+#define RIPEMD160_Final		_libmd_RIPEMD160_Final
+#endif
+#ifndef RIPEMD160_End
+#define RIPEMD160_End		_libmd_RIPEMD160_End
+#endif
+#ifndef RIPEMD160_File
+#define RIPEMD160_File		_libmd_RIPEMD160_File
+#endif
+#ifndef RIPEMD160_FileChunk
+#define RIPEMD160_FileChunk	_libmd_RIPEMD160_FileChunk
+#endif
+#ifndef RIPEMD160_Data
+#define RIPEMD160_Data		_libmd_RIPEMD160_Data
+#endif
+
+#ifndef RIPEMD160_Transform
+#define RIPEMD160_Transform	_libmd_RIPEMD160_Transform
+#endif
+#ifndef RMD160_version
+#define RMD160_version		_libmd_RMD160_version
+#endif
+#ifndef ripemd160_block
+#define ripemd160_block		_libmd_ripemd160_block
+#endif
+
 RIPEMD160_API void   RIPEMD160_Init(RIPEMD160_CTX *c);
 RIPEMD160_API void   RIPEMD160_Update(RIPEMD160_CTX *c, const void *data,
                                       size_t len);
@@ -122,6 +157,7 @@ RIPEMD160_API int    RIPEMD160_ContextSize(void);
 RIPEMD160_API RIPEMD160_CTX *RIPEMD160_Create(void);
 RIPEMD160_API void   RIPEMD160_Destroy(RIPEMD160_CTX *);
 RIPEMD160_API int    RIPEMD160_DigestSize(void);
+
 #ifdef __FreeBSD__
 __END_DECLS
 #endif

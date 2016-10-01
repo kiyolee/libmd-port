@@ -1,5 +1,5 @@
 /* MD4.H - header file for MD4C.C
- * $FreeBSD: release/10.3.0/lib/libmd/md4.h 154479 2006-01-17 15:35:57Z phk $
+ * $FreeBSD: release/11.0.0/lib/libmd/md4.h 282736 2015-05-10 21:21:52Z thomas $
  */
 
 /* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
@@ -25,10 +25,6 @@
 
 #ifndef _MD4_H_
 #define _MD4_H_
-
-#ifdef unix
-#include <sys/cdefs.h>
-#endif
 
 #ifdef _MSC_VER
 #include "supp/w32defs.h"
@@ -58,6 +54,10 @@ typedef struct MD4Context MD4_CTX;
 #define MD4_API
 #endif
 
+#ifdef unix
+#include <sys/cdefs.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -65,6 +65,34 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+/* Ensure libmd symbols do not clash with libcrypto */
+
+#ifndef MD4Init
+#define MD4Init		_libmd_MD4Init
+#endif
+#ifndef MD4Update
+#define MD4Update	_libmd_MD4Update
+#endif
+#ifndef MD4Pad
+#define MD4Pad		_libmd_MD4Pad
+#endif
+#ifndef MD4Final
+#define MD4Final	_libmd_MD4Final
+#endif
+#ifndef MD4End
+#define MD4End		_libmd_MD4End
+#endif
+#ifndef MD4File
+#define MD4File		_libmd_MD4File
+#endif
+#ifndef MD4FileChunk
+#define MD4FileChunk	_libmd_MD4FileChunk
+#endif
+#ifndef MD4Data
+#define MD4Data		_libmd_MD4Data
+#endif
+
 MD4_API void   MD4Init(MD4_CTX *);
 MD4_API void   MD4Update(MD4_CTX *, const void *, unsigned int);
 #if 0
@@ -79,6 +107,7 @@ MD4_API int    MD4ContextSize(void);
 MD4_API MD4_CTX *MD4Create(void);
 MD4_API void   MD4Destroy(MD4_CTX *);
 MD4_API int    MD4DigestSize(void);
+
 #ifdef __FreeBSD__
 __END_DECLS
 #endif

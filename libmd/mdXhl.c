@@ -1,4 +1,5 @@
-/* mdXhl.c * ----------------------------------------------------------------------------
+/* mdXhl.c
+ * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
  * <phk@FreeBSD.org> wrote this file.  As long as you retain this notice you
  * can do whatever you want with this stuff. If we meet some day, and you think
@@ -10,7 +11,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/10.3.0/lib/libmd/mdXhl.c 283054 2015-05-18 10:45:18Z ngie $");
+__FBSDID("$FreeBSD: release/11.0.0/lib/libmd/mdXhl.c 294037 2016-01-14 21:08:23Z jtl $");
 #endif
 
 #include <sys/types.h>
@@ -79,45 +80,51 @@ MDX_API
 char *
 MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 {
-	unsigned char buffer[BUFSIZ];
+	unsigned char buffer[16*1024];
 	MDX_CTX ctx;
 	struct stat stbuf;
-	int f, i, e;
-	off_t n;
+	int fd, readrv, e;
+	off_t remain;
+
+	if (len < 0) {
+		errno = EINVAL;
+		return NULL;
+	}
 
 	MDXInit(&ctx);
 #if defined(_MSC_VER) && _MSC_VER >= 1500
-	if (_sopen_s(&f, filename, O_RDONLY|O_BINARY, SH_DENYWR, 0) != 0) f = -1;
+	if (_sopen_s(&fd, filename, O_RDONLY|O_BINARY, SH_DENYWR, 0) != 0) fd = -1;
 #else
-	f = open(filename, O_RDONLY|O_BINARY);
+	fd = open(filename, O_RDONLY|O_BINARY);
 #endif
-	if (f < 0)
-		return 0;
-	if (fstat(f, &stbuf) < 0)
-		return 0;
-	if (ofs > stbuf.st_size)
-		ofs = stbuf.st_size;
-	if ((len == 0) || (len > stbuf.st_size - ofs))
-		len = stbuf.st_size - ofs;
-	if (lseek(f, ofs, SEEK_SET) < 0)
-		return 0;
-	n = len;
-	i = 0;
-	while (n > 0) {
-		if (n > sizeof(buffer))
-			i = read(f, buffer, sizeof(buffer));
+	if (fd < 0)
+		return NULL;
+	if (ofs != 0) {
+		errno = 0;
+		if (lseek(fd, ofs, SEEK_SET) != ofs ||
+		    (ofs == -1 && errno != 0)) {
+			readrv = -1;
+			goto error;
+		}
+	}
+	remain = len;
+	readrv = 0;
+	while (len == 0 || remain > 0) {
+		if (len == 0 || remain > sizeof(buffer))
+			readrv = read(fd, buffer, sizeof(buffer));
 		else
-			i = read(f, buffer, n);
-		if (i <= 0) 
+			readrv = read(fd, buffer, remain);
+		if (readrv <= 0) 
 			break;
-		MDXUpdate(&ctx, buffer, i);
-		n -= i;
+		MDXUpdate(&ctx, buffer, readrv);
+		remain -= readrv;
 	} 
+error:
 	e = errno;
-	close(f);
+	close(fd);
 	errno = e;
-	if (i < 0)
-		return 0;
+	if (readrv < 0)
+		return NULL;
 	return (MDXEnd(&ctx, buf));
 }
 
@@ -157,6 +164,21 @@ int MDXDigestSize(void)
 {
 	return LENGTH;
 }
+
+#ifdef WEAK_REFS
+/* When building libmd, provide weak references. Note: this is not
+   activated in the context of compiling these sources for internal
+   use in libcrypt.
+ */
+#undef MDXEnd
+__weak_reference(_libmd_MDXEnd, MDXEnd);
+#undef MDXFile
+__weak_reference(_libmd_MDXFile, MDXFile);
+#undef MDXFileChunk
+__weak_reference(_libmd_MDXFileChunk, MDXFileChunk);
+#undef MDXData
+__weak_reference(_libmd_MDXData, MDXData);
+#endif
 
 /* vim: ts=4:sts=4:sw=4:noet
  */

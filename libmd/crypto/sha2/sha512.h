@@ -23,13 +23,15 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/10.3.0/lib/libmd/sha512.h 220496 2011-04-09 13:56:29Z markm $
+ * $FreeBSD: release/11.0.0/sys/crypto/sha2/sha512.h 300773 2016-05-26 19:29:29Z cem $
  */
 
 #ifndef _SHA512_H_
 #define _SHA512_H_
 
+#ifndef _KERNEL
 #include <sys/types.h>
+#endif
 
 #ifdef __linux__
 #include <stdint.h>
@@ -44,10 +46,14 @@
 
 #ifdef MD_INTERNAL
 
+#define SHA512_BLOCK_LENGTH		128
+#define SHA512_DIGEST_LENGTH		64
+#define SHA512_DIGEST_STRING_LENGTH	(SHA512_DIGEST_LENGTH * 2 + 1)
+
 typedef struct SHA512Context {
 	uint64_t state[8];
 	uint64_t count[2];
-	unsigned char buf[128];
+	uint8_t buf[SHA512_BLOCK_LENGTH];
 } SHA512_CTX;
 
 #if !defined(SHA512_API) && defined(MD_DLL) && defined(_MSC_VER)
@@ -69,17 +75,51 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+/* Ensure libmd symbols do not clash with libcrypto */
+#ifndef SHA512_Init
+#define SHA512_Init		_libmd_SHA512_Init
+#endif
+#ifndef SHA512_Update
+#define SHA512_Update		_libmd_SHA512_Update
+#endif
+#ifndef SHA512_Final
+#define SHA512_Final		_libmd_SHA512_Final
+#endif
+#ifndef SHA512_End
+#define SHA512_End		_libmd_SHA512_End
+#endif
+#ifndef SHA512_File
+#define SHA512_File		_libmd_SHA512_File
+#endif
+#ifndef SHA512_FileChunk
+#define SHA512_FileChunk	_libmd_SHA512_FileChunk
+#endif
+#ifndef SHA512_Data
+#define SHA512_Data		_libmd_SHA512_Data
+#endif
+
+#ifndef SHA512_Transform
+#define SHA512_Transform	_libmd_SHA512_Transform
+#endif
+#ifndef SHA512_version
+#define SHA512_version		_libmd_SHA512_version
+#endif
+
 SHA512_API void   SHA512_Init(SHA512_CTX *);
 SHA512_API void   SHA512_Update(SHA512_CTX *, const void *, size_t);
-SHA512_API void   SHA512_Final(unsigned char [64], SHA512_CTX *);
+SHA512_API void   SHA512_Final(unsigned char [static SHA512_DIGEST_LENGTH], SHA512_CTX *);
+#ifndef _KERNEL
 SHA512_API char  *SHA512_End(SHA512_CTX *, char *);
+SHA512_API char  *SHA512_Data(const void *, unsigned int, char *);
 SHA512_API char  *SHA512_File(const char *, char *);
 SHA512_API char  *SHA512_FileChunk(const char *, char *, off_t, off_t);
-SHA512_API char  *SHA512_Data(const void *, unsigned int, char *);
+#endif
 SHA512_API int    SHA512_ContextSize(void);
 SHA512_API SHA512_CTX *SHA512_Create(void);
 SHA512_API void   SHA512_Destroy(SHA512_CTX *);
 SHA512_API int    SHA512_DigestSize(void);
+
 #ifdef __FreeBSD__
 __END_DECLS
 #endif
