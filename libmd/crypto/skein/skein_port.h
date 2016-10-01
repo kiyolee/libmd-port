@@ -16,8 +16,21 @@
 ** 
 ********************************************************************/
 
+#ifdef __FreeBSD__
 #include <sys/endian.h>
+#endif
 #include <sys/types.h>
+
+#ifdef __linux__
+#include <stdint.h>
+#endif
+
+#ifdef _MSC_VER
+#include "supp/w32defs.h"
+#endif
+#ifdef __OS400__
+#include "supp/isdefs.h"
+#endif
 
 #ifndef _OPENSOLARIS_SYS_TYPES_H_ /* Avoid redefining this typedef */
 typedef unsigned int    uint_t;             /* native unsigned integer */
@@ -30,7 +43,13 @@ typedef u_int64_t       u64b_t;             /* 64-bit unsigned integer */
 #define RotL_64(x,N)    (((x) << (N)) | ((x) >> (64-(N))))
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __FreeBSD__
 __BEGIN_DECLS
+#endif
 
 /*
  * Skein is "natively" little-endian (unlike SHA-xxx), for optimal
@@ -114,9 +133,12 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
 #endif
 #endif   /* ifndef Skein_Get64_LSB_First */
 
+#ifdef LIBMD_WITH_PREFIX
+
 /* Start FreeBSD libmd shims */
 
 /* Ensure libmd symbols do not clash with libcrypto */
+
 #ifndef SKEIN256_Init
 #define SKEIN256_Init		_libmd_SKEIN256_Init
 #define SKEIN512_Init		_libmd_SKEIN512_Init
@@ -153,6 +175,14 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
 #define SKEIN1024_Data		_libmd_SKEIN1024_Data
 #endif
 
+#endif
+
+#ifdef __FreeBSD__
 __END_DECLS
+#endif
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif   /* ifndef _SKEIN_PORT_H_ */

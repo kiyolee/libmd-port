@@ -33,9 +33,23 @@
 #include <sys/types.h>
 #endif
 
-#define SHA384_BLOCK_LENGTH		128
+#ifdef __linux__
+#include <stdint.h>
+#endif
+
+#ifdef _MSC_VER
+#include "supp/w32defs.h"
+#endif
+#ifdef __OS400__
+#include "supp/isdefs.h"
+#endif
+
 #define SHA384_DIGEST_LENGTH		48
 #define SHA384_DIGEST_STRING_LENGTH	(SHA384_DIGEST_LENGTH * 2 + 1)
+
+#ifdef MD_INTERNAL
+
+#define SHA384_BLOCK_LENGTH		128
 
 typedef struct SHA384Context {
 	uint64_t state[8];
@@ -43,9 +57,30 @@ typedef struct SHA384Context {
 	uint8_t buf[SHA384_BLOCK_LENGTH];
 } SHA384_CTX;
 
+#if !defined(SHA384_API) && defined(MD_DLL) && defined(_MSC_VER)
+#define SHA384_API __declspec(dllexport)
+#endif
+
+#else
+typedef struct SHA384Context SHA384_CTX;
+#endif
+
+#ifndef SHA384_API
+#define SHA384_API
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __FreeBSD__
 __BEGIN_DECLS
+#endif
+
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
+
 #ifndef SHA384_Init
 #define SHA384_Init		_libmd_SHA384_Init
 #endif
@@ -72,16 +107,28 @@ __BEGIN_DECLS
 #define SHA384_version		_libmd_SHA384_version
 #endif
 
-void	SHA384_Init(SHA384_CTX *);
-void	SHA384_Update(SHA384_CTX *, const void *, size_t);
-void	SHA384_Final(unsigned char [static SHA384_DIGEST_LENGTH], SHA384_CTX *);
-#ifndef _KERNEL
-char   *SHA384_End(SHA384_CTX *, char *);
-char   *SHA384_Data(const void *, unsigned int, char *);
-char   *SHA384_File(const char *, char *);
-char   *SHA384_FileChunk(const char *, char *, off_t, off_t);
 #endif
 
+SHA384_API void    SHA384_Init(SHA384_CTX *);
+SHA384_API void    SHA384_Update(SHA384_CTX *, const void *, size_t);
+SHA384_API void    SHA384_Final(unsigned char [SHA384_DIGEST_LENGTH], SHA384_CTX *);
+#ifndef _KERNEL
+SHA384_API char   *SHA384_End(SHA384_CTX *, char *);
+SHA384_API char   *SHA384_Data(const void *, unsigned int, char *);
+SHA384_API char   *SHA384_File(const char *, char *);
+SHA384_API char   *SHA384_FileChunk(const char *, char *, off_t, off_t);
+#endif
+SHA384_API int    SHA384_ContextSize(void);
+SHA384_API SHA384_CTX *SHA384_Create(void);
+SHA384_API void   SHA384_Destroy(SHA384_CTX *);
+SHA384_API int    SHA384_DigestSize(void);
+
+#ifdef __FreeBSD__
 __END_DECLS
+#endif
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif /* !_SHA384_H_ */

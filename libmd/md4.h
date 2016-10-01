@@ -66,6 +66,8 @@ extern "C" {
 __BEGIN_DECLS
 #endif
 
+#ifdef LIBMD_WITH_PREFIX
+
 /* Ensure libmd symbols do not clash with libcrypto */
 
 #ifndef MD4Init
@@ -91,6 +93,8 @@ __BEGIN_DECLS
 #endif
 #ifndef MD4Data
 #define MD4Data		_libmd_MD4Data
+#endif
+
 #endif
 
 MD4_API void   MD4Init(MD4_CTX *);

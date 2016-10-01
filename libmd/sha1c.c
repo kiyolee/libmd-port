@@ -148,6 +148,11 @@ void SHA1_Init(SHA_CTX *c)
 	c->num=0;
 	}
 
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4456) // declaration of 'l' hides previous local declaration
+#endif
+
 SHA1_API
 void
 SHA1_Update(SHA_CTX *c, const void *in, size_t len)
@@ -280,6 +285,10 @@ SHA1_Update(SHA_CTX *c, const void *in, size_t len)
 	M_c2nl_p(data,l,ec);
 	p[sw]=l;
 	}
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 #if 0 /* not used */
 void SHA1_Transform(SHA_CTX *c, unsigned char *b)

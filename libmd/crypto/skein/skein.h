@@ -38,6 +38,8 @@ extern "C"
 #endif
 #include "skein_port.h"                      /* get platform-specific definitions */
 
+#ifdef MD_INTERNAL
+
 enum
     {
     SKEIN_SUCCESS         =      0,          /* return codes from Skein calls */
@@ -71,39 +73,51 @@ typedef struct
     u64b_t  T[SKEIN_MODIFIER_WORDS];         /* tweak words: T[0]=byte cnt, T[1]=flags */
     } Skein_Ctxt_Hdr_t;
 
-typedef struct                               /*  256-bit Skein hash context structure */
+typedef struct _Skein_256_Ctxt_t             /*  256-bit Skein hash context structure */
     {
     Skein_Ctxt_Hdr_t h;                      /* common header context variables */
     u64b_t  X[SKEIN_256_STATE_WORDS];        /* chaining variables */
     u08b_t  b[SKEIN_256_BLOCK_BYTES];        /* partial block buffer (8-byte aligned) */
     } Skein_256_Ctxt_t;
 
-typedef struct                               /*  512-bit Skein hash context structure */
+typedef struct _Skein_512_Ctxt_t             /*  512-bit Skein hash context structure */
     {
     Skein_Ctxt_Hdr_t h;                      /* common header context variables */
     u64b_t  X[SKEIN_512_STATE_WORDS];        /* chaining variables */
     u08b_t  b[SKEIN_512_BLOCK_BYTES];        /* partial block buffer (8-byte aligned) */
     } Skein_512_Ctxt_t;
 
-typedef struct                               /* 1024-bit Skein hash context structure */
+typedef struct _Skein1024_Ctxt_t             /* 1024-bit Skein hash context structure */
     {
     Skein_Ctxt_Hdr_t h;                      /* common header context variables */
     u64b_t  X[SKEIN1024_STATE_WORDS];        /* chaining variables */
     u08b_t  b[SKEIN1024_BLOCK_BYTES];        /* partial block buffer (8-byte aligned) */
     } Skein1024_Ctxt_t;
 
+#else
+typedef struct _Skein_256_Ctxt_t Skein_256_Ctxt_t;
+typedef struct _Skein_512_Ctxt_t Skein_512_Ctxt_t;
+typedef struct _Skein1024_Ctxt_t Skein1024_Ctxt_t;
+#endif
+
+#ifdef MD_INTERNAL
+
+#ifndef SKEIN_INTERNAL_API
+#define SKEIN_INTERNAL_API static
+#endif
+
 /*   Skein APIs for (incremental) "straight hashing" */
-int  Skein_256_Init  (Skein_256_Ctxt_t *ctx, size_t hashBitLen);
-int  Skein_512_Init  (Skein_512_Ctxt_t *ctx, size_t hashBitLen);
-int  Skein1024_Init  (Skein1024_Ctxt_t *ctx, size_t hashBitLen);
+SKEIN_INTERNAL_API int  Skein_256_Init  (Skein_256_Ctxt_t *ctx, size_t hashBitLen);
+SKEIN_INTERNAL_API int  Skein_512_Init  (Skein_512_Ctxt_t *ctx, size_t hashBitLen);
+SKEIN_INTERNAL_API int  Skein1024_Init  (Skein1024_Ctxt_t *ctx, size_t hashBitLen);
 
-int  Skein_256_Update(Skein_256_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
-int  Skein_512_Update(Skein_512_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
-int  Skein1024_Update(Skein1024_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
+SKEIN_INTERNAL_API int  Skein_256_Update(Skein_256_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
+SKEIN_INTERNAL_API int  Skein_512_Update(Skein_512_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
+SKEIN_INTERNAL_API int  Skein1024_Update(Skein1024_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt);
 
-int  Skein_256_Final (Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein_512_Final (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein1024_Final (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_256_Final (Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_512_Final (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein1024_Final (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 
 /*
 **   Skein APIs for "extended" initialization: MAC keys, tree hashing.
@@ -119,26 +133,26 @@ int  Skein1024_Final (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 **              to precompute the MAC IV, then a copy of the context saved and
 **              reused for each new MAC computation.
 **/
-int  Skein_256_InitExt(Skein_256_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
-int  Skein_512_InitExt(Skein_512_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
-int  Skein1024_InitExt(Skein1024_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
+SKEIN_INTERNAL_API int  Skein_256_InitExt(Skein_256_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
+SKEIN_INTERNAL_API int  Skein_512_InitExt(Skein_512_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
+SKEIN_INTERNAL_API int  Skein1024_InitExt(Skein1024_Ctxt_t *ctx, size_t hashBitLen, u64b_t treeInfo, const u08b_t *key, size_t keyBytes);
 
 /*
 **   Skein APIs for MAC and tree hash:
 **      Final_Pad:  pad, do final block, but no OUTPUT type
 **      Output:     do just the output stage
 */
-int  Skein_256_Final_Pad(Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein_512_Final_Pad(Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein1024_Final_Pad(Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_256_Final_Pad(Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_512_Final_Pad(Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein1024_Final_Pad(Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 
 #ifndef SKEIN_TREE_HASH
 #define SKEIN_TREE_HASH (1)
 #endif
 #if  SKEIN_TREE_HASH
-int  Skein_256_Output   (Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein_512_Output   (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
-int  Skein1024_Output   (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_256_Output   (Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein_512_Output   (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
+SKEIN_INTERNAL_API int  Skein1024_Output   (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 #endif
 
 /*****************************************************************
@@ -321,6 +335,8 @@ enum
 #define SKEIN_256_ROUNDS_TOTAL (8*((((SKEIN_ROUNDS/100) + 5) % 10) + 5))
 #define SKEIN_512_ROUNDS_TOTAL (8*((((SKEIN_ROUNDS/ 10) + 5) % 10) + 5))
 #define SKEIN1024_ROUNDS_TOTAL (8*((((SKEIN_ROUNDS    ) + 5) % 10) + 5))
+#endif
+
 #endif
 
 #ifdef __cplusplus

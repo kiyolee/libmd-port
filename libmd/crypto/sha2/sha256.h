@@ -44,11 +44,12 @@
 #include "supp/isdefs.h"
 #endif
 
+#define SHA256_DIGEST_LENGTH		32
+#define SHA256_DIGEST_STRING_LENGTH	(SHA256_DIGEST_LENGTH * 2 + 1)
+
 #ifdef MD_INTERNAL
 
 #define SHA256_BLOCK_LENGTH		64
-#define SHA256_DIGEST_LENGTH		32
-#define SHA256_DIGEST_STRING_LENGTH	(SHA256_DIGEST_LENGTH * 2 + 1)
 
 typedef struct SHA256Context {
 	uint32_t state[8];
@@ -75,6 +76,8 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
 
@@ -107,9 +110,11 @@ __BEGIN_DECLS
 #define SHA256_version		_libmd_SHA256_version
 #endif
 
+#endif
+
 SHA256_API void   SHA256_Init(SHA256_CTX *);
 SHA256_API void   SHA256_Update(SHA256_CTX *, const void *, size_t);
-SHA256_API void   SHA256_Final(unsigned char [static SHA256_DIGEST_LENGTH], SHA256_CTX *);
+SHA256_API void   SHA256_Final(unsigned char [SHA256_DIGEST_LENGTH], SHA256_CTX *);
 #ifndef _KERNEL
 SHA256_API char  *SHA256_End(SHA256_CTX *, char *);
 SHA256_API char  *SHA256_Data(const void *, unsigned int, char *);

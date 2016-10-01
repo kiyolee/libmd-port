@@ -35,11 +35,12 @@ documentation and/or software.
 #include "supp/isdefs.h"
 #endif
 
-#define MD5_BLOCK_LENGTH		64
 #define MD5_DIGEST_LENGTH		16
 #define MD5_DIGEST_STRING_LENGTH	(MD5_DIGEST_LENGTH * 2 + 1)
 
 #ifdef MD_INTERNAL
+
+#define MD5_BLOCK_LENGTH		64
 
 /* MD5 context. */
 typedef struct MD5Context {
@@ -73,6 +74,7 @@ __BEGIN_DECLS
 #endif
 
 #ifndef _KERNEL
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
 
@@ -105,10 +107,11 @@ __BEGIN_DECLS
 #endif
 
 #endif
+#endif
 
 MD5_API void   MD5Init (MD5_CTX *);
 MD5_API void   MD5Update (MD5_CTX *, const void *, unsigned int);
-MD5_API void   MD5Final (unsigned char[static MD5_DIGEST_LENGTH], MD5_CTX *);
+MD5_API void   MD5Final (unsigned char[MD5_DIGEST_LENGTH], MD5_CTX *);
 #ifndef _KERNEL
 MD5_API char * MD5End(MD5_CTX *, char *);
 MD5_API char * MD5File(const char *, char *);

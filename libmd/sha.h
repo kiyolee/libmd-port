@@ -72,6 +72,9 @@
 #include "supp/isdefs.h"
 #endif
 
+#define SHA_DIGEST_LENGTH		20
+#define SHA_DIGEST_STRING_LENGTH	(SHA_DIGEST_LENGTH * 2 + 1)
+
 #ifdef MD_INTERNAL
 
 #define	SHA_CBLOCK	64
@@ -79,7 +82,6 @@
 #define	SHA_BLOCK	16
 #define	SHA_LAST_BLOCK  56
 #define	SHA_LENGTH_BLOCK 8
-#define	SHA_DIGEST_LENGTH 20
 
 typedef struct SHAstate_st {
 	u_int32_t h0, h1, h2, h3, h4;
@@ -91,6 +93,9 @@ typedef struct SHAstate_st {
 #if !defined(SHA_API) && defined(MD_DLL) && defined(_MSC_VER)
 #define SHA_API __declspec(dllexport)
 #endif
+#if !defined(SHA1_API) && defined(MD_DLL) && defined(_MSC_VER)
+#define SHA1_API __declspec(dllexport)
+#endif
 
 #else
 typedef struct SHAstate_st SHA_CTX;
@@ -101,6 +106,9 @@ typedef struct SHAstate_st SHA_CTX;
 #ifndef SHA_API
 #define SHA_API
 #endif
+#ifndef SHA1_API
+#define SHA1_API
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -109,6 +117,8 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
 
@@ -176,6 +186,8 @@ __BEGIN_DECLS
 #define sha1_block	_libmd_sha1_block
 #endif
 
+#endif
+
 SHA_API void    SHA_Init(SHA_CTX *c);
 SHA_API void    SHA_Update(SHA_CTX *c, const void *data, size_t len);
 SHA_API void    SHA_Final(unsigned char *md, SHA_CTX *c);
@@ -187,17 +199,17 @@ SHA_API int     SHA_ContextSize(void);
 SHA_API SHA_CTX *SHA_Create(void);
 SHA_API void    SHA_Destroy(SHA_CTX *);
 SHA_API int     SHA_DigestSize(void);
-SHA_API void   SHA1_Init(SHA_CTX *c);
-SHA_API void   SHA1_Update(SHA_CTX *c, const void *data, size_t len);
-SHA_API void   SHA1_Final(unsigned char *md, SHA_CTX *c);
-SHA_API char  *SHA1_End(SHA_CTX *, char *);
-SHA_API char  *SHA1_File(const char *, char *);
-SHA_API char  *SHA1_FileChunk(const char *, char *, off_t, off_t);
-SHA_API char  *SHA1_Data(const void *, unsigned int, char *);
-SHA_API int    SHA1_ContextSize(void);
-SHA_API SHA_CTX *SHA1_Create(void);
-SHA_API void   SHA1_Destroy(SHA_CTX *);
-SHA_API int    SHA1_DigestSize(void);
+SHA1_API void   SHA1_Init(SHA_CTX *c);
+SHA1_API void   SHA1_Update(SHA_CTX *c, const void *data, size_t len);
+SHA1_API void   SHA1_Final(unsigned char *md, SHA_CTX *c);
+SHA1_API char  *SHA1_End(SHA_CTX *, char *);
+SHA1_API char  *SHA1_File(const char *, char *);
+SHA1_API char  *SHA1_FileChunk(const char *, char *, off_t, off_t);
+SHA1_API char  *SHA1_Data(const void *, unsigned int, char *);
+SHA1_API int    SHA1_ContextSize(void);
+SHA1_API SHA_CTX *SHA1_Create(void);
+SHA1_API void   SHA1_Destroy(SHA_CTX *);
+SHA1_API int    SHA1_DigestSize(void);
 
 #ifdef __FreeBSD__
 __END_DECLS

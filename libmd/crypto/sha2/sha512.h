@@ -44,11 +44,12 @@
 #include "supp/isdefs.h"
 #endif
 
+#define SHA512_DIGEST_LENGTH		64
+#define SHA512_DIGEST_STRING_LENGTH	(SHA512_DIGEST_LENGTH * 2 + 1)
+
 #ifdef MD_INTERNAL
 
 #define SHA512_BLOCK_LENGTH		128
-#define SHA512_DIGEST_LENGTH		64
-#define SHA512_DIGEST_STRING_LENGTH	(SHA512_DIGEST_LENGTH * 2 + 1)
 
 typedef struct SHA512Context {
 	uint64_t state[8];
@@ -76,7 +77,10 @@ extern "C" {
 __BEGIN_DECLS
 #endif
 
+#ifdef LIBMD_WITH_PREFIX
+
 /* Ensure libmd symbols do not clash with libcrypto */
+
 #ifndef SHA512_Init
 #define SHA512_Init		_libmd_SHA512_Init
 #endif
@@ -106,9 +110,11 @@ __BEGIN_DECLS
 #define SHA512_version		_libmd_SHA512_version
 #endif
 
+#endif
+
 SHA512_API void   SHA512_Init(SHA512_CTX *);
 SHA512_API void   SHA512_Update(SHA512_CTX *, const void *, size_t);
-SHA512_API void   SHA512_Final(unsigned char [static SHA512_DIGEST_LENGTH], SHA512_CTX *);
+SHA512_API void   SHA512_Final(unsigned char [SHA512_DIGEST_LENGTH], SHA512_CTX *);
 #ifndef _KERNEL
 SHA512_API char  *SHA512_End(SHA512_CTX *, char *);
 SHA512_API char  *SHA512_Data(const void *, unsigned int, char *);

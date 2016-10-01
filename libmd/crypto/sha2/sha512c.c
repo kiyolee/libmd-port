@@ -61,15 +61,6 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 1
 
 #if !defined(__FreeBSD__)
 
-static __inline uint64_t
-be64dec(const void *pp)
-{
-	unsigned char const *p = (unsigned char const *)pp;
-
-	return (((uint64_t)(p[0]) << 56) | ((uint64_t)(p[1]) << 48) | ((uint64_t)(p[2]) << 40) | (uint64_t)(p[3]) << 32)
-	     | (((uint64_t)(p[4]) << 24) | ((uint64_t)(p[5]) << 16) | ((uint64_t)(p[6]) << 8) | (uint64_t)(p[7]));
-}
-
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
@@ -83,6 +74,15 @@ be64enc(void *pp, uint64_t u)
 	p[5] = (unsigned char)((u >> 16) & 0xff);
 	p[6] = (unsigned char)((u >> 8) & 0xff);
 	p[7] = (unsigned char)(u & 0xff);
+}
+
+static __inline uint64_t
+be64dec(const void *pp)
+{
+	unsigned char const *p = (unsigned char const *)pp;
+
+	return (((uint64_t)(p[0]) << 56) | ((uint64_t)(p[1]) << 48) | ((uint64_t)(p[2]) << 40) | (uint64_t)(p[3]) << 32)
+	     | (((uint64_t)(p[4]) << 24) | ((uint64_t)(p[5]) << 16) | ((uint64_t)(p[6]) << 8) | (uint64_t)(p[7]));
 }
 
 #endif /* !defined(__FreeBSD__) */
@@ -358,7 +358,7 @@ SHA512_Update(SHA512_CTX * ctx, const void *in, size_t len)
  */
 SHA512_API
 void
-SHA512_Final(unsigned char digest[static SHA512_DIGEST_LENGTH], SHA512_CTX *ctx)
+SHA512_Final(unsigned char digest[SHA512_DIGEST_LENGTH], SHA512_CTX *ctx)
 {
 
 	/* Add padding */
@@ -404,7 +404,7 @@ SHA512_224_Update(SHA512_CTX * ctx, const void *in, size_t len)
 
 SHA512_API
 void
-SHA512_224_Final(unsigned char digest[static SHA512_224_DIGEST_LENGTH], SHA512_CTX * ctx)
+SHA512_224_Final(unsigned char digest[SHA512_224_DIGEST_LENGTH], SHA512_CTX * ctx)
 {
 
 	/* Add padding */
@@ -446,7 +446,7 @@ SHA512_256_Update(SHA512_CTX * ctx, const void *in, size_t len)
 
 SHA512_API
 void
-SHA512_256_Final(unsigned char digest[static SHA512_256_DIGEST_LENGTH], SHA512_CTX * ctx)
+SHA512_256_Final(unsigned char digest[SHA512_256_DIGEST_LENGTH], SHA512_CTX * ctx)
 {
 
 	/* Add padding */
@@ -499,7 +499,7 @@ SHA384_Update(SHA384_CTX * ctx, const void *in, size_t len)
  */
 SHA512_API
 void
-SHA384_Final(unsigned char digest[static SHA384_DIGEST_LENGTH], SHA384_CTX *ctx)
+SHA384_Final(unsigned char digest[SHA384_DIGEST_LENGTH], SHA384_CTX *ctx)
 {
 
 	/* Add padding */

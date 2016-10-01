@@ -22,7 +22,13 @@ libmd/rmd160hl.c
 libmd/sha0hl.c
 libmd/sha1hl.c
 libmd/sha256hl.c
+libmd/sha384hl.c
 libmd/sha512hl.c
+libmd/sha512t224hl.c
+libmd/sha512t256hl.c
+libmd/skein256hl.c
+libmd/skein512hl.c
+libmd/skein1024hl.c
 md5/md5
 md5/rmd160
 md5/sha1

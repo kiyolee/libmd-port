@@ -43,6 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="MD_INTERNAL;MD_DLL;_DEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -113,6 +114,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="MD_INTERNAL;MD_DLL;_DEBUG"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -185,6 +187,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="MD_INTERNAL;MD_DLL;NDEBUG"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -256,6 +259,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="MD_INTERNAL;MD_DLL;NDEBUG"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -350,21 +354,69 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\libmd\sha256c.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\libmd\sha256hl.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\libmd\sha512c.c"
+				RelativePath="..\..\libmd\sha384hl.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\libmd\sha512hl.c"
 				>
 			</File>
+			<File
+				RelativePath="..\..\libmd\sha512t224hl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\libmd\sha512t256hl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\libmd\skein1024hl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\libmd\skein256hl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\libmd\skein512hl.c"
+				>
+			</File>
+			<Filter
+				Name="crypto"
+				>
+				<Filter
+					Name="sha2"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha256c.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha512c.c"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="skein"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_block.c"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_debug.c"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -396,14 +448,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\libmd\sha256.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\libmd\sha512.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\libmd\sha_locl.h"
 				>
 			</File>
@@ -414,6 +458,54 @@
 					RelativePath="..\..\libmd\supp\w32defs.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="crypto"
+				>
+				<Filter
+					Name="sha2"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha256.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha384.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha512.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha512t.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="skein"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_debug.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_freebsd.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_iv.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_port.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

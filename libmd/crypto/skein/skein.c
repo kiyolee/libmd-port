@@ -8,10 +8,16 @@
 ** 
 ************************************************************************/
 
+#ifdef unix
 #include <sys/cdefs.h>
+#endif
+#ifdef __FreeBSD__
 __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein.c 300921 2016-05-29 01:15:36Z allanjude $");
+#endif
 
+#ifdef __FreeBSD__
 #include <sys/endian.h>
+#endif
 #include <sys/types.h>
 
 /* get the memcpy/memset functions */
@@ -38,6 +44,7 @@ void    Skein1024_Process_Block(Skein1024_Ctxt_t *ctx,const u08b_t *blkPtr,size_
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a straight hashing operation  */
+SKEIN_INTERNAL_API
 int Skein_256_Init(Skein_256_Ctxt_t *ctx, size_t hashBitLen)
     {
     union
@@ -82,6 +89,7 @@ int Skein_256_Init(Skein_256_Ctxt_t *ctx, size_t hashBitLen)
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein_256_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
+SKEIN_INTERNAL_API
 int Skein_256_InitExt(Skein_256_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, const u08b_t *key, size_t keyBytes)
     {
     union
@@ -140,6 +148,7 @@ int Skein_256_InitExt(Skein_256_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
+SKEIN_INTERNAL_API
 int Skein_256_Update(Skein_256_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt)
     {
     size_t n;
@@ -188,6 +197,7 @@ int Skein_256_Update(Skein_256_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt
    
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the result */
+SKEIN_INTERNAL_API
 int Skein_256_Final(Skein_256_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -235,6 +245,7 @@ size_t Skein_256_API_CodeSize(void)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a straight hashing operation  */
+SKEIN_INTERNAL_API
 int Skein_512_Init(Skein_512_Ctxt_t *ctx, size_t hashBitLen)
     {
     union
@@ -280,6 +291,7 @@ int Skein_512_Init(Skein_512_Ctxt_t *ctx, size_t hashBitLen)
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein_512_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
+SKEIN_INTERNAL_API
 int Skein_512_InitExt(Skein_512_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, const u08b_t *key, size_t keyBytes)
     {
     union
@@ -338,6 +350,7 @@ int Skein_512_InitExt(Skein_512_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
+SKEIN_INTERNAL_API
 int Skein_512_Update(Skein_512_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt)
     {
     size_t n;
@@ -386,6 +399,7 @@ int Skein_512_Update(Skein_512_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt
    
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the result */
+SKEIN_INTERNAL_API
 int Skein_512_Final(Skein_512_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -433,6 +447,7 @@ size_t Skein_512_API_CodeSize(void)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a straight hashing operation  */
+SKEIN_INTERNAL_API
 int Skein1024_Init(Skein1024_Ctxt_t *ctx, size_t hashBitLen)
     {
     union
@@ -477,6 +492,7 @@ int Skein1024_Init(Skein1024_Ctxt_t *ctx, size_t hashBitLen)
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein1024_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
+SKEIN_INTERNAL_API
 int Skein1024_InitExt(Skein1024_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, const u08b_t *key, size_t keyBytes)
     {
     union
@@ -535,6 +551,7 @@ int Skein1024_InitExt(Skein1024_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
+SKEIN_INTERNAL_API
 int Skein1024_Update(Skein1024_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt)
     {
     size_t n;
@@ -583,6 +600,7 @@ int Skein1024_Update(Skein1024_Ctxt_t *ctx, const u08b_t *msg, size_t msgByteCnt
    
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the result */
+SKEIN_INTERNAL_API
 int Skein1024_Final(Skein1024_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -629,6 +647,7 @@ size_t Skein1024_API_CodeSize(void)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the block, no OUTPUT stage */
+SKEIN_INTERNAL_API
 int Skein_256_Final_Pad(Skein_256_Ctxt_t *ctx, u08b_t *hashVal)
     {
     Skein_Assert(ctx->h.bCnt <= SKEIN_256_BLOCK_BYTES,SKEIN_FAIL);    /* catch uninitialized context */
@@ -645,6 +664,7 @@ int Skein_256_Final_Pad(Skein_256_Ctxt_t *ctx, u08b_t *hashVal)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the block, no OUTPUT stage */
+SKEIN_INTERNAL_API
 int Skein_512_Final_Pad(Skein_512_Ctxt_t *ctx, u08b_t *hashVal)
     {
     Skein_Assert(ctx->h.bCnt <= SKEIN_512_BLOCK_BYTES,SKEIN_FAIL);    /* catch uninitialized context */
@@ -661,6 +681,7 @@ int Skein_512_Final_Pad(Skein_512_Ctxt_t *ctx, u08b_t *hashVal)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* finalize the hash computation and output the block, no OUTPUT stage */
+SKEIN_INTERNAL_API
 int Skein1024_Final_Pad(Skein1024_Ctxt_t *ctx, u08b_t *hashVal)
     {
     Skein_Assert(ctx->h.bCnt <= SKEIN1024_BLOCK_BYTES,SKEIN_FAIL);    /* catch uninitialized context */
@@ -678,6 +699,7 @@ int Skein1024_Final_Pad(Skein1024_Ctxt_t *ctx, u08b_t *hashVal)
 #if SKEIN_TREE_HASH
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* just do the OUTPUT stage                                       */
+SKEIN_INTERNAL_API
 int Skein_256_Output(Skein_256_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -707,6 +729,7 @@ int Skein_256_Output(Skein_256_Ctxt_t *ctx, u08b_t *hashVal)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* just do the OUTPUT stage                                       */
+SKEIN_INTERNAL_API
 int Skein_512_Output(Skein_512_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -736,6 +759,7 @@ int Skein_512_Output(Skein_512_Ctxt_t *ctx, u08b_t *hashVal)
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* just do the OUTPUT stage                                       */
+SKEIN_INTERNAL_API
 int Skein1024_Output(Skein1024_Ctxt_t *ctx, u08b_t *hashVal)
     {
     size_t i,n,byteCnt;
@@ -808,21 +832,21 @@ SKEIN1024_Update(SKEIN1024_CTX * ctx, const void *in, size_t len)
 }
 
 void
-SKEIN256_Final(unsigned char digest[static SKEIN_256_BLOCK_BYTES], SKEIN256_CTX *ctx)
+SKEIN256_Final(unsigned char digest[SKEIN_256_BLOCK_BYTES], SKEIN256_CTX *ctx)
 {
 
 	Skein_256_Final(ctx, digest);
 }
 
 void
-SKEIN512_Final(unsigned char digest[static SKEIN_512_BLOCK_BYTES], SKEIN512_CTX *ctx)
+SKEIN512_Final(unsigned char digest[SKEIN_512_BLOCK_BYTES], SKEIN512_CTX *ctx)
 {
 
 	Skein_512_Final(ctx, digest);
 }
 
 void
-SKEIN1024_Final(unsigned char digest[static SKEIN1024_BLOCK_BYTES], SKEIN1024_CTX *ctx)
+SKEIN1024_Final(unsigned char digest[SKEIN1024_BLOCK_BYTES], SKEIN1024_CTX *ctx)
 {
 
 	Skein1024_Final(ctx, digest);

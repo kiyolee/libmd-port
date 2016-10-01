@@ -75,6 +75,9 @@
 #include "supp/isdefs.h"
 #endif
 
+#define RIPEMD160_DIGEST_LENGTH		20
+#define RIPEMD160_DIGEST_STRING_LENGTH	(RIPEMD160_DIGEST_LENGTH * 2 + 1)
+
 #ifdef MD_INTERNAL
 
 #define RIPEMD160_CBLOCK	64
@@ -82,7 +85,6 @@
 #define RIPEMD160_BLOCK		16
 #define RIPEMD160_LAST_BLOCK	56
 #define RIPEMD160_LENGTH_BLOCK	8
-#define RIPEMD160_DIGEST_LENGTH	20
 
 typedef struct RIPEMD160state_st {
 	u_int32_t A,B,C,D,E;
@@ -110,6 +112,8 @@ extern "C" {
 #ifdef __FreeBSD__
 __BEGIN_DECLS
 #endif
+
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
 
@@ -143,6 +147,8 @@ __BEGIN_DECLS
 #endif
 #ifndef ripemd160_block
 #define ripemd160_block		_libmd_ripemd160_block
+#endif
+
 #endif
 
 RIPEMD160_API void   RIPEMD160_Init(RIPEMD160_CTX *c);

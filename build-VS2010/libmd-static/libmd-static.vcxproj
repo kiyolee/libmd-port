@@ -66,6 +66,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -83,6 +84,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -97,6 +99,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -114,11 +117,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\libmd\crypto\sha2\sha256c.c" />
+    <ClCompile Include="..\..\libmd\crypto\sha2\sha512c.c" />
+    <ClCompile Include="..\..\libmd\crypto\skein\skein.c" />
+    <ClCompile Include="..\..\libmd\crypto\skein\skein_block.c" />
+    <ClCompile Include="..\..\libmd\crypto\skein\skein_debug.c" />
     <ClCompile Include="..\..\libmd\md4c.c" />
     <ClCompile Include="..\..\libmd\md4hl.c" />
     <ClCompile Include="..\..\libmd\md5c.c" />
@@ -129,20 +138,31 @@
     <ClCompile Include="..\..\libmd\sha0hl.c" />
     <ClCompile Include="..\..\libmd\sha1c.c" />
     <ClCompile Include="..\..\libmd\sha1hl.c" />
-    <ClCompile Include="..\..\libmd\sha256c.c" />
     <ClCompile Include="..\..\libmd\sha256hl.c" />
-    <ClCompile Include="..\..\libmd\sha512c.c" />
+    <ClCompile Include="..\..\libmd\sha384hl.c" />
     <ClCompile Include="..\..\libmd\sha512hl.c" />
+    <ClCompile Include="..\..\libmd\sha512t224hl.c" />
+    <ClCompile Include="..\..\libmd\sha512t256hl.c" />
+    <ClCompile Include="..\..\libmd\skein1024hl.c" />
+    <ClCompile Include="..\..\libmd\skein256hl.c" />
+    <ClCompile Include="..\..\libmd\skein512hl.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512t.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_debug.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_freebsd.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_iv.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h" />
     <ClInclude Include="..\..\libmd\md4.h" />
     <ClInclude Include="..\..\libmd\md5.h" />
     <ClInclude Include="..\..\libmd\ripemd.h" />
     <ClInclude Include="..\..\libmd\rmd_locl.h" />
     <ClInclude Include="..\..\libmd\rmdconst.h" />
     <ClInclude Include="..\..\libmd\sha.h" />
-    <ClInclude Include="..\..\libmd\sha256.h" />
-    <ClInclude Include="..\..\libmd\sha512.h" />
     <ClInclude Include="..\..\libmd\sha_locl.h" />
     <ClInclude Include="..\..\libmd\supp\w32defs.h" />
   </ItemGroup>

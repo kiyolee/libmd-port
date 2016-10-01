@@ -22,6 +22,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Header Files\crypto">
+      <UniqueIdentifier>{e13dbdc7-7a86-4a4c-b3dc-a115f65324b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\crypto\sha2">
+      <UniqueIdentifier>{66e5838a-7def-4503-977e-53bf9c928174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\crypto\skein">
+      <UniqueIdentifier>{582f7420-c829-4df3-ad84-95a85b4b9618}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\md5\md5.c">
@@ -44,8 +53,26 @@
     <ClInclude Include="..\..\libmd\sha.h">
       <Filter>Header Files\libmd</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\libmd\sha256.h">
-      <Filter>Header Files\libmd</Filter>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512t.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein.h">
+      <Filter>Header Files\crypto\skein</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_freebsd.h">
+      <Filter>Header Files\crypto\skein</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h">
+      <Filter>Header Files\crypto\skein</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -82,7 +82,6 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 {
 	unsigned char buffer[16*1024];
 	MDX_CTX ctx;
-	struct stat stbuf;
 	int fd, readrv, e;
 	off_t remain;
 

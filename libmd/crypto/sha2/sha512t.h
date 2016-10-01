@@ -35,14 +35,52 @@
 #include <sys/types.h>
 #endif
 
+#ifdef __linux__
+#include <stdint.h>
+#endif
+
+#ifdef _MSC_VER
+#include "supp/w32defs.h"
+#endif
+#ifdef __OS400__
+#include "supp/isdefs.h"
+#endif
+
 #define SHA512_224_DIGEST_LENGTH	28
 #define SHA512_224_DIGEST_STRING_LENGTH	(SHA512_224_DIGEST_LENGTH * 2 + 1)
 #define SHA512_256_DIGEST_LENGTH	32
 #define SHA512_256_DIGEST_STRING_LENGTH	(SHA512_256_DIGEST_LENGTH * 2 + 1)
 
+#ifdef MD_INTERNAL
+
+#if !defined(SHA512_224_API) && defined(MD_DLL) && defined(_MSC_VER)
+#define SHA512_224_API __declspec(dllexport)
+#endif
+#if !defined(SHA512_256_API) && defined(MD_DLL) && defined(_MSC_VER)
+#define SHA512_256_API __declspec(dllexport)
+#endif
+
+#endif
+
+#ifndef SHA512_224_API
+#define SHA512_224_API
+#endif
+#ifndef SHA512_256_API
+#define SHA512_256_API
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __FreeBSD__
 __BEGIN_DECLS
+#endif
+
+#ifdef LIBMD_WITH_PREFIX
 
 /* Ensure libmd symbols do not clash with libcrypto */
+
 #ifndef SHA512_224_Init
 #define SHA512_224_Init		_libmd_SHA512_224_Init
 #endif
@@ -101,25 +139,41 @@ __BEGIN_DECLS
 #define SHA512_256_version	_libmd_SHA512_256_version
 #endif
 
-void	SHA512_224_Init(SHA512_CTX *);
-void	SHA512_224_Update(SHA512_CTX *, const void *, size_t);
-void	SHA512_224_Final(unsigned char [static SHA512_224_DIGEST_LENGTH], SHA512_CTX *);
-#ifndef _KERNEL
-char   *SHA512_224_End(SHA512_CTX *, char *);
-char   *SHA512_224_Data(const void *, unsigned int, char *);
-char   *SHA512_224_File(const char *, char *);
-char   *SHA512_224_FileChunk(const char *, char *, off_t, off_t);
-#endif
-void	SHA512_256_Init(SHA512_CTX *);
-void	SHA512_256_Update(SHA512_CTX *, const void *, size_t);
-void	SHA512_256_Final(unsigned char [static SHA512_256_DIGEST_LENGTH], SHA512_CTX *);
-#ifndef _KERNEL
-char   *SHA512_256_End(SHA512_CTX *, char *);
-char   *SHA512_256_Data(const void *, unsigned int, char *);
-char   *SHA512_256_File(const char *, char *);
-char   *SHA512_256_FileChunk(const char *, char *, off_t, off_t);
 #endif
 
+SHA512_224_API void    SHA512_224_Init(SHA512_CTX *);
+SHA512_224_API void    SHA512_224_Update(SHA512_CTX *, const void *, size_t);
+SHA512_224_API void    SHA512_224_Final(unsigned char [SHA512_224_DIGEST_LENGTH], SHA512_CTX *);
+#ifndef _KERNEL
+SHA512_224_API char   *SHA512_224_End(SHA512_CTX *, char *);
+SHA512_224_API char   *SHA512_224_Data(const void *, unsigned int, char *);
+SHA512_224_API char   *SHA512_224_File(const char *, char *);
+SHA512_224_API char   *SHA512_224_FileChunk(const char *, char *, off_t, off_t);
+#endif
+SHA512_224_API int     SHA512_224_ContextSize(void);
+SHA512_224_API SHA512_CTX *SHA512_224_Create(void);
+SHA512_224_API void    SHA512_224_Destroy(SHA512_CTX *);
+SHA512_224_API int     SHA512_224_DigestSize(void);
+SHA512_256_API void    SHA512_256_Init(SHA512_CTX *);
+SHA512_256_API void    SHA512_256_Update(SHA512_CTX *, const void *, size_t);
+SHA512_256_API void    SHA512_256_Final(unsigned char [SHA512_256_DIGEST_LENGTH], SHA512_CTX *);
+#ifndef _KERNEL
+SHA512_256_API char   *SHA512_256_End(SHA512_CTX *, char *);
+SHA512_256_API char   *SHA512_256_Data(const void *, unsigned int, char *);
+SHA512_256_API char   *SHA512_256_File(const char *, char *);
+SHA512_256_API char   *SHA512_256_FileChunk(const char *, char *, off_t, off_t);
+#endif
+SHA512_256_API int     SHA512_256_ContextSize(void);
+SHA512_256_API SHA512_CTX *SHA512_256_Create(void);
+SHA512_256_API void    SHA512_256_Destroy(SHA512_CTX *);
+SHA512_256_API int     SHA512_256_DigestSize(void);
+
+#ifdef __FreeBSD__
 __END_DECLS
+#endif
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif /* !_SHA512T_H_ */

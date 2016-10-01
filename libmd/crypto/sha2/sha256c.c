@@ -58,14 +58,6 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 1
 
 #if !defined(__FreeBSD__)
 
-static __inline uint32_t
-be32dec(const void *pp)
-{
-	unsigned char const *p = (unsigned char const *)pp;
-
-	return (((uint32_t)(p[0]) << 24) | ((uint32_t)(p[1]) << 16) | ((uint32_t)(p[2]) << 8) | (uint32_t)(p[3]));
-}
-
 static __inline void
 be32enc(void *pp, uint32_t u)
 {
@@ -75,6 +67,29 @@ be32enc(void *pp, uint32_t u)
 	p[1] = (unsigned char)((u >> 16) & 0xff);
 	p[2] = (unsigned char)((u >> 8) & 0xff);
 	p[3] = (unsigned char)(u & 0xff);
+}
+
+static __inline uint32_t
+be32dec(const void *pp)
+{
+	unsigned char const *p = (unsigned char const *)pp;
+
+	return (((uint32_t)(p[0]) << 24) | ((uint32_t)(p[1]) << 16) | ((uint32_t)(p[2]) << 8) | (uint32_t)(p[3]));
+}
+
+static __inline void
+be64enc(void *pp, uint64_t u)
+{
+	unsigned char *p = (unsigned char *)pp;
+
+	p[0] = (unsigned char)((u >> 56) & 0xff);
+	p[1] = (unsigned char)((u >> 48) & 0xff);
+	p[2] = (unsigned char)((u >> 40) & 0xff);
+	p[3] = (unsigned char)((u >> 32) & 0xff);
+	p[4] = (unsigned char)((u >> 24) & 0xff);
+	p[5] = (unsigned char)((u >> 16) & 0xff);
+	p[6] = (unsigned char)((u >> 8) & 0xff);
+	p[7] = (unsigned char)(u & 0xff);
 }
 
 #endif /* !defined(__FreeBSD__) */
@@ -319,7 +334,7 @@ SHA256_Update(SHA256_CTX * ctx, const void *in, size_t len)
  */
 SHA256_API
 void
-SHA256_Final(unsigned char digest[static SHA256_DIGEST_LENGTH], SHA256_CTX *ctx)
+SHA256_Final(unsigned char digest[SHA256_DIGEST_LENGTH], SHA256_CTX *ctx)
 {
 
 	/* Add padding */

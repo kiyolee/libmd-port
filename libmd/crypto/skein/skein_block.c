@@ -14,10 +14,16 @@
 **
 ************************************************************************/
 
+#ifdef unix
 #include <sys/cdefs.h>
+#endif
+#ifdef __FreeBSD__
 __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein_block.c 300921 2016-05-29 01:15:36Z allanjude $");
+#endif
 
+#ifdef __FreeBSD__
 #include <sys/endian.h>
+#endif
 #include <sys/types.h>
 
 #ifdef _KERNEL
