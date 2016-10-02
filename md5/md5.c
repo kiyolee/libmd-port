@@ -99,7 +99,7 @@ extern const char *SHA1_TestOutput[MDTESTCOUNT];
 extern const char *SHA256_TestOutput[MDTESTCOUNT];
 extern const char *SHA384_TestOutput[MDTESTCOUNT];
 extern const char *SHA512_TestOutput[MDTESTCOUNT];
-extern const char *SHA512t256_TestOutput[MDTESTCOUNT];
+extern const char *SHA512_256_TestOutput[MDTESTCOUNT];
 extern const char *RIPEMD160_TestOutput[MDTESTCOUNT];
 extern const char *SKEIN256_TestOutput[MDTESTCOUNT];
 extern const char *SKEIN512_TestOutput[MDTESTCOUNT];
@@ -147,36 +147,56 @@ typedef union {
 /* algorithm function table */
 
 static const struct Algorithm_t Algorithm[] = {
-	{ STR_LEN_PAIR("md5"), "MD5", &MD5TestOutput, (DIGEST_Init*)&MD5Init,
-		(DIGEST_Update*)&MD5Update, (DIGEST_End*)&MD5End,
+	{ STR_LEN_PAIR("md5"), "MD5", &MD5TestOutput,
+		(DIGEST_Init*)&MD5Init,
+		(DIGEST_Update*)&MD5Update,
+		(DIGEST_End*)&MD5End,
 		&MD5Data, &MD5File },
-	{ STR_LEN_PAIR("sha1"), "SHA1", &SHA1_TestOutput, (DIGEST_Init*)&SHA1_Init,
-		(DIGEST_Update*)&SHA1_Update, (DIGEST_End*)&SHA1_End,
+	{ STR_LEN_PAIR("sha1"), "SHA1", &SHA1_TestOutput,
+		(DIGEST_Init*)&SHA1_Init,
+		(DIGEST_Update*)&SHA1_Update,
+		(DIGEST_End*)&SHA1_End,
 		&SHA1_Data, &SHA1_File },
-	{ STR_LEN_PAIR("sha256"), "SHA256", &SHA256_TestOutput, (DIGEST_Init*)&SHA256_Init,
-		(DIGEST_Update*)&SHA256_Update, (DIGEST_End*)&SHA256_End,
+	{ STR_LEN_PAIR("sha256"), "SHA256", &SHA256_TestOutput,
+		(DIGEST_Init*)&SHA256_Init,
+		(DIGEST_Update*)&SHA256_Update,
+		(DIGEST_End*)&SHA256_End,
 		&SHA256_Data, &SHA256_File },
-	{ STR_LEN_PAIR("sha384"), "SHA384", &SHA384_TestOutput, (DIGEST_Init*)&SHA384_Init,
-		(DIGEST_Update*)&SHA384_Update, (DIGEST_End*)&SHA384_End,
+	{ STR_LEN_PAIR("sha384"), "SHA384", &SHA384_TestOutput,
+		(DIGEST_Init*)&SHA384_Init,
+		(DIGEST_Update*)&SHA384_Update,
+		(DIGEST_End*)&SHA384_End,
 		&SHA384_Data, &SHA384_File },
-	{ STR_LEN_PAIR("sha512"), "SHA512", &SHA512_TestOutput, (DIGEST_Init*)&SHA512_Init,
-		(DIGEST_Update*)&SHA512_Update, (DIGEST_End*)&SHA512_End,
-		&SHA512_Data, &SHA512_File },
-	{ STR_LEN_PAIR("sha512t256"), "SHA512t256", &SHA512t256_TestOutput, (DIGEST_Init*)&SHA512_256_Init,
-		(DIGEST_Update*)&SHA512_256_Update, (DIGEST_End*)&SHA512_256_End,
+	{ STR_LEN_PAIR("sha512_256"), "SHA512_256", &SHA512_256_TestOutput,
+		(DIGEST_Init*)&SHA512_256_Init,
+		(DIGEST_Update*)&SHA512_256_Update,
+		(DIGEST_End*)&SHA512_256_End,
 		&SHA512_256_Data, &SHA512_256_File },
+	{ STR_LEN_PAIR("sha512"), "SHA512", &SHA512_TestOutput,
+		(DIGEST_Init*)&SHA512_Init,
+		(DIGEST_Update*)&SHA512_Update,
+		(DIGEST_End*)&SHA512_End,
+		&SHA512_Data, &SHA512_File },
 	{ STR_LEN_PAIR("rmd160"), "RMD160", &RIPEMD160_TestOutput,
-		(DIGEST_Init*)&RIPEMD160_Init, (DIGEST_Update*)&RIPEMD160_Update,
-		(DIGEST_End*)&RIPEMD160_End, &RIPEMD160_Data, &RIPEMD160_File },
+		(DIGEST_Init*)&RIPEMD160_Init,
+		(DIGEST_Update*)&RIPEMD160_Update,
+		(DIGEST_End*)&RIPEMD160_End,
+		&RIPEMD160_Data, &RIPEMD160_File },
 	{ STR_LEN_PAIR("skein256"), "Skein256", &SKEIN256_TestOutput,
-		(DIGEST_Init*)&SKEIN256_Init, (DIGEST_Update*)&SKEIN256_Update,
-		(DIGEST_End*)&SKEIN256_End, &SKEIN256_Data, &SKEIN256_File },
+		(DIGEST_Init*)&SKEIN256_Init,
+		(DIGEST_Update*)&SKEIN256_Update,
+		(DIGEST_End*)&SKEIN256_End,
+		&SKEIN256_Data, &SKEIN256_File },
 	{ STR_LEN_PAIR("skein512"), "Skein512", &SKEIN512_TestOutput,
-		(DIGEST_Init*)&SKEIN512_Init, (DIGEST_Update*)&SKEIN512_Update,
-		(DIGEST_End*)&SKEIN512_End, &SKEIN512_Data, &SKEIN512_File },
+		(DIGEST_Init*)&SKEIN512_Init,
+		(DIGEST_Update*)&SKEIN512_Update,
+		(DIGEST_End*)&SKEIN512_End,
+		&SKEIN512_Data, &SKEIN512_File },
 	{ STR_LEN_PAIR("skein1024"), "Skein1024", &SKEIN1024_TestOutput,
-		(DIGEST_Init*)&SKEIN1024_Init, (DIGEST_Update*)&SKEIN1024_Update,
-		(DIGEST_End*)&SKEIN1024_End, &SKEIN1024_Data, &SKEIN1024_File }
+		(DIGEST_Init*)&SKEIN1024_Init,
+		(DIGEST_Update*)&SKEIN1024_Update,
+		(DIGEST_End*)&SKEIN1024_End,
+		&SKEIN1024_Data, &SKEIN1024_File }
 };
 
 #if defined(_MSC_VER) || defined(__OS400__)
@@ -500,7 +520,7 @@ const char *SHA512_TestOutput[MDTESTCOUNT] = {
 	"e8a835195e039708b13d9131e025f4441dbdc521ce625f245a436dcd762f54bf5cb298d96235e6c6a304e087ec8189b9512cbdf6427737ea82793460c367b9c3"
 };
 
-const char *SHA512t256_TestOutput[MDTESTCOUNT] = {
+const char *SHA512_256_TestOutput[MDTESTCOUNT] = {
 	"c672b8d1ef56ed28ab87c3622c5114069bdd3ad7b8f9737498d0c01ecef0967a",
 	"455e518824bc0601f9fb858ff5c37d417d67c2f8e0df2babe4808858aea830f8",
 	"53048e2681941ef99b2e29b76b4c7dabe4c2d0c634fc6d46e0e2f13107e7af23",
