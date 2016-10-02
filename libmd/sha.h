@@ -154,6 +154,19 @@ __BEGIN_DECLS
 #define sha_block	_libmd_sha_block
 #endif
 
+#ifndef SHA_ContextSize
+#define SHA_ContextSize	_libmd_SHA_ContextSize
+#endif
+#ifndef SHA_Create
+#define SHA_Create	_libmd_SHA_Create
+#endif
+#ifndef SHA_Destroy
+#define SHA_Destroy	_libmd_SHA_Destroy
+#endif
+#ifndef SHA_DigestSize
+#define SHA_DigestSize	_libmd_SHA_DigestSize
+#endif
+
 #ifndef SHA1_Init
 #define SHA1_Init	_libmd_SHA1_Init
 #endif
@@ -184,6 +197,19 @@ __BEGIN_DECLS
 #endif
 #ifndef sha1_block
 #define sha1_block	_libmd_sha1_block
+#endif
+
+#ifndef SHA1_ContextSize
+#define SHA1_ContextSize	_libmd_SHA1_ContextSize
+#endif
+#ifndef SHA1_Create
+#define SHA1_Create	_libmd_SHA1_Create
+#endif
+#ifndef SHA1_Destroy
+#define SHA1_Destroy	_libmd_SHA1_Destroy
+#endif
+#ifndef SHA1_DigestSize
+#define SHA1_DigestSize	_libmd_SHA1_DigestSize
 #endif
 
 #endif

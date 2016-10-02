@@ -175,6 +175,27 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
 #define SKEIN1024_Data		_libmd_SKEIN1024_Data
 #endif
 
+#ifndef SKEIN256_ContextSize
+#define SKEIN256_ContextSize	_libmd_SKEIN256_ContextSize
+#define SKEIN512_ContextSize	_libmd_SKEIN512_ContextSize
+#define SKEIN1024_ContextSize	_libmd_SKEIN1024_ContextSize
+#endif
+#ifndef SKEIN256_Create
+#define SKEIN256_Create		_libmd_SKEIN256_Create
+#define SKEIN512_Create		_libmd_SKEIN512_Create
+#define SKEIN1024_Create	_libmd_SKEIN1024_Create
+#endif
+#ifndef SKEIN256_Destroy
+#define SKEIN256_Destroy	_libmd_SKEIN256_Destroy
+#define SKEIN512_Destroy	_libmd_SKEIN512_Destroy
+#define SKEIN1024_Destroy	_libmd_SKEIN1024_Destroy
+#endif
+#ifndef SKEIN256_DigestSize
+#define SKEIN256_DigestSize	_libmd_SKEIN256_DigestSize
+#define SKEIN512_DigestSize	_libmd_SKEIN512_DigestSize
+#define SKEIN1024_DigestSize	_libmd_SKEIN1024_DigestSize
+#endif
+
 #endif
 
 #ifdef __FreeBSD__

@@ -149,6 +149,19 @@ __BEGIN_DECLS
 #define ripemd160_block		_libmd_ripemd160_block
 #endif
 
+#ifndef RIPEMD160_ContextSize
+#define RIPEMD160_ContextSize	_libmd_RIPEMD160_ContextSize
+#endif
+#ifndef RIPEMD160_Create
+#define RIPEMD160_Create	_libmd_RIPEMD160_Create
+#endif
+#ifndef RIPEMD160_Destroy
+#define RIPEMD160_Destroy	_libmd_RIPEMD160_Destroy
+#endif
+#ifndef RIPEMD160_DigestSize
+#define RIPEMD160_DigestSize	_libmd_RIPEMD160_DigestSize
+#endif
+
 #endif
 
 RIPEMD160_API void   RIPEMD160_Init(RIPEMD160_CTX *c);

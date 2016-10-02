@@ -107,16 +107,29 @@ __BEGIN_DECLS
 #define SHA384_version		_libmd_SHA384_version
 #endif
 
+#ifndef SHA384_ContextSize
+#define SHA384_ContextSize	_libmd_SHA384_ContextSize
+#endif
+#ifndef SHA384_Create
+#define SHA384_Create		_libmd_SHA384_Create
+#endif
+#ifndef SHA384_Destroy
+#define SHA384_Destroy		_libmd_SHA384_Destroy
+#endif
+#ifndef SHA384_DigestSize
+#define SHA384_DigestSize	_libmd_SHA384_DigestSize
 #endif
 
-SHA384_API void    SHA384_Init(SHA384_CTX *);
-SHA384_API void    SHA384_Update(SHA384_CTX *, const void *, size_t);
-SHA384_API void    SHA384_Final(unsigned char [SHA384_DIGEST_LENGTH], SHA384_CTX *);
+#endif
+
+SHA384_API void   SHA384_Init(SHA384_CTX *);
+SHA384_API void   SHA384_Update(SHA384_CTX *, const void *, size_t);
+SHA384_API void   SHA384_Final(unsigned char [SHA384_DIGEST_LENGTH], SHA384_CTX *);
 #ifndef _KERNEL
-SHA384_API char   *SHA384_End(SHA384_CTX *, char *);
-SHA384_API char   *SHA384_Data(const void *, unsigned int, char *);
-SHA384_API char   *SHA384_File(const char *, char *);
-SHA384_API char   *SHA384_FileChunk(const char *, char *, off_t, off_t);
+SHA384_API char  *SHA384_End(SHA384_CTX *, char *);
+SHA384_API char  *SHA384_Data(const void *, unsigned int, char *);
+SHA384_API char  *SHA384_File(const char *, char *);
+SHA384_API char  *SHA384_FileChunk(const char *, char *, off_t, off_t);
 #endif
 SHA384_API int    SHA384_ContextSize(void);
 SHA384_API SHA384_CTX *SHA384_Create(void);

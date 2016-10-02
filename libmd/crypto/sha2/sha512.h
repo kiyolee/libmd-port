@@ -110,6 +110,19 @@ __BEGIN_DECLS
 #define SHA512_version		_libmd_SHA512_version
 #endif
 
+#ifndef SHA512_ContextSize
+#define SHA512_ContextSize	_libmd_SHA512_ContextSize
+#endif
+#ifndef SHA512_Create
+#define SHA512_Create		_libmd_SHA512_Create
+#endif
+#ifndef SHA512_Destroy
+#define SHA512_Destroy		_libmd_SHA512_Destroy
+#endif
+#ifndef SHA512_DigestSize
+#define SHA512_DigestSize	_libmd_SHA512_DigestSize
+#endif
+
 #endif
 
 SHA512_API void   SHA512_Init(SHA512_CTX *);

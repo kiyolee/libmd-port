@@ -95,6 +95,19 @@ __BEGIN_DECLS
 #define MD4Data		_libmd_MD4Data
 #endif
 
+#ifndef MD4ContextSize
+#define MD4ContextSize	_libmd_MD4ContextSize
+#endif
+#ifndef MD4Create
+#define MD4Create	_libmd_MD4Create
+#endif
+#ifndef MD4Destroy
+#define MD4Destroy	_libmd_MD4Destroy
+#endif
+#ifndef MD4DigestSize
+#define MD4DigestSize	_libmd_MD4DigestSize
+#endif
+
 #endif
 
 MD4_API void   MD4Init(MD4_CTX *);
@@ -108,7 +121,7 @@ MD4_API char * MD4File(const char *, char *);
 MD4_API char * MD4FileChunk(const char *, char *, off_t, off_t);
 MD4_API char * MD4Data(const void *, unsigned int, char *);
 MD4_API int    MD4ContextSize(void);
-MD4_API MD4_CTX *MD4Create(void);
+MD4_API MD4_CTX * MD4Create(void);
 MD4_API void   MD4Destroy(MD4_CTX *);
 MD4_API int    MD4DigestSize(void);
 

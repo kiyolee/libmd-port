@@ -110,6 +110,19 @@ __BEGIN_DECLS
 #define SHA256_version		_libmd_SHA256_version
 #endif
 
+#ifndef SHA256_ContextSize
+#define SHA256_ContextSize	_libmd_SHA256_ContextSize
+#endif
+#ifndef SHA256_Create
+#define SHA256_Create		_libmd_SHA256_Create
+#endif
+#ifndef SHA256_Destroy
+#define SHA256_Destroy		_libmd_SHA256_Destroy
+#endif
+#ifndef SHA256_DigestSize
+#define SHA256_DigestSize	_libmd_SHA256_DigestSize
+#endif
+
 #endif
 
 SHA256_API void   SHA256_Init(SHA256_CTX *);

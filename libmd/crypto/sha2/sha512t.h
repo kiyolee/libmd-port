@@ -110,6 +110,19 @@ __BEGIN_DECLS
 #define SHA512_224_version	_libmd_SHA512_224_version
 #endif
 
+#ifndef SHA512_224_ContextSize
+#define SHA512_224_ContextSize	_libmd_SHA512_224_ContextSize
+#endif
+#ifndef SHA512_224_Create
+#define SHA512_224_Create	_libmd_SHA512_224_Create
+#endif
+#ifndef SHA512_224_Destroy
+#define SHA512_224_Destroy	_libmd_SHA512_224_Destroy
+#endif
+#ifndef SHA512_224_DigestSize
+#define SHA512_224_DigestSize	_libmd_SHA512_224_DigestSize
+#endif
+
 #ifndef SHA512_256_Init
 #define SHA512_256_Init		_libmd_SHA512_256_Init
 #endif
@@ -139,34 +152,47 @@ __BEGIN_DECLS
 #define SHA512_256_version	_libmd_SHA512_256_version
 #endif
 
+#ifndef SHA512_256_ContextSize
+#define SHA512_256_ContextSize	_libmd_SHA512_256_ContextSize
+#endif
+#ifndef SHA512_256_Create
+#define SHA512_256_Create	_libmd_SHA512_256_Create
+#endif
+#ifndef SHA512_256_Destroy
+#define SHA512_256_Destroy	_libmd_SHA512_256_Destroy
+#endif
+#ifndef SHA512_256_DigestSize
+#define SHA512_256_DigestSize	_libmd_SHA512_256_DigestSize
 #endif
 
-SHA512_224_API void    SHA512_224_Init(SHA512_CTX *);
-SHA512_224_API void    SHA512_224_Update(SHA512_CTX *, const void *, size_t);
-SHA512_224_API void    SHA512_224_Final(unsigned char [SHA512_224_DIGEST_LENGTH], SHA512_CTX *);
-#ifndef _KERNEL
-SHA512_224_API char   *SHA512_224_End(SHA512_CTX *, char *);
-SHA512_224_API char   *SHA512_224_Data(const void *, unsigned int, char *);
-SHA512_224_API char   *SHA512_224_File(const char *, char *);
-SHA512_224_API char   *SHA512_224_FileChunk(const char *, char *, off_t, off_t);
 #endif
-SHA512_224_API int     SHA512_224_ContextSize(void);
+
+SHA512_224_API void   SHA512_224_Init(SHA512_CTX *);
+SHA512_224_API void   SHA512_224_Update(SHA512_CTX *, const void *, size_t);
+SHA512_224_API void   SHA512_224_Final(unsigned char [SHA512_224_DIGEST_LENGTH], SHA512_CTX *);
+#ifndef _KERNEL
+SHA512_224_API char  *SHA512_224_End(SHA512_CTX *, char *);
+SHA512_224_API char  *SHA512_224_Data(const void *, unsigned int, char *);
+SHA512_224_API char  *SHA512_224_File(const char *, char *);
+SHA512_224_API char  *SHA512_224_FileChunk(const char *, char *, off_t, off_t);
+#endif
+SHA512_224_API int    SHA512_224_ContextSize(void);
 SHA512_224_API SHA512_CTX *SHA512_224_Create(void);
-SHA512_224_API void    SHA512_224_Destroy(SHA512_CTX *);
-SHA512_224_API int     SHA512_224_DigestSize(void);
-SHA512_256_API void    SHA512_256_Init(SHA512_CTX *);
-SHA512_256_API void    SHA512_256_Update(SHA512_CTX *, const void *, size_t);
-SHA512_256_API void    SHA512_256_Final(unsigned char [SHA512_256_DIGEST_LENGTH], SHA512_CTX *);
+SHA512_224_API void   SHA512_224_Destroy(SHA512_CTX *);
+SHA512_224_API int    SHA512_224_DigestSize(void);
+SHA512_256_API void   SHA512_256_Init(SHA512_CTX *);
+SHA512_256_API void   SHA512_256_Update(SHA512_CTX *, const void *, size_t);
+SHA512_256_API void   SHA512_256_Final(unsigned char [SHA512_256_DIGEST_LENGTH], SHA512_CTX *);
 #ifndef _KERNEL
-SHA512_256_API char   *SHA512_256_End(SHA512_CTX *, char *);
-SHA512_256_API char   *SHA512_256_Data(const void *, unsigned int, char *);
-SHA512_256_API char   *SHA512_256_File(const char *, char *);
-SHA512_256_API char   *SHA512_256_FileChunk(const char *, char *, off_t, off_t);
+SHA512_256_API char  *SHA512_256_End(SHA512_CTX *, char *);
+SHA512_256_API char  *SHA512_256_Data(const void *, unsigned int, char *);
+SHA512_256_API char  *SHA512_256_File(const char *, char *);
+SHA512_256_API char  *SHA512_256_FileChunk(const char *, char *, off_t, off_t);
 #endif
-SHA512_256_API int     SHA512_256_ContextSize(void);
+SHA512_256_API int    SHA512_256_ContextSize(void);
 SHA512_256_API SHA512_CTX *SHA512_256_Create(void);
-SHA512_256_API void    SHA512_256_Destroy(SHA512_CTX *);
-SHA512_256_API int     SHA512_256_DigestSize(void);
+SHA512_256_API void   SHA512_256_Destroy(SHA512_CTX *);
+SHA512_256_API int    SHA512_256_DigestSize(void);
 
 #ifdef __FreeBSD__
 __END_DECLS

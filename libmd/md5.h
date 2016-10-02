@@ -106,6 +106,19 @@ __BEGIN_DECLS
 #define MD5Data		_libmd_MD5Data
 #endif
 
+#ifndef MD5ContextSize
+#define MD5ContextSize	_libmd_MD5ContextSize
+#endif
+#ifndef MD5Create
+#define MD5Create	_libmd_MD5Create
+#endif
+#ifndef MD5Destroy
+#define MD5Destroy	_libmd_MD5Destroy
+#endif
+#ifndef MD5DigestSize
+#define MD5DigestSize	_libmd_MD5DigestSize
+#endif
+
 #endif
 #endif
 
@@ -119,7 +132,7 @@ MD5_API char * MD5FileChunk(const char *, char *, off_t, off_t);
 MD5_API char * MD5Data(const void *, unsigned int, char *);
 #endif
 MD5_API int    MD5ContextSize(void);
-MD5_API MD5_CTX *MD5Create(void);
+MD5_API MD5_CTX * MD5Create(void);
 MD5_API void   MD5Destroy(MD5_CTX *);
 MD5_API int    MD5DigestSize(void);
 
