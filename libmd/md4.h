@@ -33,13 +33,18 @@
 #include "supp/isdefs.h"
 #endif
 
-/* MD4 context. */
+#define MD4_DIGEST_LENGTH		16
+#define MD4_DIGEST_STRING_LENGTH	(MD4_DIGEST_LENGTH * 2 + 1)
+
 #ifdef LIBMD_INTERNAL
 
+#define MD4_BLOCK_LENGTH		64
+
+/* MD4 context. */
 typedef struct MD4Context {
   u_int32_t state[4];	/* state (ABCD) */
   u_int32_t count[2];	/* number of bits, modulo 2^64 (lsb first) */
-  unsigned char buffer[64];	/* input buffer */
+  unsigned char buffer[MD4_BLOCK_LENGTH];	/* input buffer */
 } MD4_CTX;
 
 #if !defined(MD4_API) && defined(LIBMD_DLL) && defined(_MSC_VER)
@@ -115,7 +120,7 @@ MD4_API void   MD4Update(MD4_CTX *, const void *, unsigned int);
 #if 0
 void   MD4Pad(MD4_CTX *);
 #endif
-MD4_API void   MD4Final(unsigned char [16], MD4_CTX *);
+MD4_API void   MD4Final(unsigned char [MD4_DIGEST_LENGTH], MD4_CTX *);
 MD4_API char * MD4End(MD4_CTX *, char *);
 MD4_API char * MD4File(const char *, char *);
 MD4_API char * MD4FileChunk(const char *, char *, off_t, off_t);

@@ -46,7 +46,7 @@ documentation and/or software.
 typedef struct MD5Context {
   u_int32_t state[4];	/* state (ABCD) */
   u_int32_t count[2];	/* number of bits, modulo 2^64 (lsb first) */
-  unsigned char buffer[64];	/* input buffer */
+  unsigned char buffer[MD5_BLOCK_LENGTH];	/* input buffer */
 } MD5_CTX;
 
 #if !defined(MD5_API) && defined(LIBMD_DLL) && defined(_MSC_VER)

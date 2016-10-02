@@ -53,15 +53,15 @@ char *
 MDXEnd(MDX_CTX *ctx, char *buf)
 {
 	int i;
-	unsigned char digest[LENGTH];
+	unsigned char digest[MDX_DIGEST_LENGTH];
 	static const char hex[]="0123456789abcdef";
 
 	if (!buf)
-		buf = malloc(2*LENGTH + 1);
+		buf = malloc(MDX_DIGEST_STRING_LENGTH);
 	if (!buf)
 		return 0;
 	MDXFinal(digest, ctx);
-	for (i = 0; i < LENGTH; i++) {
+	for (i = 0; i < MDX_DIGEST_LENGTH; i++) {
 		buf[i+i] = hex[digest[i] >> 4];
 		buf[i+i+1] = hex[digest[i] & 0x0f];
 	}
@@ -161,7 +161,7 @@ void MDXDestroy(MDX_CTX *ctx)
 MDX_API
 int MDXDigestSize(void)
 {
-	return LENGTH;
+	return MDX_DIGEST_LENGTH;
 }
 
 #ifdef WEAK_REFS
