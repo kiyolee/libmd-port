@@ -84,9 +84,6 @@
     <ClCompile Include="..\..\libmd\crypto\skein\skein_block.c">
       <Filter>Source Files\crypto\skein</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\libmd\crypto\skein\skein_debug.c">
-      <Filter>Source Files\crypto\skein</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\libmd\sha384hl.c">
       <Filter>Source Files</Filter>
     </ClCompile>

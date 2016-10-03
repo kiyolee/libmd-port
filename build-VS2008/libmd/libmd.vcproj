@@ -411,10 +411,6 @@
 						RelativePath="..\..\libmd\crypto\skein\skein_block.c"
 						>
 					</File>
-					<File
-						RelativePath="..\..\libmd\crypto\skein\skein_debug.c"
-						>
-					</File>
 				</Filter>
 			</Filter>
 		</Filter>

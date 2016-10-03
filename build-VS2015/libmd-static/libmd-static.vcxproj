@@ -131,7 +131,6 @@
     <ClCompile Include="..\..\libmd\crypto\sha2\sha512c.c" />
     <ClCompile Include="..\..\libmd\crypto\skein\skein.c" />
     <ClCompile Include="..\..\libmd\crypto\skein\skein_block.c" />
-    <ClCompile Include="..\..\libmd\crypto\skein\skein_debug.c" />
     <ClCompile Include="..\..\libmd\md4c.c" />
     <ClCompile Include="..\..\libmd\md4hl.c" />
     <ClCompile Include="..\..\libmd\md5c.c" />
