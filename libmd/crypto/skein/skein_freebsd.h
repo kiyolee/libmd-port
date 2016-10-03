@@ -87,18 +87,33 @@ SKEIN512_API  void SKEIN512_Final(unsigned char digest[SKEIN512_DIGEST_LENGTH], 
 SKEIN1024_API void SKEIN1024_Final(unsigned char digest[SKEIN1024_DIGEST_LENGTH], SKEIN1024_CTX *ctx);
 
 #ifndef _KERNEL
-SKEIN256_API char   *SKEIN256_End(SKEIN256_CTX *, char *);
-SKEIN512_API char   *SKEIN512_End(SKEIN512_CTX *, char *);
+SKEIN256_API  char  *SKEIN256_End(SKEIN256_CTX *, char *);
+SKEIN512_API  char  *SKEIN512_End(SKEIN512_CTX *, char *);
 SKEIN1024_API char  *SKEIN1024_End(SKEIN1024_CTX *, char *);
-SKEIN256_API char   *SKEIN256_Data(const void *, unsigned int, char *);
-SKEIN512_API char   *SKEIN512_Data(const void *, unsigned int, char *);
+SKEIN256_API  char  *SKEIN256_Data(const void *, unsigned int, char *);
+SKEIN512_API  char  *SKEIN512_Data(const void *, unsigned int, char *);
 SKEIN1024_API char  *SKEIN1024_Data(const void *, unsigned int, char *);
-SKEIN256_API char   *SKEIN256_File(const char *, char *);
-SKEIN512_API char   *SKEIN512_File(const char *, char *);
+SKEIN256_API  char  *SKEIN256_File(const char *, char *);
+SKEIN512_API  char  *SKEIN512_File(const char *, char *);
 SKEIN1024_API char  *SKEIN1024_File(const char *, char *);
-SKEIN256_API char   *SKEIN256_FileChunk(const char *, char *, off_t, off_t);
-SKEIN512_API char   *SKEIN512_FileChunk(const char *, char *, off_t, off_t);
+SKEIN256_API  char  *SKEIN256_FileChunk(const char *, char *, off_t, off_t);
+SKEIN512_API  char  *SKEIN512_FileChunk(const char *, char *, off_t, off_t);
 SKEIN1024_API char  *SKEIN1024_FileChunk(const char *, char *, off_t, off_t);
 #endif
+
+SKEIN256_API  int    SKEIN256_ContextSize(void);
+SKEIN256_API  SKEIN256_CTX *SKEIN256_Create(void);
+SKEIN256_API  void   SKEIN256_Destroy(SKEIN256_CTX *);
+SKEIN256_API  int    SKEIN256_DigestSize(void);
+
+SKEIN512_API  int    SKEIN512_ContextSize(void);
+SKEIN512_API  SKEIN512_CTX *SKEIN512_Create(void);
+SKEIN512_API  void   SKEIN512_Destroy(SKEIN512_CTX *);
+SKEIN512_API  int    SKEIN512_DigestSize(void);
+
+SKEIN1024_API int    SKEIN1024_ContextSize(void);
+SKEIN1024_API SKEIN1024_CTX *SKEIN1024_Create(void);
+SKEIN1024_API void   SKEIN1024_Destroy(SKEIN1024_CTX *);
+SKEIN1024_API int    SKEIN1024_DigestSize(void);
 
 #endif	/* ifndef _SKEIN_FREEBSD_H_ */
