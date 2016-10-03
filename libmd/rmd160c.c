@@ -237,7 +237,7 @@ void RIPEMD160_Update(RIPEMD160_CTX *c, const void *in, size_t len)
 		}
 	}
 
-#if 0 /* not used */
+#ifdef LIBMD_INCL_UNUSED
 void RIPEMD160_Transform(RIPEMD160_CTX *c, unsigned char *b)
 	{
 	u_int32_t p[16];
@@ -272,7 +272,7 @@ void RIPEMD160_Transform(RIPEMD160_CTX *c, unsigned char *b)
 #endif
 	ripemd160_block(c,p,64);
 	}
-#endif
+#endif /* LIBMD_INCL_UNUSED */
 
 #ifndef RMD160_ASM
 

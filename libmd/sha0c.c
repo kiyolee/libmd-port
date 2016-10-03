@@ -262,7 +262,7 @@ void SHA_Update(SHA_CTX *c, const void *in, size_t len)
 #pragma warning(pop)
 #endif
 
-#if 0 /* not used */
+#ifdef LIBMD_INCL_UNUSED
 void SHA_Transform(SHA_CTX *c, unsigned char *b)
 	{
 	u_int32_t p[16];
@@ -297,7 +297,7 @@ void SHA_Transform(SHA_CTX *c, unsigned char *b)
 #endif
 	sha_block(c,p,64);
 	}
-#endif
+#endif /* LIBMD_INCL_UNUSED */
 
 static void sha_block(SHA_CTX *c, const u_int32_t *W, int num)
 	{

@@ -117,9 +117,6 @@ __BEGIN_DECLS
 
 MD4_API void   MD4Init(MD4_CTX *);
 MD4_API void   MD4Update(MD4_CTX *, const void *, unsigned int);
-#if 0
-void   MD4Pad(MD4_CTX *);
-#endif
 MD4_API void   MD4Final(unsigned char [MD4_DIGEST_LENGTH], MD4_CTX *);
 MD4_API char * MD4End(MD4_CTX *, char *);
 MD4_API char * MD4File(const char *, char *);

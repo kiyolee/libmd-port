@@ -121,7 +121,7 @@ SKEIN_INTERNAL_API int  Skein_256_Final (Skein_256_Ctxt_t *ctx, u08b_t * hashVal
 SKEIN_INTERNAL_API int  Skein_512_Final (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
 SKEIN_INTERNAL_API int  Skein1024_Final (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 
-#ifdef __FreeBSD__
+#ifdef LIBMD_INCL_UNUSED
 
 /*
 **   Skein APIs for "extended" initialization: MAC keys, tree hashing.
@@ -159,7 +159,7 @@ SKEIN_INTERNAL_API int  Skein_512_Output   (Skein_512_Ctxt_t *ctx, u08b_t * hash
 SKEIN_INTERNAL_API int  Skein1024_Output   (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 #endif
 
-#endif /* __FreeBSD__ */
+#endif /* LIBMD_INCL_UNUSED */
 
 #endif /* LIBMD_COMPILING_SKEIN_C */
 

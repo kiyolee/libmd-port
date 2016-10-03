@@ -148,7 +148,8 @@ void MD4Update (MD4_CTX *context, const void *in, unsigned int inputLen)
 }
 
 /* MD4 padding. */
-static void MD4Pad (MD4_CTX *context)
+static
+void MD4Pad (MD4_CTX *context)
 {
   unsigned char bits[8];
   unsigned int idx, padLen;
