@@ -29,6 +29,7 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein.c 300921 2016-05-29 01
 
 #define  SKEIN_PORT_CODE /* instantiate any code in skein_port.h */
 
+#define LIBMD_COMPILING_SKEIN_C
 #include "skein.h"       /* get the Skein API definitions   */
 #include "skein_iv.h"    /* get precomputed IVs */
 
@@ -86,6 +87,7 @@ int Skein_256_Init(Skein_256_Ctxt_t *ctx, size_t hashBitLen)
     return SKEIN_SUCCESS;
     }
 
+#ifdef __FreeBSD__
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein_256_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
@@ -145,6 +147,7 @@ int Skein_256_InitExt(Skein_256_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
     
     return SKEIN_SUCCESS;
     }
+#endif
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
@@ -288,6 +291,7 @@ int Skein_512_Init(Skein_512_Ctxt_t *ctx, size_t hashBitLen)
     return SKEIN_SUCCESS;
     }
 
+#ifdef __FreeBSD__
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein_512_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
@@ -347,6 +351,7 @@ int Skein_512_InitExt(Skein_512_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
     
     return SKEIN_SUCCESS;
     }
+#endif
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
@@ -489,6 +494,7 @@ int Skein1024_Init(Skein1024_Ctxt_t *ctx, size_t hashBitLen)
     return SKEIN_SUCCESS;
     }
 
+#ifdef __FreeBSD__
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* init the context for a MAC and/or tree hash operation */
 /* [identical to Skein1024_Init() when keyBytes == 0 && treeInfo == SKEIN_CFG_TREE_INFO_SEQUENTIAL] */
@@ -548,6 +554,7 @@ int Skein1024_InitExt(Skein1024_Ctxt_t *ctx,size_t hashBitLen,u64b_t treeInfo, c
     
     return SKEIN_SUCCESS;
     }
+#endif
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* process the input bytes */
@@ -641,6 +648,8 @@ size_t Skein1024_API_CodeSize(void)
            ((u08b_t *) Skein1024_Init);
     }
 #endif
+
+#ifdef __FreeBSD__
 
 /**************** Functions to support MAC/tree hashing ***************/
 /*   (this code is identical for Optimized and Reference versions)    */
@@ -786,7 +795,9 @@ int Skein1024_Output(Skein1024_Ctxt_t *ctx, u08b_t *hashVal)
         }
     return SKEIN_SUCCESS;
     }
+#endif
 
+#endif /* __FreeBSD__ */
 
 /* Adapt the functions to match the prototype expected by libmd */
 void
@@ -877,6 +888,4 @@ __weak_reference(_libmd_SKEIN1024_Init, SKEIN1024_Init);
 __weak_reference(_libmd_SKEIN1024_Update, SKEIN1024_Update);
 #undef SKEIN1024_Final
 __weak_reference(_libmd_SKEIN1024_Final, SKEIN1024_Final);
-#endif
-
 #endif

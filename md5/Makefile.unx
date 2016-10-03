@@ -2,13 +2,30 @@ TARGET = md5
 TARGET_RMD160 = rmd160
 TARGET_SHA1 = sha1
 TARGET_SHA256 = sha256
+TARGET_SHA384 = sha384
 TARGET_SHA512 = sha512
+TARGET_SHA512t256 = sha512t256
+TARGET_SKEIN256 = skein256
+TARGET_SKEIN512 = skein512
+TARGET_SKEIN1024 = skein1024
+
+ALL_TARGETS = \
+    $(TARGET) \
+    $(TARGET_RMD160) \
+    $(TARGET_SHA1) \
+    $(TARGET_SHA256) \
+    $(TARGET_SHA384) \
+    $(TARGET_SHA512) \
+    $(TARGET_SHA512t256) \
+    $(TARGET_SKEIN256) \
+    $(TARGET_SKEIN512) \
+    $(TARGET_SKEIN1024)
 
 ifeq ($(NO_INTERNAL),)
 CFLAGS_INTERNAL = -DLIBMD_INTERNAL
 endif
 
-CFLAGS = -pipe -O2 -Wall -I../libmd $(CFLAGS_INTERNAL)
+CFLAGS = -pipe -O2 -Wall -I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein $(CFLAGS_INTERNAL)
 LDFLAGS =
 
 ifeq ($(NO_INTERNAL),)
@@ -19,10 +36,10 @@ endif
 
 LIBS = ../libmd/libmd.a
 
-all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
+all: $(ALL_TARGETS)
 
 clean:
-	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
+	$(RM) $(OBJS) $(ALL_TARGETS)
 
 $(TARGET): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) $^ -o $@
@@ -36,7 +53,22 @@ $(TARGET_SHA1): $(TARGET)
 $(TARGET_SHA256): $(TARGET)
 	ln -s $(TARGET) $@
 
+$(TARGET_SHA384): $(TARGET)
+	ln -s $(TARGET) $@
+
 $(TARGET_SHA512): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512t256): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN256): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN512): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN1024): $(TARGET)
 	ln -s $(TARGET) $@
 
 %.o: %.c

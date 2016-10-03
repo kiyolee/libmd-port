@@ -102,6 +102,8 @@ typedef struct _Skein1024_Ctxt_t Skein1024_Ctxt_t;
 
 #ifdef LIBMD_INTERNAL
 
+#ifdef LIBMD_COMPILING_SKEIN_C
+
 #ifndef SKEIN_INTERNAL_API
 #define SKEIN_INTERNAL_API static
 #endif
@@ -118,6 +120,8 @@ SKEIN_INTERNAL_API int  Skein1024_Update(Skein1024_Ctxt_t *ctx, const u08b_t *ms
 SKEIN_INTERNAL_API int  Skein_256_Final (Skein_256_Ctxt_t *ctx, u08b_t * hashVal);
 SKEIN_INTERNAL_API int  Skein_512_Final (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
 SKEIN_INTERNAL_API int  Skein1024_Final (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
+
+#ifdef __FreeBSD__
 
 /*
 **   Skein APIs for "extended" initialization: MAC keys, tree hashing.
@@ -154,6 +158,10 @@ SKEIN_INTERNAL_API int  Skein_256_Output   (Skein_256_Ctxt_t *ctx, u08b_t * hash
 SKEIN_INTERNAL_API int  Skein_512_Output   (Skein_512_Ctxt_t *ctx, u08b_t * hashVal);
 SKEIN_INTERNAL_API int  Skein1024_Output   (Skein1024_Ctxt_t *ctx, u08b_t * hashVal);
 #endif
+
+#endif /* __FreeBSD__ */
+
+#endif /* LIBMD_COMPILING_SKEIN_C */
 
 /*****************************************************************
 ** "Internal" Skein definitions
@@ -337,7 +345,7 @@ enum
 #define SKEIN1024_ROUNDS_TOTAL (8*((((SKEIN_ROUNDS    ) + 5) % 10) + 5))
 #endif
 
-#endif
+#endif /* LIBMD_INTERNAL */
 
 #ifdef __cplusplus
 }
