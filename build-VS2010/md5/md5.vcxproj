@@ -85,7 +85,7 @@ copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512_256.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
@@ -124,7 +124,7 @@ copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512_256.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
@@ -160,7 +160,7 @@ copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512_256.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
@@ -199,7 +199,7 @@ copy /y $(TargetPath) $(TargetDir)sha1.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512_256.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe

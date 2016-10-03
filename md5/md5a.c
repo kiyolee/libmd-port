@@ -107,7 +107,7 @@ extern const char *SHA1_TestOutput[MDTESTCOUNT];
 extern const char *SHA256_TestOutput[MDTESTCOUNT];
 extern const char *SHA384_TestOutput[MDTESTCOUNT];
 extern const char *SHA512_TestOutput[MDTESTCOUNT];
-extern const char *SHA512_256_TestOutput[MDTESTCOUNT];
+extern const char *SHA512t256_TestOutput[MDTESTCOUNT];
 extern const char *RIPEMD160_TestOutput[MDTESTCOUNT];
 extern const char *SKEIN256_TestOutput[MDTESTCOUNT];
 extern const char *SKEIN512_TestOutput[MDTESTCOUNT];
@@ -168,7 +168,7 @@ static const struct Algorithm_t Algorithm[] = {
 		(DIGEST_Update*)&SHA384_Update,
 		(DIGEST_End*)&SHA384_End,
 		&SHA384_Data, &SHA384_File },
-	{ STR_LEN_PAIR("sha512_256"), "SHA512_256", &SHA512_256_TestOutput,
+	{ STR_LEN_PAIR("sha512t256"), "SHA512t256", &SHA512t256_TestOutput,
 		(DIGEST_Create*)&SHA512_256_Create,
 		(DIGEST_Destroy*)&SHA512_256_Destroy,
 		(DIGEST_Update*)&SHA512_256_Update,
@@ -273,8 +273,8 @@ main(int argc, char *argv[])
 	char   *p;
 	char	buf[HEX_DIGEST_LENGTH];
 	int	failed;
-	unsigned	digest;
-	const char*	progname;
+ 	unsigned	digest;
+ 	const char*	progname;
 
 	if ((progname = strrchr(argv[0], '/')) != NULL)
 		progname++;
@@ -291,8 +291,8 @@ main(int argc, char *argv[])
 		if (strnicmp(Algorithm[digest].progname, progname, Algorithm[digest].prognamelen) == 0)
 			break;
 
-	if (digest == sizeof(Algorithm)/sizeof(*Algorithm))
-		digest = 0;
+ 	if (digest == sizeof(Algorithm)/sizeof(*Algorithm))
+ 		digest = 0;
 
 	failed = 0;
 	checkAgainst = NULL;
@@ -543,7 +543,7 @@ const char *SHA512_TestOutput[MDTESTCOUNT] = {
 	"e8a835195e039708b13d9131e025f4441dbdc521ce625f245a436dcd762f54bf5cb298d96235e6c6a304e087ec8189b9512cbdf6427737ea82793460c367b9c3"
 };
 
-const char *SHA512_256_TestOutput[MDTESTCOUNT] = {
+const char *SHA512t256_TestOutput[MDTESTCOUNT] = {
 	"c672b8d1ef56ed28ab87c3622c5114069bdd3ad7b8f9737498d0c01ecef0967a",
 	"455e518824bc0601f9fb858ff5c37d417d67c2f8e0df2babe4808858aea830f8",
 	"53048e2681941ef99b2e29b76b4c7dabe4c2d0c634fc6d46e0e2f13107e7af23",
