@@ -54,6 +54,14 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein_block.c 300921 2016-05
 #define DebugSaveTweak(ctx)
 #endif
 
+#ifndef SKEIN_HIDDEN_API
+#if defined(__GNUC__)
+#define SKEIN_HIDDEN_API __attribute__((visibility("hidden")))
+#else
+#define SKEIN_HIDDEN_API
+#endif
+#endif
+
 /*****************************************************************/
 /* functions to process blkCnt (nonzero) full block(s) of data. */
 void    Skein_256_Process_Block(Skein_256_Ctxt_t *ctx,const u08b_t *blkPtr,size_t blkCnt,size_t byteCntAdd);
@@ -62,6 +70,7 @@ void    Skein1024_Process_Block(Skein1024_Ctxt_t *ctx,const u08b_t *blkPtr,size_
 
 /*****************************  Skein_256 ******************************/
 #if !(SKEIN_USE_ASM & 256)
+SKEIN_HIDDEN_API
 void Skein_256_Process_Block(Skein_256_Ctxt_t *ctx,const u08b_t *blkPtr,size_t blkCnt,size_t byteCntAdd)
     { /* do it in C */
     enum
@@ -247,6 +256,7 @@ uint_t Skein_256_Unroll_Cnt(void)
 
 /*****************************  Skein_512 ******************************/
 #if !(SKEIN_USE_ASM & 512)
+SKEIN_HIDDEN_API
 void Skein_512_Process_Block(Skein_512_Ctxt_t *ctx,const u08b_t *blkPtr,size_t blkCnt,size_t byteCntAdd)
     { /* do it in C */
     enum
@@ -455,6 +465,7 @@ uint_t Skein_512_Unroll_Cnt(void)
 
 /*****************************  Skein1024 ******************************/
 #if !(SKEIN_USE_ASM & 1024)
+SKEIN_HIDDEN_API
 void Skein1024_Process_Block(Skein1024_Ctxt_t *ctx,const u08b_t *blkPtr,size_t blkCnt,size_t byteCntAdd)
     { /* do it in C, always looping (unrolled is bigger AND slower!) */
     enum
