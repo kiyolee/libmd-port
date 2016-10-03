@@ -21,6 +21,7 @@ endif
 ifeq ($(MACHINE_ARCH),amd64)
 ifeq ($(NO_X64_ASM),)
 ifneq ($(WITH_X64_ASM),)
+# Need explicit enable, skein1024 not working somehow btw.
 CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
 OBJS_X64 = skein_block_asm.o
 endif

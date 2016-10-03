@@ -6,17 +6,31 @@ MACHINE_ARCH=$(shell uname -m)
 ifeq ($(MACHINE_ARCH),i686)
 MACHINE_ARCH=i386
 endif
-
-NO_ASM = yes # Assembly files do not compile somehow.
+ifeq ($(MACHINE_ARCH),x86_64)
+MACHINE_ARCH=amd64
+endif
 
 ifeq ($(MACHINE_ARCH),i386)
-ifeq ($(NO_ASM),)
+ifeq ($(NO_X86_ASM),)
+ifneq ($(WITH_X86_ASM),)
+# Need explicit enable, not compiling somehow anyway.
 CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM
 OBJS_X86 = rmd160.o sha.o
 endif
 endif
+endif
 
-CFLAGS = -pipe -O2 -Wall -I. -Icrypto/sha2 -Icrypto/skein -DLIBMD_INTERNAL $(CFLAGS_X86)
+ifeq ($(MACHINE_ARCH),amd64)
+ifeq ($(NO_X64_ASM),)
+ifneq ($(WITH_X64_ASM),)
+# Need explicit enable, skein1024 not working somehow btw.
+CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
+OBJS_X64 = skein_block_asm.o
+endif
+endif
+endif
+
+CFLAGS = -pipe -O3 -Wall -I. -Icrypto/sha2 -Icrypto/skein -DLIBMD_INTERNAL $(CFLAGS_X86) $(CFLAGS_X64)
 LDFLAGS_STATIC =
 
 OBJS = \
@@ -27,7 +41,8 @@ OBJS = \
     sha512c.o sha512hl.o sha512t224hl.o sha512t256hl.o sha384hl.o \
     skein.o skein_block.o \
     skein256hl.o skein512hl.o skein1024hl.o \
-    $(OBJS_X86)
+    $(OBJS_X86) \
+    $(OBJS_X64)
 
 SRCS_HL = \
     md4hl.c md5hl.c \
@@ -64,6 +79,9 @@ $(TARGET_STATIC): $(OBJS)
 
 %.o: i386/%.S
 	$(CC) $(CFLAGS) -DELF -c -o $@ $<
+
+%.o: crypto/skein/amd64/%.s
+	$(AS) -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@
