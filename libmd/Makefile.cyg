@@ -22,7 +22,7 @@ endif
 
 ifeq ($(MACHINE_ARCH),amd64)
 ifeq ($(NO_X64_ASM),)
-ifneq ($(WITH_X86_ASM),)
+ifneq ($(WITH_X64_ASM),)
 ifeq ($(SKEIN_USE_ASM),)
 #SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
 # Unfortunately, none of assembly block functions work on cygwin.
