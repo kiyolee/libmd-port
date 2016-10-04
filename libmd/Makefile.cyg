@@ -22,11 +22,13 @@ endif
 
 ifeq ($(MACHINE_ARCH),amd64)
 ifeq ($(NO_X64_ASM),)
-ifneq ($(WITH_X64_ASM),)
-# Need explicit enable, skein1024 not working somehow btw.
-CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
-OBJS_X64 = skein_block_asm.o
+ifeq ($(SKEIN_USE_ASM),)
+#SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
+# Somehow skein1024 only works if compiled with /usr/bin/as on FreeBSD.
+SKEIN_USE_ASM=768 # list of block functions to replace with assembly: 256+512 = 768
 endif
+CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=$(SKEIN_USE_ASM)
+OBJS_X64 = skein_block_asm.o
 endif
 endif
 
@@ -81,7 +83,7 @@ $(TARGET_STATIC): $(OBJS)
 	$(CC) $(CFLAGS) -DELF -c -o $@ $<
 
 %.o: crypto/skein/amd64/%.s
-	$(AS) -o $@ $<
+	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@
