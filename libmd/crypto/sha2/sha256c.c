@@ -61,18 +61,18 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 1
 static __inline void
 be32enc(void *pp, uint32_t u)
 {
-	unsigned char *p = (unsigned char *)pp;
+	uint8_t *p = (uint8_t *)pp;
 
-	p[0] = (unsigned char)((u >> 24) & 0xff);
-	p[1] = (unsigned char)((u >> 16) & 0xff);
-	p[2] = (unsigned char)((u >> 8) & 0xff);
-	p[3] = (unsigned char)(u & 0xff);
+	p[0] = (u >> 24) & 0xff;
+	p[1] = (u >> 16) & 0xff;
+	p[2] = (u >> 8) & 0xff;
+	p[3] = u & 0xff;
 }
 
 static __inline uint32_t
 be32dec(const void *pp)
 {
-	unsigned char const *p = (unsigned char const *)pp;
+	uint8_t const *p = (uint8_t const *)pp;
 
 	return (((uint32_t)(p[0]) << 24) | ((uint32_t)(p[1]) << 16) | ((uint32_t)(p[2]) << 8) | (uint32_t)(p[3]));
 }
@@ -107,20 +107,22 @@ be32dec_vect(uint32_t *dst, const unsigned char *src, size_t len)
 
 #endif /* BYTE_ORDER != BIG_ENDIAN */
 
+#ifndef __FreeBSD__
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
-	unsigned char *p = (unsigned char *)pp;
+	uint8_t *p = (uint8_t *)pp;
 
-	p[0] = (unsigned char)((u >> 56) & 0xff);
-	p[1] = (unsigned char)((u >> 48) & 0xff);
-	p[2] = (unsigned char)((u >> 40) & 0xff);
-	p[3] = (unsigned char)((u >> 32) & 0xff);
-	p[4] = (unsigned char)((u >> 24) & 0xff);
-	p[5] = (unsigned char)((u >> 16) & 0xff);
-	p[6] = (unsigned char)((u >> 8) & 0xff);
-	p[7] = (unsigned char)(u & 0xff);
+	p[0] = (u >> 56) & 0xff;
+	p[1] = (u >> 48) & 0xff;
+	p[2] = (u >> 40) & 0xff;
+	p[3] = (u >> 32) & 0xff;
+	p[4] = (u >> 24) & 0xff;
+	p[5] = (u >> 16) & 0xff;
+	p[6] = (u >> 8) & 0xff;
+	p[7] = u & 0xff;
 }
+#endif
 
 /* SHA256 round constants. */
 static const uint32_t K[64] = {

@@ -102,8 +102,8 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 static __inline uint64_t
 bswap64(uint64_t w64)
 {
-    unsigned char *p = (unsigned char *)&w64;
-    register unsigned char t;
+    uint8_t *p = (uint8_t *)&w64;
+    register uint8_t t;
     t = p[0]; p[0] = p[7]; p[7] = t;
     t = p[1]; p[1] = p[6]; p[6] = t;
     t = p[2]; p[2] = p[5]; p[5] = t;
@@ -122,16 +122,16 @@ bswap64(uint64_t w64)
 static __inline void
 le64enc(void* pp, uint64_t u)
 {
-    unsigned char *p = (unsigned char *)pp;
+    uint8_t *p = (uint8_t *)pp;
 
-    p[0] = (unsigned char)(u & 0xff);
-    p[1] = (unsigned char)((u >> 8) & 0xff);
-    p[2] = (unsigned char)((u >> 16) & 0xff);
-    p[3] = (unsigned char)((u >> 24) & 0xff);
-    p[4] = (unsigned char)((u >> 32) & 0xff);
-    p[5] = (unsigned char)((u >> 40) & 0xff);
-    p[6] = (unsigned char)((u >> 48) & 0xff);
-    p[7] = (unsigned char)((u >> 56) & 0xff);
+    p[0] = u & 0xff;
+    p[1] = (u >> 8) & 0xff;
+    p[2] = (u >> 16) & 0xff;
+    p[3] = (u >> 24) & 0xff;
+    p[4] = (u >> 32) & 0xff;
+    p[5] = (u >> 40) & 0xff;
+    p[6] = (u >> 48) & 0xff;
+    p[7] = (u >> 56) & 0xff;
 }
 #endif
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
@@ -153,7 +153,7 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 static __inline uint64_t
 le64dec(const void* pp)
 {
-    unsigned char const *p = (unsigned char const *)pp;
+    uint8_t const *p = (uint8_t const *)pp;
 
     return (((uint64_t)(p[7]) << 56) | ((uint64_t)(p[6]) << 48) | ((uint64_t)(p[5]) << 40) | (uint64_t)(p[4]) << 32)
          | (((uint64_t)(p[3]) << 24) | ((uint64_t)(p[2]) << 16) | ((uint64_t)(p[1]) << 8) | (uint64_t)(p[0]));
