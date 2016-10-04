@@ -25,7 +25,7 @@ ifeq ($(NO_INTERNAL),)
 CFLAGS_INTERNAL = -DLIBMD_INTERNAL
 endif
 
-CFLAGS = -pipe -O2 -Wall -I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein $(CFLAGS_INTERNAL)
+CFLAGS = -pipe -O3 -Wall -I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein $(CFLAGS_INTERNAL)
 LDFLAGS =
 
 ifeq ($(NO_INTERNAL),)
