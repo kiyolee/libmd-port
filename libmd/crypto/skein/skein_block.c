@@ -55,7 +55,7 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein_block.c 300921 2016-05
 #endif
 
 #ifndef SKEIN_HIDDEN_API
-#if defined(__GNUC__)
+#if defined(__GNUC__) && !defined(__CYGWIN__)
 #define SKEIN_HIDDEN_API __attribute__((visibility("hidden")))
 #else
 #define SKEIN_HIDDEN_API
