@@ -28,8 +28,8 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/skein/skein.c 300921 2016-05-29 01
 #endif
 
 #define  SKEIN_PORT_CODE /* instantiate any code in skein_port.h */
+#define  SKEIN_FOR_SKEIN_C
 
-#define LIBMD_COMPILING_SKEIN_C
 #include "skein.h"       /* get the Skein API definitions   */
 #include "skein_iv.h"    /* get precomputed IVs */
 

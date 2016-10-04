@@ -102,7 +102,7 @@ typedef struct _Skein1024_Ctxt_t Skein1024_Ctxt_t;
 
 #ifdef LIBMD_INTERNAL
 
-#ifdef LIBMD_COMPILING_SKEIN_C
+#ifdef SKEIN_FOR_SKEIN_C
 
 #ifndef SKEIN_INTERNAL_API
 #define SKEIN_INTERNAL_API static
@@ -161,7 +161,7 @@ SKEIN_INTERNAL_API int  Skein1024_Output   (Skein1024_Ctxt_t *ctx, u08b_t * hash
 
 #endif /* LIBMD_INCL_UNUSED */
 
-#endif /* LIBMD_COMPILING_SKEIN_C */
+#endif /* SKEIN_FOR_SKEIN_C */
 
 /*****************************************************************
 ** "Internal" Skein definitions
