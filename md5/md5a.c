@@ -74,6 +74,15 @@ __FBSDID("$FreeBSD: release/11.0.0/sbin/md5/md5.c 300921 2016-05-29 01:15:36Z al
 
 #if defined(__OS400__)
 #include "../libmd/supp/e2a.h"
+#define timersub(a, b, result) \
+	do { \
+		(result)->tv_sec = (a)->tv_sec - (b)->tv_sec; \
+		(result)->tv_usec = (a)->tv_usec - (b)->tv_usec; \
+		if ((result)->tv_usec < 0) { \
+			--(result)->tv_sec; \
+			(result)->tv_usec += 1000000; \
+		} \
+	} while (0)
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER >= 1400
@@ -127,9 +136,7 @@ typedef struct Algorithm_t {
 } Algorithm_t;
 
 static void MDString(const Algorithm_t *, const char *);
-#ifndef __OS400__
 static void MDTimeTrial(const Algorithm_t *);
-#endif
 static void MDTestSuite(const Algorithm_t *);
 static void MDFilter(const Algorithm_t *, int);
 static void usage(const Algorithm_t *);
@@ -316,12 +323,7 @@ main(int argc, char *argv[])
 			MDString(&Algorithm[digest], optarg);
 			break;
 		case 't':
-#ifndef __OS400__
 			MDTimeTrial(&Algorithm[digest]);
-#else
-			fprintf(stderr, "option -t is not functional yet on IBM i.\n");
-			exit(1);
-#endif
 			break;
 		case 'x':
 			MDTestSuite(&Algorithm[digest]);
@@ -392,7 +394,6 @@ MDString(const Algorithm_t *alg, const char *string)
 /*
  * Measures the time to digest TEST_BLOCK_COUNT TEST_BLOCK_LEN-byte blocks.
  */
-#ifndef __OS400__
 static void
 MDTimeTrial(const Algorithm_t *alg)
 {
@@ -401,7 +402,11 @@ MDTimeTrial(const Algorithm_t *alg)
 	LARGE_INTEGER freq;
 	LARGE_INTEGER before, after;
 #else
+#ifdef __OS400__
+	struct timeval before, after;
+#else
 	struct rusage before, after;
+#endif
 	struct timeval total;
 #endif
 	int hastime;
@@ -423,7 +428,11 @@ MDTimeTrial(const Algorithm_t *alg)
 	memset(&before, 0, sizeof(before));
 	hastime = (QueryPerformanceFrequency(&freq) && QueryPerformanceCounter(&before));
 #else
+#ifdef __OS400__
+	hastime = (gettimeofday(&before, 0) == 0);
+#else
 	getrusage(RUSAGE_SELF, &before);
+#endif
 	hastime = 1;
 #endif
 
@@ -449,8 +458,13 @@ MDTimeTrial(const Algorithm_t *alg)
 		seconds = (float)((double)(after.QuadPart - before.QuadPart) / (double)freq.QuadPart);
 	}
 #else
+#ifdef __OS400__
+	hastime = hastime && (gettimeofday(&after, 0) == 0);
+	timersub(&after, &before, &total);
+#else
 	getrusage(RUSAGE_SELF, &after);
 	timersub(&after.ru_utime, &before.ru_utime, &total);
+#endif
 	seconds = total.tv_sec + (float) total.tv_usec / 1000000;
 #endif
 
@@ -471,7 +485,6 @@ MDTimeTrial(const Algorithm_t *alg)
 		printf("Failed to create context\n");
 	}
 }
-#endif
 /*
  * Digests a reference suite of strings and prints the results.
  */
