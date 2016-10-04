@@ -2,7 +2,25 @@ TARGET = md5
 TARGET_RMD160 = rmd160
 TARGET_SHA1 = sha1
 TARGET_SHA256 = sha256
+TARGET_SHA384 = sha384
 TARGET_SHA512 = sha512
+TARGET_SHA512t256 = sha512t256
+TARGET_SKEIN256 = skein256
+TARGET_SKEIN512 = skein512
+TARGET_SKEIN1024 = skein1024
+
+ALL_TARGETS = \
+    $(TARGET) \
+    $(TARGET_RMD160) \
+    $(TARGET_SHA1) \
+    $(TARGET_SHA256) \
+    $(TARGET_SHA384) \
+    $(TARGET_SHA512) \
+    $(TARGET_SHA512t256) \
+    $(TARGET_SKEIN256) \
+    $(TARGET_SKEIN512) \
+    $(TARGET_SKEIN1024)
+
 
 CC = icc
 RM = del -f
@@ -13,7 +31,7 @@ endif
 
 CFLAGS = \
 	-v -g -O \
-	-I../libmd \
+	-I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein \
 	-D_XOPEN_SOURCE=520 \
 	-qTGTRLS=V6R1M0 \
 	-qAUT='*USE' \
@@ -40,10 +58,10 @@ OBJS = $(OBJS_MD5) getopt.o
 
 LIBS = ../libmd/libmd.a
 
-all: $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
+all: $(ALL_TARGETS)
 
 clean:
-	$(RM) $(OBJS) $(TARGET) $(TARGET_RMD160) $(TARGET_SHA1) $(TARGET_SHA256) $(TARGET_SHA512)
+	$(RM) $(OBJS) $(ALL_TARGETS)
 
 $(TARGET): $(OBJS) $(LIBS)
 	$(CC) $(LDFLAGS) $^ -o $@
@@ -63,7 +81,32 @@ $(TARGET_SHA256): $(TARGET)
 	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
 	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
 
+$(TARGET_SHA384): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
 $(TARGET_SHA512): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SHA512t256): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SKEIN256): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SKEIN512): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SKEIN1024): $(TARGET)
 	del $@
 	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
 	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@

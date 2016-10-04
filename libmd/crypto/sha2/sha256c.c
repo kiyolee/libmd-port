@@ -77,21 +77,6 @@ be32dec(const void *pp)
 	return (((uint32_t)(p[0]) << 24) | ((uint32_t)(p[1]) << 16) | ((uint32_t)(p[2]) << 8) | (uint32_t)(p[3]));
 }
 
-static __inline void
-be64enc(void *pp, uint64_t u)
-{
-	unsigned char *p = (unsigned char *)pp;
-
-	p[0] = (unsigned char)((u >> 56) & 0xff);
-	p[1] = (unsigned char)((u >> 48) & 0xff);
-	p[2] = (unsigned char)((u >> 40) & 0xff);
-	p[3] = (unsigned char)((u >> 32) & 0xff);
-	p[4] = (unsigned char)((u >> 24) & 0xff);
-	p[5] = (unsigned char)((u >> 16) & 0xff);
-	p[6] = (unsigned char)((u >> 8) & 0xff);
-	p[7] = (unsigned char)(u & 0xff);
-}
-
 #endif /* !defined(__FreeBSD__) */
 
 /*
@@ -121,6 +106,21 @@ be32dec_vect(uint32_t *dst, const unsigned char *src, size_t len)
 }
 
 #endif /* BYTE_ORDER != BIG_ENDIAN */
+
+static __inline void
+be64enc(void *pp, uint64_t u)
+{
+	unsigned char *p = (unsigned char *)pp;
+
+	p[0] = (unsigned char)((u >> 56) & 0xff);
+	p[1] = (unsigned char)((u >> 48) & 0xff);
+	p[2] = (unsigned char)((u >> 40) & 0xff);
+	p[3] = (unsigned char)((u >> 32) & 0xff);
+	p[4] = (unsigned char)((u >> 24) & 0xff);
+	p[5] = (unsigned char)((u >> 16) & 0xff);
+	p[6] = (unsigned char)((u >> 8) & 0xff);
+	p[7] = (unsigned char)(u & 0xff);
+}
 
 /* SHA256 round constants. */
 static const uint32_t K[64] = {

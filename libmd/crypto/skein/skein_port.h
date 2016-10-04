@@ -98,6 +98,19 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #ifndef Skein_Swap64  /* swap for big-endian, nop for little-endian */
 #if     SKEIN_NEED_SWAP
 #define Skein_Swap64(w64)  bswap64(w64)
+#ifndef __FreeBSD__
+static __inline uint64_t
+bswap64(uint64_t w64)
+{
+    unsigned char *p = (unsigned char *)&w64;
+    register unsigned char t;
+    t = p[0]; p[0] = p[7]; p[7] = t;
+    t = p[1]; p[1] = p[6]; p[6] = t;
+    t = p[2]; p[2] = p[5]; p[5] = t;
+    t = p[3]; p[3] = p[4]; p[4] = t;
+    return w64;
+}
+#endif
 #else
 #define Skein_Swap64(w64)  (w64)
 #endif
@@ -105,6 +118,22 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 
 
 #ifndef Skein_Put64_LSB_First
+#if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
+static __inline void
+le64enc(void* pp, uint64_t u)
+{
+    unsigned char *p = (unsigned char *)pp;
+
+    p[0] = (unsigned char)(u & 0xff);
+    p[1] = (unsigned char)((u >> 8) & 0xff);
+    p[2] = (unsigned char)((u >> 16) & 0xff);
+    p[3] = (unsigned char)((u >> 24) & 0xff);
+    p[4] = (unsigned char)((u >> 32) & 0xff);
+    p[5] = (unsigned char)((u >> 40) & 0xff);
+    p[6] = (unsigned char)((u >> 48) & 0xff);
+    p[7] = (unsigned char)((u >> 56) & 0xff);
+}
+#endif
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 #ifdef  SKEIN_PORT_CODE /* instantiate the function code here? */
 {
@@ -120,6 +149,16 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 
 
 #ifndef Skein_Get64_LSB_First
+#if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
+static __inline uint64_t
+le64dec(const void* pp)
+{
+    unsigned char const *p = (unsigned char const *)pp;
+
+    return (((uint64_t)(p[7]) << 56) | ((uint64_t)(p[6]) << 48) | ((uint64_t)(p[5]) << 40) | (uint64_t)(p[4]) << 32)
+         | (((uint64_t)(p[3]) << 24) | ((uint64_t)(p[2]) << 16) | ((uint64_t)(p[1]) << 8) | (uint64_t)(p[0]));
+}
+#endif
 void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
 #ifdef  SKEIN_PORT_CODE /* instantiate the function code here? */
 {
