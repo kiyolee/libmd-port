@@ -76,8 +76,8 @@ __BEGIN_DECLS
     /* here for big-endian CPUs */
 #define SKEIN_NEED_SWAP   (1)
 #ifdef  SKEIN_PORT_CODE
-void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt);
-void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
+static void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt);
+static void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #endif /* ifdef SKEIN_PORT_CODE */
 #elif BYTE_ORDER == LITTLE_ENDIAN
     /* here for x86 and x86-64 CPUs (and other detected little-endian CPUs) */
@@ -105,6 +105,9 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 
 
 #ifndef Skein_Put64_LSB_First
+#ifdef  SKEIN_PORT_CODE
+static
+#endif
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 #ifdef  SKEIN_PORT_CODE /* instantiate the function code here? */
 {
@@ -120,6 +123,9 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 
 
 #ifndef Skein_Get64_LSB_First
+#ifdef  SKEIN_PORT_CODE
+static
+#endif
 void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
 #ifdef  SKEIN_PORT_CODE /* instantiate the function code here? */
 {
