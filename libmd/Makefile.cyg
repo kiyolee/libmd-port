@@ -24,6 +24,9 @@ ifeq ($(MACHINE_ARCH),amd64)
 ifeq ($(NO_X64_ASM),)
 ifeq ($(SKEIN_USE_ASM),)
 SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
+# Note that though it is observed that for certain CPU, for instance i7-4790,
+# skein512 in asm can actually be slower than optimized C code.
+# Of cource, the compiler involved can also be a contributing factor.
 endif
 CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=$(SKEIN_USE_ASM)
 OBJS_X64 = skein_block_asm.o
