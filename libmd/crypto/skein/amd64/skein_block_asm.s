@@ -969,7 +969,7 @@ rIdx_offs = tmpStk_1024
     addReg      \reg0 , \reg1                      #perform the MIX
     RotL64      \reg1 , 1024,%((_RN0_) % 8),_Rn1_
     xorReg      \reg1 , \reg0
-.if ((_RN0_) && 3) == 3         #time to do key injection?
+.if ((_RN0_) & 3) == 3         #time to do key injection?
  .if _SKEIN_DEBUG
     movq       %\reg0 , xDebug_1024+8*w0(%rsp)     #save intermediate values for Debug_Round
     movq       %\reg1 , xDebug_1024+8*w1(%rsp)     # (before inline key injection)
