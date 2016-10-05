@@ -22,15 +22,11 @@ endif
 
 ifeq ($(MACHINE_ARCH),amd64)
 ifeq ($(NO_X64_ASM),)
-ifneq ($(WITH_X64_ASM),)
 ifeq ($(SKEIN_USE_ASM),)
-#SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
-# Unfortunately, none of assembly block functions work on cygwin.
-SKEIN_USE_ASM=0
+SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
 endif
 CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=$(SKEIN_USE_ASM)
 OBJS_X64 = skein_block_asm.o
-endif
 endif
 endif
 
@@ -85,7 +81,7 @@ $(TARGET_STATIC): $(OBJS)
 	$(CC) $(CFLAGS) -DELF -c -o $@ $<
 
 %.o: crypto/skein/amd64/%.s
-	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) -o $@ $<
+	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) --defsym SKEIN_CYGWIN= -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@

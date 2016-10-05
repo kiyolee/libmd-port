@@ -268,6 +268,10 @@ _PushCnt_   =   0                   #save nonvolatile regs on stack
        pushq    %\_reg_
 _PushCnt_ = _PushCnt_ + 1           #track count to keep alignment
   .endr
+.ifdef SKEIN_CYGWIN
+       pushq    %rsi
+       pushq    %rdi
+.endif
 #
 _STK_OFFS_  =   0                   #starting offset from rsp
     #---- local  variables         #<-- rsp
@@ -323,6 +327,12 @@ __STK_FRM_OFFS_\BLK_BITS = FRAME_OFFS
 #
     subq    $LOCAL_SIZE,%rsp        #make room for the locals
     leaq    FRAME_OFFS(%rsp),%rbp   #maximize use of short offsets
+.ifdef SKEIN_CYGWIN
+    movq    %rcx, %rdi  #realign cygwin calling convention
+    movq    %rdx, %rsi
+    movq    %r8, %rdx
+    movq    %r9, %rcx
+.endif
     movq    %rdi, ctxPtr+F_O(%rbp)  #save caller's parameters on the stack
     movq    %rsi, blkPtr+F_O(%rbp)
     movq    %rdx, blkCnt+F_O(%rbp)
@@ -334,6 +344,10 @@ __STK_FRM_OFFS_\BLK_BITS = FRAME_OFFS
 #
 .macro Reset_Stack
     addq    $LOCAL_SIZE,%rsp        #get rid of locals (wipe??)
+.ifdef SKEIN_CYGWIN
+    popq    %rdi
+    popq    %rsi
+.endif
   .irp _reg_,r15,r14,r13,r12,rbx,rbp
     popq    %\_reg_                 #restore caller's regs
 _PushCnt_ = _PushCnt_ - 1
