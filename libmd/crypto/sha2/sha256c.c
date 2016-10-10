@@ -42,6 +42,10 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 1
 #include <string.h>
 #endif
 
+#ifdef _MSC_VER
+#include <stdlib.h>
+#endif
+
 #include "sha256.h"
 
 #if BYTE_ORDER == BIG_ENDIAN
@@ -61,20 +65,28 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 1
 static __inline void
 be32enc(void *pp, uint32_t u)
 {
+#ifdef _MSC_VER
+	*((uint32_t *)pp) = _byteswap_ulong(u);
+#else
 	uint8_t *p = (uint8_t *)pp;
 
 	p[0] = (u >> 24) & 0xff;
 	p[1] = (u >> 16) & 0xff;
 	p[2] = (u >> 8) & 0xff;
 	p[3] = u & 0xff;
+#endif
 }
 
 static __inline uint32_t
 be32dec(const void *pp)
 {
+#ifdef _MSC_VER
+	return _byteswap_ulong(*((const uint32_t *)pp));
+#else
 	uint8_t const *p = (uint8_t const *)pp;
 
 	return (((uint32_t)(p[0]) << 24) | ((uint32_t)(p[1]) << 16) | ((uint32_t)(p[2]) << 8) | (uint32_t)(p[3]));
+#endif
 }
 
 #endif /* !defined(__FreeBSD__) */
@@ -111,6 +123,9 @@ be32dec_vect(uint32_t *dst, const unsigned char *src, size_t len)
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
+#ifdef _MSC_VER
+	*((uint64_t *)pp) = _byteswap_uint64(u);
+#else
 	uint8_t *p = (uint8_t *)pp;
 
 	p[0] = (u >> 56) & 0xff;
@@ -121,6 +136,7 @@ be64enc(void *pp, uint64_t u)
 	p[5] = (u >> 16) & 0xff;
 	p[6] = (u >> 8) & 0xff;
 	p[7] = u & 0xff;
+#endif
 }
 #endif
 

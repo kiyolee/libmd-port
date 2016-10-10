@@ -43,6 +43,10 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 1
 #include <string.h>
 #endif
 
+#ifdef _MSC_VER
+#include <stdlib.h>
+#endif
+
 #include "sha512.h"
 #include "sha512t.h"
 #include "sha384.h"
@@ -64,6 +68,9 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 1
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
+#ifdef _MSC_VER
+	*((uint64_t *)pp) = _byteswap_uint64(u);
+#else
 	uint8_t *p = (uint8_t *)pp;
 
 	p[0] = (u >> 56) & 0xff;
@@ -74,15 +81,20 @@ be64enc(void *pp, uint64_t u)
 	p[5] = (u >> 16) & 0xff;
 	p[6] = (u >> 8) & 0xff;
 	p[7] = u & 0xff;
+#endif
 }
 
 static __inline uint64_t
 be64dec(const void *pp)
 {
+#ifdef _MSC_VER
+	return _byteswap_uint64(*((const uint64_t *)pp));
+#else
 	uint8_t const *p = (uint8_t const *)pp;
 
 	return (((uint64_t)(p[0]) << 56) | ((uint64_t)(p[1]) << 48) | ((uint64_t)(p[2]) << 40) | (uint64_t)(p[3]) << 32)
 	     | (((uint64_t)(p[4]) << 24) | ((uint64_t)(p[5]) << 16) | ((uint64_t)(p[6]) << 8) | (uint64_t)(p[7]));
+#endif
 }
 
 #endif /* !defined(__FreeBSD__) */
