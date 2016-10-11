@@ -65,8 +65,10 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 1
 static __inline void
 be32enc(void *pp, uint32_t u)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
 	*((uint32_t *)pp) = _byteswap_ulong(u);
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+	*((uint32_t *)pp) = __builtin_bswap32(u);
 #else
 	uint8_t *p = (uint8_t *)pp;
 
@@ -80,8 +82,10 @@ be32enc(void *pp, uint32_t u)
 static __inline uint32_t
 be32dec(const void *pp)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
 	return _byteswap_ulong(*((const uint32_t *)pp));
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+	return __builtin_bswap32(*((const uint32_t *)pp));
 #else
 	uint8_t const *p = (uint8_t const *)pp;
 
@@ -123,8 +127,10 @@ be32dec_vect(uint32_t *dst, const unsigned char *src, size_t len)
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
 	*((uint64_t *)pp) = _byteswap_uint64(u);
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+	*((uint64_t *)pp) = __builtin_bswap64(u);
 #else
 	uint8_t *p = (uint8_t *)pp;
 

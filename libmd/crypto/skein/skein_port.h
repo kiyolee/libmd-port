@@ -99,6 +99,9 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #if     SKEIN_NEED_SWAP
 #define Skein_Swap64(w64)  bswap64(w64)
 #ifndef __FreeBSD__
+#if (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+#define bswap64(w64) __builtin_bswap64(w64)
+#else
 static __inline uint64_t
 bswap64(uint64_t w64)
 {
@@ -111,6 +114,7 @@ bswap64(uint64_t w64)
     return w64;
 }
 #endif
+#endif /* !__FreeBSD__ */
 #else
 #define Skein_Swap64(w64)  (w64)
 #endif
@@ -120,8 +124,13 @@ bswap64(uint64_t w64)
 #ifndef Skein_Put64_LSB_First
 #if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
 static __inline void
-le64enc(void* pp, uint64_t u)
+le64enc(void *pp, uint64_t u)
 {
+#if defined(_MSC_VER)
+    *((uint64_t *)pp) = _byteswap_uint64(u);
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+    *((uint64_t *)pp) = __builtin_bswap64(u);
+#else
     uint8_t *p = (uint8_t *)pp;
 
     p[0] = u & 0xff;
@@ -132,6 +141,7 @@ le64enc(void* pp, uint64_t u)
     p[5] = (u >> 40) & 0xff;
     p[6] = (u >> 48) & 0xff;
     p[7] = (u >> 56) & 0xff;
+#endif
 }
 #endif
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
@@ -151,12 +161,18 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 #ifndef Skein_Get64_LSB_First
 #if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
 static __inline uint64_t
-le64dec(const void* pp)
+le64dec(const void *pp)
 {
+#if defined(_MSC_VER)
+    return _byteswap_uint64(*((const uint64_t *)pp));
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+    return __builtin_bswap64(*((const uint64_t *)pp));
+#else
     uint8_t const *p = (uint8_t const *)pp;
 
     return (((uint64_t)(p[7]) << 56) | ((uint64_t)(p[6]) << 48) | ((uint64_t)(p[5]) << 40) | (uint64_t)(p[4]) << 32)
          | (((uint64_t)(p[3]) << 24) | ((uint64_t)(p[2]) << 16) | ((uint64_t)(p[1]) << 8) | (uint64_t)(p[0]));
+#endif
 }
 #endif
 void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
