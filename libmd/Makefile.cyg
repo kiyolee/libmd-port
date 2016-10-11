@@ -84,7 +84,7 @@ $(TARGET_STATIC): $(OBJS)
 	$(CC) $(CFLAGS) -DELF -c -o $@ $<
 
 %.o: crypto/skein/amd64/%.s
-	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) --defsym SKEIN_CYGWIN= -o $@ $<
+	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) --defsym SKEIN_CYGWIN=1 -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@
