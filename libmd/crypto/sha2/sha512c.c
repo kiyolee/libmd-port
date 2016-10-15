@@ -63,45 +63,37 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 1
 
 #else /* BYTE_ORDER != BIG_ENDIAN */
 
-#if !defined(__FreeBSD__)
+#undef _sha_bswap64
+#if defined(_MSC_VER)
+#define _sha_bswap64 _byteswap_uint64
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+#define _sha_bswap64 __builtin_bswap64
+#else
+static __inline uint64_t _sha_bswap64(register uint64_t u)
+{
+	u = ((u >>  8) & 0x00ff00ff00ff00ff) | ((u <<  8) & 0xff00ff00ff00ff00);
+	u = ((u >> 16) & 0x0000ffff0000ffff) | ((u << 16) & 0xffff0000ffff0000);
+	u = ((u >> 32) & 0x00000000ffffffff) | ((u << 32) & 0xffffffff00000000);
+	return u;
+}
+#endif
+
+#ifdef __FreeBSD__
+#define be64enc _sha_be64enc
+#define be64dec _sha_be64dec
+#endif
 
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
-#if defined(_MSC_VER)
-	*((uint64_t *)pp) = _byteswap_uint64(u);
-#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-	*((uint64_t *)pp) = __builtin_bswap64(u);
-#else
-	uint8_t *p = (uint8_t *)pp;
-
-	p[0] = (u >> 56) & 0xff;
-	p[1] = (u >> 48) & 0xff;
-	p[2] = (u >> 40) & 0xff;
-	p[3] = (u >> 32) & 0xff;
-	p[4] = (u >> 24) & 0xff;
-	p[5] = (u >> 16) & 0xff;
-	p[6] = (u >> 8) & 0xff;
-	p[7] = u & 0xff;
-#endif
+	*((uint64_t *)pp) = _sha_bswap64(u);
 }
 
 static __inline uint64_t
 be64dec(const void *pp)
 {
-#if defined(_MSC_VER)
-	return _byteswap_uint64(*((const uint64_t *)pp));
-#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-	return __builtin_bswap64(*((const uint64_t *)pp));
-#else
-	uint8_t const *p = (uint8_t const *)pp;
-
-	return (((uint64_t)(p[0]) << 56) | ((uint64_t)(p[1]) << 48) | ((uint64_t)(p[2]) << 40) | (uint64_t)(p[3]) << 32)
-	     | (((uint64_t)(p[4]) << 24) | ((uint64_t)(p[5]) << 16) | ((uint64_t)(p[6]) << 8) | (uint64_t)(p[7]));
-#endif
+	return _sha_bswap64(*((const uint64_t *)pp));
 }
-
-#endif /* !defined(__FreeBSD__) */
 
 /*
  * Encode a length len/4 vector of (uint64_t) into a length len vector of

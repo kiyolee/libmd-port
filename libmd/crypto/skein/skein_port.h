@@ -98,23 +98,20 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #ifndef Skein_Swap64  /* swap for big-endian, nop for little-endian */
 #if     SKEIN_NEED_SWAP
 #define Skein_Swap64(w64)  bswap64(w64)
-#ifndef __FreeBSD__
-#if (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-#define bswap64(w64) __builtin_bswap64(w64)
-#else
-static __inline uint64_t
-bswap64(uint64_t w64)
+#if defined(_MSC_VER)
+#define bswap64 _byteswap_uint64
+#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
+#define bswap64 __builtin_bswap64
+#elif !defined(__FreeBSD__)
+static __inline uint64_t _skein_bswap64(register uint64_t u)
 {
-    uint8_t *p = (uint8_t *)&w64;
-    register uint8_t t;
-    t = p[0]; p[0] = p[7]; p[7] = t;
-    t = p[1]; p[1] = p[6]; p[6] = t;
-    t = p[2]; p[2] = p[5]; p[5] = t;
-    t = p[3]; p[3] = p[4]; p[4] = t;
-    return w64;
+	u = ((u >>  8) & 0x00ff00ff00ff00ff) | ((u <<  8) & 0xff00ff00ff00ff00);
+	u = ((u >> 16) & 0x0000ffff0000ffff) | ((u << 16) & 0xffff0000ffff0000);
+	u = ((u >> 32) & 0x00000000ffffffff) | ((u << 32) & 0xffffffff00000000);
+	return u;
 }
+#define bswap64 _skein_bswap64
 #endif
-#endif /* !__FreeBSD__ */
 #else
 #define Skein_Swap64(w64)  (w64)
 #endif
@@ -126,22 +123,7 @@ bswap64(uint64_t w64)
 static __inline void
 le64enc(void *pp, uint64_t u)
 {
-#if defined(_MSC_VER)
-    *((uint64_t *)pp) = _byteswap_uint64(u);
-#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-    *((uint64_t *)pp) = __builtin_bswap64(u);
-#else
-    uint8_t *p = (uint8_t *)pp;
-
-    p[0] = u & 0xff;
-    p[1] = (u >> 8) & 0xff;
-    p[2] = (u >> 16) & 0xff;
-    p[3] = (u >> 24) & 0xff;
-    p[4] = (u >> 32) & 0xff;
-    p[5] = (u >> 40) & 0xff;
-    p[6] = (u >> 48) & 0xff;
-    p[7] = (u >> 56) & 0xff;
-#endif
+    *((uint64_t *)pp) = Skein_Swap64(u);
 }
 #endif
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
@@ -163,16 +145,7 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 static __inline uint64_t
 le64dec(const void *pp)
 {
-#if defined(_MSC_VER)
-    return _byteswap_uint64(*((const uint64_t *)pp));
-#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-    return __builtin_bswap64(*((const uint64_t *)pp));
-#else
-    uint8_t const *p = (uint8_t const *)pp;
-
-    return (((uint64_t)(p[7]) << 56) | ((uint64_t)(p[6]) << 48) | ((uint64_t)(p[5]) << 40) | (uint64_t)(p[4]) << 32)
-         | (((uint64_t)(p[3]) << 24) | ((uint64_t)(p[2]) << 16) | ((uint64_t)(p[1]) << 8) | (uint64_t)(p[0]));
-#endif
+    return Skein_Swap64(*((const uint64_t *)pp));
 }
 #endif
 void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
