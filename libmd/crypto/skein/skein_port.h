@@ -103,14 +103,26 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
 #define bswap64 __builtin_bswap64
 #elif !defined(__FreeBSD__)
-static __inline uint64_t _skein_bswap64(register uint64_t u)
+#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
+static __inline uint32_t _libmd_bswap32(register uint32_t u)
 {
+	u = ((u >>  8) & 0x00ff00ff) | ((u <<  8) & 0xff00ff00);
+	u = ((u >> 16) & 0x0000ffff) | ((u << 16) & 0xffff0000);
+	return u;
+}
+#endif
+static __inline uint64_t _libmd_bswap64(register uint64_t u)
+{
+#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
+	return ((uint64_t)_libmd_bswap32((uint32_t)u) << 32) | _libmd_bswap32((uint32_t)(u >> 32));
+#else
 	u = ((u >>  8) & 0x00ff00ff00ff00ff) | ((u <<  8) & 0xff00ff00ff00ff00);
 	u = ((u >> 16) & 0x0000ffff0000ffff) | ((u << 16) & 0xffff0000ffff0000);
 	u = ((u >> 32) & 0x00000000ffffffff) | ((u << 32) & 0xffffffff00000000);
 	return u;
+#endif
 }
-#define bswap64 _skein_bswap64
+#define bswap64 _libmd_bswap64
 #endif
 #else
 #define Skein_Swap64(w64)  (w64)

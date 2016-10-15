@@ -63,36 +63,48 @@ __FBSDID("$FreeBSD: release/11.0.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 1
 
 #else /* BYTE_ORDER != BIG_ENDIAN */
 
-#undef _sha_bswap64
+#undef _libmd_bswap64
 #if defined(_MSC_VER)
-#define _sha_bswap64 _byteswap_uint64
+#define _libmd_bswap64 _byteswap_uint64
 #elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-#define _sha_bswap64 __builtin_bswap64
+#define _libmd_bswap64 __builtin_bswap64
 #else
-static __inline uint64_t _sha_bswap64(register uint64_t u)
+#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
+static __inline uint32_t _libmd_bswap32(register uint32_t u)
 {
+	u = ((u >>  8) & 0x00ff00ff) | ((u <<  8) & 0xff00ff00);
+	u = ((u >> 16) & 0x0000ffff) | ((u << 16) & 0xffff0000);
+	return u;
+}
+#endif
+static __inline uint64_t _libmd_bswap64(register uint64_t u)
+{
+#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
+	return ((uint64_t)_libmd_bswap32((uint32_t)u) << 32) | _libmd_bswap32((uint32_t)(u >> 32));
+#else
 	u = ((u >>  8) & 0x00ff00ff00ff00ff) | ((u <<  8) & 0xff00ff00ff00ff00);
 	u = ((u >> 16) & 0x0000ffff0000ffff) | ((u << 16) & 0xffff0000ffff0000);
 	u = ((u >> 32) & 0x00000000ffffffff) | ((u << 32) & 0xffffffff00000000);
 	return u;
+#endif
 }
 #endif
 
 #ifdef __FreeBSD__
-#define be64enc _sha_be64enc
-#define be64dec _sha_be64dec
+#define be64enc _libmd_be64enc
+#define be64dec _libmd_be64dec
 #endif
 
 static __inline void
 be64enc(void *pp, uint64_t u)
 {
-	*((uint64_t *)pp) = _sha_bswap64(u);
+	*((uint64_t *)pp) = _libmd_bswap64(u);
 }
 
 static __inline uint64_t
 be64dec(const void *pp)
 {
-	return _sha_bswap64(*((const uint64_t *)pp));
+	return _libmd_bswap64(*((const uint64_t *)pp));
 }
 
 /*
