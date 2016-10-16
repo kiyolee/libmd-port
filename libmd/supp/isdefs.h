@@ -1,5 +1,5 @@
-#ifndef ISDEFS_H
-#define ISDEFS_H
+#ifndef LIBMD_SUPP_ISDEFS_H
+#define LIBMD_SUPP_ISDEFS_H
 
 #include <stdint.h>
 
@@ -12,4 +12,4 @@ typedef uint64_t u_int64_t;
 #define LITTLE_ENDIAN   1234
 #define BIG_ENDIAN      4321
 
-#endif
+#endif /* LIBMD_SUPP_ISDEFS_H */

@@ -97,33 +97,8 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
  */
 #ifndef Skein_Swap64  /* swap for big-endian, nop for little-endian */
 #if     SKEIN_NEED_SWAP
-#define Skein_Swap64(w64)  bswap64(w64)
-#if defined(_MSC_VER)
-#define bswap64 _byteswap_uint64
-#elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
-#define bswap64 __builtin_bswap64
-#else
-#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
-static __inline uint32_t _libmd_bswap32(register uint32_t u)
-{
-	u = ((u >>  8) & 0x00ff00ff) | ((u <<  8) & 0xff00ff00);
-	u = ((u >> 16) & 0x0000ffff) | ((u << 16) & 0xffff0000);
-	return u;
-}
-#endif
-static __inline uint64_t _libmd_bswap64(register uint64_t u)
-{
-#if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
-	return ((uint64_t)_libmd_bswap32((uint32_t)u) << 32) | _libmd_bswap32((uint32_t)(u >> 32));
-#else
-	u = ((u >>  8) & 0x00ff00ff00ff00ff) | ((u <<  8) & 0xff00ff00ff00ff00);
-	u = ((u >> 16) & 0x0000ffff0000ffff) | ((u << 16) & 0xffff0000ffff0000);
-	u = ((u >> 32) & 0x00000000ffffffff) | ((u << 32) & 0xffffffff00000000);
-	return u;
-#endif
-}
-#define bswap64 _libmd_bswap64
-#endif
+#include "supp/bswap.h"
+#define Skein_Swap64(w64)  _libmd_bswap64(w64)
 #else
 #define Skein_Swap64(w64)  (w64)
 #endif
@@ -133,6 +108,13 @@ static __inline uint64_t _libmd_bswap64(register uint64_t u)
 #ifndef Skein_Put64_LSB_First
 #ifdef SKEIN_PORT_CODE
 #ifdef __FreeBSD__
+/*
+ *  FreeBSD's le64enc() is alignment-agnostic and so cannot be
+ *  optimized into CPU bswap even if that is available.
+ *  libmd-port uses optimizable code instead.
+ *  For CPUs having alignment problem, these may need to change
+ *  to follow what FreeBSD does.
+ */
 #define le64enc _libmd_le64enc
 #endif
 static __inline void
@@ -158,6 +140,13 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 #ifndef Skein_Get64_LSB_First
 #ifdef SKEIN_PORT_CODE
 #ifdef __FreeBSD__
+/*
+ *  FreeBSD's le64dec() is alignment-agnostic and so cannot be
+ *  optimized into CPU bswap even if that is available.
+ *  libmd-port uses optimizable code instead.
+ *  For CPUs having alignment problem, these may need to change
+ *  to follow what FreeBSD does.
+ */
 #define le64dec _libmd_le64dec
 #endif
 static __inline uint64_t
