@@ -48,10 +48,11 @@
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				OmitDefaultLibName="true"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -112,10 +113,11 @@
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				OmitDefaultLibName="true"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -175,11 +177,12 @@
 				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="LIBMD_INTERNAL;NDEBUG"
 				StringPooling="true"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				OmitDefaultLibName="true"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -240,11 +243,12 @@
 				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="LIBMD_INTERNAL;NDEBUG"
 				StringPooling="true"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				OmitDefaultLibName="true"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

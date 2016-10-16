@@ -67,10 +67,11 @@
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -85,10 +86,11 @@
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -99,11 +101,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>LIBMD_INTERNAL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
@@ -117,11 +120,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>LIBMD_INTERNAL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitDefaultLibName>true</OmitDefaultLibName>
     </ClCompile>
     <Xdcmake />
     <Bscmake />
