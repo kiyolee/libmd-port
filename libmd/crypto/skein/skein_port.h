@@ -102,7 +102,7 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #define bswap64 _byteswap_uint64
 #elif (defined(__GNUC__) && (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))) || defined(__clang__)
 #define bswap64 __builtin_bswap64
-#elif !defined(__FreeBSD__)
+#else
 #if defined(_M_IX86) || defined(i386) // or any 32-bit CPU
 static __inline uint32_t _libmd_bswap32(register uint32_t u)
 {
@@ -131,7 +131,10 @@ static __inline uint64_t _libmd_bswap64(register uint64_t u)
 
 
 #ifndef Skein_Put64_LSB_First
-#if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
+#ifdef SKEIN_PORT_CODE
+#ifdef __FreeBSD__
+#define le64enc _libmd_le64enc
+#endif
 static __inline void
 le64enc(void *pp, uint64_t u)
 {
@@ -153,7 +156,10 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
 
 
 #ifndef Skein_Get64_LSB_First
-#if defined(SKEIN_PORT_CODE) && !defined(__FreeBSD__)
+#ifdef SKEIN_PORT_CODE
+#ifdef __FreeBSD__
+#define le64dec _libmd_le64dec
+#endif
 static __inline uint64_t
 le64dec(const void *pp)
 {
