@@ -11,7 +11,7 @@
 #define TYPE(a,b)       .type   a,b
 #define SIZE(a,b)       .size   a,b
 
-#if defined(OUT) || defined(BSDI)
+#if defined(OUT) || defined(BSDI) || defined(CYGWIN)
 #define sha1_block_x86 _sha1_block_x86
 
 #endif
@@ -21,7 +21,7 @@
 #define ALIGN	4
 #endif
 
-#ifdef BSDI
+#if defined(BSDI) || defined(CYGWIN)
 #define OK              1
 #define ALIGN           4
 #undef SIZE

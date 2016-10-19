@@ -13,7 +13,7 @@ endif
 ifeq ($(MACHINE_ARCH),i386)
 ifeq ($(NO_X86_ASM),)
 ifneq ($(WITH_X86_ASM),)
-# Need explicit enable, not compiling somehow anyway.
+# Need explicit enable, looks like optimized C code is actually faster for certain CPU.
 CFLAGS_X86 = -DSHA1_ASM -DRMD160_ASM
 OBJS_X86 = rmd160.o sha.o
 endif
@@ -25,7 +25,7 @@ ifeq ($(NO_X64_ASM),)
 ifeq ($(SKEIN_USE_ASM),)
 SKEIN_USE_ASM=1792 # list of block functions to replace with assembly: 256+512+1024 = 1792
 # Note that though it is observed that for certain CPU, for instance i7-4790,
-# skein512 in asm can actually be slower than optimized C code.
+# skein256/skein512 in asm can actually be slower than optimized C code.
 # Of cource, the compiler involved can also be a contributing factor.
 endif
 CFLAGS_X64 = -DSKEIN_ASM -DSKEIN_USE_ASM=$(SKEIN_USE_ASM)
@@ -81,7 +81,7 @@ $(TARGET_STATIC): $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 %.o: i386/%.S
-	$(CC) $(CFLAGS) -DELF -c -o $@ $<
+	$(CC) $(CFLAGS) -DCYGWIN -c -o $@ $<
 
 %.o: crypto/skein/amd64/%.s
 	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) --defsym SKEIN_CYGWIN=1 -o $@ $<
