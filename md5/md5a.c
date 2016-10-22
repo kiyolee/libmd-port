@@ -474,8 +474,8 @@ MDTimeTrial(const Algorithm_t *alg)
 		printf("Digest = %s", p);
 		if (hastime) {
 			printf("\nTime = %f seconds\n", seconds);
-			printf("Speed = %f bytes/second\n",
-				(float) TEST_BLOCK_LEN * (float) TEST_BLOCK_COUNT / seconds);
+			printf("Speed = %f MiB/second\n", (float) TEST_BLOCK_LEN * 
+				(float) TEST_BLOCK_COUNT / seconds / (1 << 20));
 		} else {
 			printf("Timing not available\n");
 		}
