@@ -44,6 +44,12 @@ clean:
 cleanx: clean
 	( cd ../libmd; gmake -f Makefile.unx clean )
 
+test: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -x; done
+
+timetrial: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -t; done
+
 $(LIBMD): ../libmd/Makefile.unx
 	( cd ../libmd; gmake -f Makefile.unx )
 

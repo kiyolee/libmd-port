@@ -128,7 +128,7 @@ typedef struct Algorithm_t {
 
 static void MDString(const Algorithm_t *, const char *);
 static void MDTimeTrial(const Algorithm_t *);
-static void MDTestSuite(const Algorithm_t *);
+static int  MDTestSuite(const Algorithm_t *);
 static void MDFilter(const Algorithm_t *, int);
 static void usage(const Algorithm_t *);
 
@@ -275,6 +275,7 @@ main(int argc, char *argv[])
 	int	failed;
  	unsigned	digest;
  	const char*	progname;
+	int testres = -1;
 
 	if ((progname = strrchr(argv[0], '/')) != NULL)
 		progname++;
@@ -319,7 +320,7 @@ main(int argc, char *argv[])
 			MDTimeTrial(&Algorithm[digest]);
 			break;
 		case 'x':
-			MDTestSuite(&Algorithm[digest]);
+			testres = (MDTestSuite(&Algorithm[digest]) == 0) ? 0 : 1;
 			break;
 		default:
 			usage(&Algorithm[digest]);
@@ -352,6 +353,9 @@ main(int argc, char *argv[])
 		} while (*++argv);
 	} else if (!sflag && (optind == 1 || qflag || rflag))
 		MDFilter(&Algorithm[digest], 0);
+
+	if (testres > 0)
+		return 255;
 
 	if (failed != 0)
 		return (1);
@@ -588,9 +592,10 @@ const char *SKEIN1024_TestOutput[MDTESTCOUNT] = {
 	"e6799b78db54085a2be7ff4c8007f147fa88d326abab30be0560b953396d8802feee9a15419b48a467574e9283be15685ca8a079ee52b27166b64dd70b124b1d4e4f6aca37224c3f2685e67e67baef9f94b905698adc794a09672aba977a61b20966912acdb08c21a2c37001785355dc884751a21f848ab36e590331ff938138"
 };
 
-static void
+static int
 MDTestSuite(const Algorithm_t *alg)
 {
+	int res = 0;
 	int i;
 	char buffer[HEX_DIGEST_LENGTH];
 
@@ -606,9 +611,13 @@ MDTestSuite(const Algorithm_t *alg)
 		printf("%s (\"%s\") = %s", alg->name, MDTestInput[i], buffer);
 		if (strcmp(buffer, (*alg->TestOutput)[i]) == 0)
 			printf(" - verified correct\n");
-		else
+		else {
+			res = -1;
 			printf(" - INCORRECT RESULT!\n");
+		}
 	}
+
+	return res;
 }
 
 /*
