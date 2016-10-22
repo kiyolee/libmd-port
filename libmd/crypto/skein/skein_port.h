@@ -97,8 +97,15 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
  */
 #ifndef Skein_Swap64  /* swap for big-endian, nop for little-endian */
 #if     SKEIN_NEED_SWAP
+#ifdef __OS400__
+#define USE_LIBMD_BSWAP_SAFE
+#endif
 #include "supp/bswap.h"
+#ifdef __OS400__
+#define Skein_Swap64(w64)  _libmd_bswap64_safe(w64)
+#else
 #define Skein_Swap64(w64)  _libmd_bswap64(w64)
+#endif
 #else
 #define Skein_Swap64(w64)  (w64)
 #endif

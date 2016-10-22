@@ -29,4 +29,25 @@ static __inline uint64_t _libmd_bswap64(register uint64_t u)
 }
 #endif
 
+#ifdef USE_LIBMD_BSWAP_SAFE
+static __inline uint32_t _libmd_bswap32_safe(uint32_t u)
+{
+    register uint8_t *p = (uint8_t *)&u;
+    register uint8_t t;
+    t = p[0]; p[0] = p[3]; p[3] = t;
+    t = p[1]; p[1] = p[2]; p[2] = t;
+    return u;
+}
+static __inline uint64_t _libmd_bswap64_safe(uint64_t u)
+{
+    register uint8_t *p = (uint8_t *)&u;
+    register uint8_t t;
+    t = p[0]; p[0] = p[7]; p[7] = t;
+    t = p[1]; p[1] = p[6]; p[6] = t;
+    t = p[2]; p[2] = p[5]; p[5] = t;
+    t = p[3]; p[3] = p[4]; p[4] = t;
+    return u;
+}
+#endif
+
 #endif /* LIBMD_SUPP_BSWAP_H */
