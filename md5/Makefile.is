@@ -56,14 +56,26 @@ endif
 
 OBJS = $(OBJS_MD5) getopt.o
 
-LIBS = ../libmd/libmd.a
+LIBMD = ../libmd/libmd.a
 
 all: $(ALL_TARGETS)
 
 clean:
-	$(RM) $(OBJS) $(ALL_TARGETS)
+	$(RM) *.o $(ALL_TARGETS)
 
-$(TARGET): $(OBJS) $(LIBS)
+cleanx: clean
+	( cd ../libmd; gmake -f Makefile.is clean )
+
+test: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
+
+timetrial: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
+
+$(LIBMD): ../libmd/Makefile.is
+	( cd ../libmd; gmake -f Makefile.is )
+
+$(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(TARGET_RMD160): $(TARGET)

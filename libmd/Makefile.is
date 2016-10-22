@@ -70,7 +70,7 @@ REFS = \
 all: $(TARGET_SHARED) $(TARGET_LIB)
 
 clean:
-	$(RM) $(SRCS_HL) $(OBJS) $(TARGET_SHARED) $(TARGET_LIB) $(REFS)
+	$(RM) *.o $(SRCS_HL) $(TARGET_SHARED) $(TARGET_LIB) $(REFS)
 
 $(TARGET_SHARED): $(OBJS)
 	system "cpyfrmstmf fromstmf('libmd.isb') tombr('/QSYS.LIB/$(OUTPUTDIR).LIB/QSRVSRC.FILE/LIBMD.MBR') MBROPT(*REPLACE)"
