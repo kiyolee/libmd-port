@@ -36,14 +36,20 @@ else
 OBJS = md5a.o
 endif
 
-LIBS = ../libmd/libmd.a
+LIBMD = ../libmd/libmd.a
 
 all: $(ALL_TARGETS)
 
 clean:
-	$(RM) $(OBJS) $(ALL_TARGETS)
+	$(RM) *.o $(ALL_TARGETS)
 
-$(TARGET): $(OBJS) $(LIBS)
+cleanx: clean
+	( cd ../libmd; gmake -f Makefile.cyg clean )
+
+$(LIBMD): ../libmd/Makefile.cyg
+	( cd ../libmd; gmake -f Makefile.cyg )
+
+$(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(TARGET_RMD160): $(TARGET)

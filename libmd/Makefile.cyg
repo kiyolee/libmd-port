@@ -65,7 +65,7 @@ REFS = \
 all: $(TARGET_STATIC)
 
 clean:
-	$(RM) $(SRCS_HL) $(OBJS) $(TARGET_STATIC) $(REFS)
+	$(RM) *.o $(SRCS_HL) $(TARGET_STATIC) $(REFS)
 
 $(TARGET_STATIC): $(OBJS)
 	$(AR) cr $@ $^
