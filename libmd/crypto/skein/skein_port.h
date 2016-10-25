@@ -25,7 +25,7 @@
 #include <stdint.h>
 #endif
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include "supp/w32defs.h"
 #endif
 #ifdef __OS400__

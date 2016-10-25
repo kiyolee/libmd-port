@@ -28,7 +28,7 @@ documentation and/or software.
 #ifndef _SYS_MD5_H_
 #define _SYS_MD5_H_
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include "supp/w32defs.h"
 #endif
 #ifdef __OS400__

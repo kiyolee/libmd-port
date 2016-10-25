@@ -1,7 +1,11 @@
 #ifndef LIBMD_SUPP_W32DEFS_H
 #define LIBMD_SUPP_W32DEFS_H
 
-#if defined(_MSC_VER) && _MSC_VER >= 1600
+#ifdef __MINGW32__
+#include <intrin.h>
+#endif
+
+#if (defined(_MSC_VER) && _MSC_VER >= 1600) || defined(__MINGW32__)
 #include <stdint.h>
 #else
 typedef unsigned char uint8_t;

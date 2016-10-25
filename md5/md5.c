@@ -24,13 +24,13 @@
 __FBSDID("$FreeBSD: release/11.0.0/sbin/md5/md5.c 300921 2016-05-29 01:15:36Z allanjude $");
 #endif
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <stddef.h>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
 
-#if defined(_MSC_VER) || defined(__OS400__)
+#if defined(_WIN32) || defined(__OS400__)
 #include <stdarg.h>
 #endif
 
@@ -63,7 +63,7 @@ __FBSDID("$FreeBSD: release/11.0.0/sbin/md5/md5.c 300921 2016-05-29 01:15:36Z al
 #include <string.h>
 #include <time.h>
 
-#if defined(_MSC_VER) || defined(__OS400__)
+#if defined(_WIN32) || defined(__OS400__)
 #include "getopt/getopt.h"
 #endif
 
@@ -206,7 +206,7 @@ static const struct Algorithm_t Algorithm[] = {
 		&SKEIN1024_Data, &SKEIN1024_File }
 };
 
-#if defined(_MSC_VER) || defined(__OS400__)
+#if defined(_WIN32) || defined(__OS400__)
 
 static void
 warn(const char *fmt, ...)
@@ -279,7 +279,7 @@ main(int argc, char *argv[])
 
 	if ((progname = strrchr(argv[0], '/')) != NULL)
 		progname++;
-#ifdef _MSC_VER
+#ifdef _WIN32
 	else if ((progname = strrchr(argv[0], '\\')) != NULL)
 		progname++;
 	else if ((progname = strrchr(argv[0], ':')) != NULL)
@@ -395,7 +395,7 @@ static void
 MDTimeTrial(const Algorithm_t *alg)
 {
 	DIGEST_CTX context;
-#ifdef _MSC_VER
+#ifdef _WIN32
 	LARGE_INTEGER freq;
 	LARGE_INTEGER before, after;
 #else
@@ -421,7 +421,7 @@ MDTimeTrial(const Algorithm_t *alg)
 		block[i] = (unsigned char) (i & 0xff);
 
 	/* Start timer */
-#ifdef _MSC_VER
+#ifdef _WIN32
 	memset(&before, 0, sizeof(before));
 	hastime = (QueryPerformanceFrequency(&freq) && QueryPerformanceCounter(&before));
 #else
@@ -440,7 +440,7 @@ MDTimeTrial(const Algorithm_t *alg)
 	p = alg->End(&context, buf);
 
 	/* Stop timer */
-#ifdef _MSC_VER
+#ifdef _WIN32
 	if (hastime) {
 		QueryPerformanceCounter(&after);
 		seconds = (float)((double)(after.QuadPart - before.QuadPart) / (double)freq.QuadPart);

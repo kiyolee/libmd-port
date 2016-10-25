@@ -26,7 +26,7 @@
 #ifndef _MD4_H_
 #define _MD4_H_
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include "supp/w32defs.h"
 #endif
 #ifdef __OS400__

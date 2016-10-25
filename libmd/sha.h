@@ -65,7 +65,7 @@
 #endif
 #include <sys/types.h>		/* XXX switch to machine/ansi.h and __ types */
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include "supp/w32defs.h"
 #endif
 #ifdef __OS400__
