@@ -61,31 +61,31 @@ $(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(TARGET_RMD160): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SHA1): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SHA256): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SHA384): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SHA512): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SHA512t256): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SKEIN256): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SKEIN512): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 $(TARGET_SKEIN1024): $(TARGET)
-	ln -s $(TARGET)$(EXE_EXT) $@
+	ln -sf $(TARGET)$(EXE_EXT) $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
