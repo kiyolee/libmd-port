@@ -335,6 +335,11 @@ main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
+	if (testres == 0)
+		return 0;
+	else if (testres > 0)
+		return 255;
+
 	if (*argv) {
 		do {
 			p = Algorithm[digest].File(*argv, buf);
@@ -360,9 +365,6 @@ main(int argc, char *argv[])
 		} while (*++argv);
 	} else if (!sflag && (optind == 1 || qflag || rflag))
 		MDFilter(&Algorithm[digest], 0);
-
-	if (testres > 0)
-		return 255;
 
 	if (failed != 0)
 		return (1);
