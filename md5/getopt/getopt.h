@@ -33,6 +33,10 @@
 #ifndef _GETOPT_H_
 #define _GETOPT_H_
 
+#ifdef __CYGWIN__
+#error Not for cygwin.
+#endif
+
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
