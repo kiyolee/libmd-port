@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/11.0.0/sys/crypto/skein/skein_freebsd.h 300921 2016-05-29 01:15:36Z allanjude $
+ * $FreeBSD: release/11.1.0/sys/crypto/skein/skein_freebsd.h 310372 2016-12-21 18:42:04Z emaste $
  */
 
 #ifndef _SKEIN_FREEBSD_H_
@@ -82,9 +82,20 @@ SKEIN256_API  void SKEIN256_Update(SKEIN256_CTX *ctx, const void *in, size_t len
 SKEIN512_API  void SKEIN512_Update(SKEIN512_CTX *ctx, const void *in, size_t len);
 SKEIN1024_API void SKEIN1024_Update(SKEIN1024_CTX *ctx, const void *in, size_t len);
 
-SKEIN256_API  void SKEIN256_Final(unsigned char digest[SKEIN256_DIGEST_LENGTH], SKEIN256_CTX *ctx);
-SKEIN512_API  void SKEIN512_Final(unsigned char digest[SKEIN512_DIGEST_LENGTH], SKEIN512_CTX *ctx);
-SKEIN1024_API void SKEIN1024_Final(unsigned char digest[SKEIN1024_DIGEST_LENGTH], SKEIN1024_CTX *ctx);
+#ifdef __cplusplus
+#define __skein_min_size(n) n
+#else
+#define __skein_min_size(n) static n
+#endif
+
+SKEIN256_API  void SKEIN256_Final(unsigned char digest[__skein_min_size(SKEIN256_DIGEST_LENGTH)],
+    SKEIN256_CTX *ctx);
+SKEIN512_API  void SKEIN512_Final(unsigned char digest[__skein_min_size(SKEIN512_DIGEST_LENGTH)],
+    SKEIN512_CTX *ctx);
+SKEIN1024_API void SKEIN1024_Final(unsigned char digest[__skein_min_size(SKEIN1024_DIGEST_LENGTH)],
+    SKEIN1024_CTX *ctx);
+
+#undef __skein_min_size
 
 #ifndef _KERNEL
 SKEIN256_API  char  *SKEIN256_End(SKEIN256_CTX *, char *);
@@ -93,6 +104,12 @@ SKEIN1024_API char  *SKEIN1024_End(SKEIN1024_CTX *, char *);
 SKEIN256_API  char  *SKEIN256_Data(const void *, unsigned int, char *);
 SKEIN512_API  char  *SKEIN512_Data(const void *, unsigned int, char *);
 SKEIN1024_API char  *SKEIN1024_Data(const void *, unsigned int, char *);
+SKEIN256_API  char  *SKEIN256_Fd(int, char *);
+SKEIN512_API  char  *SKEIN512_Fd(int, char *);
+SKEIN1024_API char  *SKEIN1024_Fd(int, char *);
+SKEIN256_API  char  *SKEIN256_FdChunk(int, char *, off_t, off_t);
+SKEIN512_API  char  *SKEIN512_FdChunk(int, char *, off_t, off_t);
+SKEIN1024_API char  *SKEIN1024_FdChunk(int, char *, off_t, off_t);
 SKEIN256_API  char  *SKEIN256_File(const char *, char *);
 SKEIN512_API  char  *SKEIN512_File(const char *, char *);
 SKEIN1024_API char  *SKEIN1024_File(const char *, char *);

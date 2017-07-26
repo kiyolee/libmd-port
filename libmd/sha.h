@@ -54,7 +54,7 @@
  * copied and put under another distribution licence
  * [including the GNU Public Licence.]
  *
- * $FreeBSD: release/11.0.0/lib/libmd/sha.h 282736 2015-05-10 21:21:52Z thomas $
+ * $FreeBSD: release/11.1.0/lib/libmd/sha.h 310372 2016-12-21 18:42:04Z emaste $
  */
 
 #ifndef _SHA_H_
@@ -136,6 +136,12 @@ __BEGIN_DECLS
 #ifndef SHA_End
 #define SHA_End		_libmd_SHA_End
 #endif
+#ifndef SHA_Fd
+#define SHA_Fd		_libmd_SHA_Fd
+#endif
+#ifndef SHA_FdChunk
+#define SHA_FdChunk	_libmd_SHA_FdChunk
+#endif
 #ifndef SHA_File
 #define SHA_File	_libmd_SHA_File
 #endif
@@ -181,6 +187,12 @@ __BEGIN_DECLS
 #ifndef SHA1_End
 #define SHA1_End	_libmd_SHA1_End
 #endif
+#ifndef SHA1_Fd
+#define SHA1_Fd		_libmd_SHA1_Fd
+#endif
+#ifndef SHA1_FdChunk
+#define SHA1_FdChunk	_libmd_SHA1_FdChunk
+#endif
 #ifndef SHA1_File
 #define SHA1_File	_libmd_SHA1_File
 #endif
@@ -220,6 +232,8 @@ SHA_API void    SHA_Init(SHA_CTX *c);
 SHA_API void    SHA_Update(SHA_CTX *c, const void *data, size_t len);
 SHA_API void    SHA_Final(unsigned char *md, SHA_CTX *c);
 SHA_API char   *SHA_End(SHA_CTX *, char *);
+SHA_API char   *SHA_Fd(int, char *);
+SHA_API char   *SHA_FdChunk(int, char *, off_t, off_t);
 SHA_API char   *SHA_File(const char *, char *);
 SHA_API char   *SHA_FileChunk(const char *, char *, off_t, off_t);
 SHA_API char   *SHA_Data(const void *, unsigned int, char *);
@@ -231,6 +245,8 @@ SHA1_API void   SHA1_Init(SHA_CTX *c);
 SHA1_API void   SHA1_Update(SHA_CTX *c, const void *data, size_t len);
 SHA1_API void   SHA1_Final(unsigned char *md, SHA_CTX *c);
 SHA1_API char  *SHA1_End(SHA_CTX *, char *);
+SHA1_API char  *SHA1_Fd(int, char *);
+SHA1_API char  *SHA1_FdChunk(int, char *, off_t, off_t);
 SHA1_API char  *SHA1_File(const char *, char *);
 SHA1_API char  *SHA1_FileChunk(const char *, char *, off_t, off_t);
 SHA1_API char  *SHA1_Data(const void *, unsigned int, char *);

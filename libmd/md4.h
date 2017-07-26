@@ -1,5 +1,5 @@
 /* MD4.H - header file for MD4C.C
- * $FreeBSD: release/11.0.0/lib/libmd/md4.h 282736 2015-05-10 21:21:52Z thomas $
+ * $FreeBSD: release/11.1.0/lib/libmd/md4.h 310372 2016-12-21 18:42:04Z emaste $
  */
 
 /* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
@@ -90,6 +90,12 @@ __BEGIN_DECLS
 #ifndef MD4End
 #define MD4End		_libmd_MD4End
 #endif
+#ifndef MD4Fd
+#define MD4Fd		_libmd_MD4Fd
+#endif
+#ifndef MD4FdChunk
+#define MD4FdChunk	_libmd_MD4FdChunk
+#endif
 #ifndef MD4File
 #define MD4File		_libmd_MD4File
 #endif
@@ -119,6 +125,8 @@ MD4_API void   MD4Init(MD4_CTX *);
 MD4_API void   MD4Update(MD4_CTX *, const void *, unsigned int);
 MD4_API void   MD4Final(unsigned char [MD4_DIGEST_LENGTH], MD4_CTX *);
 MD4_API char * MD4End(MD4_CTX *, char *);
+MD4_API char * MD4Fd(int, char *);
+MD4_API char * MD4FdChunk(int, char *, off_t, off_t);
 MD4_API char * MD4File(const char *, char *);
 MD4_API char * MD4FileChunk(const char *, char *, off_t, off_t);
 MD4_API char * MD4Data(const void *, unsigned int, char *);

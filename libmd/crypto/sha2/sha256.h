@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/11.0.0/sys/crypto/sha2/sha256.h 300773 2016-05-26 19:29:29Z cem $
+ * $FreeBSD: release/11.1.0/sys/crypto/sha2/sha256.h 310372 2016-12-21 18:42:04Z emaste $
  */
 
 #ifndef _SHA256_H_
@@ -93,6 +93,12 @@ __BEGIN_DECLS
 #ifndef SHA256_End
 #define SHA256_End		_libmd_SHA256_End
 #endif
+#ifndef SHA256_Fd
+#define SHA256_Fd		_libmd_SHA256_Fd
+#endif
+#ifndef SHA256_FdChunk
+#define SHA256_FdChunk		_libmd_SHA256_FdChunk
+#endif
 #ifndef SHA256_File
 #define SHA256_File		_libmd_SHA256_File
 #endif
@@ -125,12 +131,21 @@ __BEGIN_DECLS
 
 #endif
 
+#ifdef __cplusplus
+#define __sha256_min_size(n) n
+#else
+#define __sha256_min_size(n) static n
+#endif
+
 SHA256_API void   SHA256_Init(SHA256_CTX *);
 SHA256_API void   SHA256_Update(SHA256_CTX *, const void *, size_t);
-SHA256_API void   SHA256_Final(unsigned char [SHA256_DIGEST_LENGTH], SHA256_CTX *);
+SHA256_API void   SHA256_Final(unsigned char [__sha256_min_size(SHA256_DIGEST_LENGTH)],
+    SHA256_CTX *);
 #ifndef _KERNEL
 SHA256_API char  *SHA256_End(SHA256_CTX *, char *);
 SHA256_API char  *SHA256_Data(const void *, unsigned int, char *);
+SHA256_API char  *SHA256_Fd(int, char *);
+SHA256_API char  *SHA256_FdChunk(int, char *, off_t, off_t);
 SHA256_API char  *SHA256_File(const char *, char *);
 SHA256_API char  *SHA256_FileChunk(const char *, char *, off_t, off_t);
 #endif
@@ -138,6 +153,8 @@ SHA256_API int    SHA256_ContextSize(void);
 SHA256_API SHA256_CTX *SHA256_Create(void);
 SHA256_API void   SHA256_Destroy(SHA256_CTX *);
 SHA256_API int    SHA256_DigestSize(void);
+
+#undef __sha256_min_size
 
 #ifdef __FreeBSD__
 __END_DECLS

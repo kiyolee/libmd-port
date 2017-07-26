@@ -1,5 +1,5 @@
 /* MD5.H - header file for MD5C.C
- * $FreeBSD: release/11.0.0/sys/sys/md5.h 300774 2016-05-26 20:37:49Z cem $
+ * $FreeBSD: release/11.1.0/sys/sys/md5.h 310372 2016-12-21 18:42:04Z emaste $
  */
 
 /*-
@@ -96,6 +96,12 @@ __BEGIN_DECLS
 #ifndef MD5End
 #define MD5End		_libmd_MD5End
 #endif
+#ifndef MD5Fd
+#define MD5Fd		_libmd_MD5Fd
+#endif
+#ifndef MD5FdChunk
+#define MD5FdChunk	_libmd_MD5FdChunk
+#endif
 #ifndef MD5File
 #define MD5File		_libmd_MD5File
 #endif
@@ -122,11 +128,19 @@ __BEGIN_DECLS
 #endif
 #endif
 
+#ifdef __cplusplus
+#define __md5_min_size(n) n
+#else
+#define __md5_min_size(n) static n
+#endif
+
 MD5_API void   MD5Init (MD5_CTX *);
 MD5_API void   MD5Update (MD5_CTX *, const void *, unsigned int);
-MD5_API void   MD5Final (unsigned char[MD5_DIGEST_LENGTH], MD5_CTX *);
+MD5_API void   MD5Final (unsigned char[__md5_min_size(MD5_DIGEST_LENGTH)], MD5_CTX *);
 #ifndef _KERNEL
 MD5_API char * MD5End(MD5_CTX *, char *);
+MD5_API char * MD5Fd(int, char *);
+MD5_API char * MD5FdChunk(int, char *, off_t, off_t);
 MD5_API char * MD5File(const char *, char *);
 MD5_API char * MD5FileChunk(const char *, char *, off_t, off_t);
 MD5_API char * MD5Data(const void *, unsigned int, char *);
@@ -135,6 +149,8 @@ MD5_API int    MD5ContextSize(void);
 MD5_API MD5_CTX * MD5Create(void);
 MD5_API void   MD5Destroy(MD5_CTX *);
 MD5_API int    MD5DigestSize(void);
+
+#undef __md5_min_size
 
 #ifdef __FreeBSD__
 __END_DECLS

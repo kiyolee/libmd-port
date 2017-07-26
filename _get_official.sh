@@ -11,6 +11,8 @@ svn update --depth empty sys
 svn update --depth empty sys/crypto
 svn update sys/crypto/sha2
 svn update sys/crypto/skein
+svn update --depth empty sys/sys
+svn update sys/sys/md5.h
 svn update --depth empty lib/libc
 svn update --depth empty lib/libc/stdlib
 svn update lib/libc/stdlib/getopt.c
@@ -23,6 +25,9 @@ rm -rf .svn
 
 mv lib/libmd .
 mv sys/crypto libmd/
+mv libmd/md5.h libmd/libmd_md5.h
+mv sys/sys/md5.h libmd/
+rmdir sys/sys
 rmdir sys
 mv sbin/md5 .
 rmdir sbin

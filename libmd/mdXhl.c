@@ -11,7 +11,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.0.0/lib/libmd/mdXhl.c 294037 2016-01-14 21:08:23Z jtl $");
+__FBSDID("$FreeBSD: release/11.1.0/lib/libmd/mdXhl.c 310372 2016-12-21 18:42:04Z emaste $");
 #endif
 
 #include <sys/types.h>
@@ -71,18 +71,18 @@ MDXEnd(MDX_CTX *ctx, char *buf)
 
 MDX_API
 char *
-MDXFile(const char *filename, char *buf)
+MDXFd(int fd, char *buf)
 {
-	return (MDXFileChunk(filename, buf, 0, 0));
+	return MDXFdChunk(fd, buf, 0, 0);
 }
 
 MDX_API
 char *
-MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
+MDXFdChunk(int fd, char *buf, off_t ofs, off_t len)
 {
 	unsigned char buffer[16*1024];
 	MDX_CTX ctx;
-	int fd, readrv, e;
+	int readrv;
 	off_t remain;
 
 	if (len < 0) {
@@ -91,13 +91,6 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 	}
 
 	MDXInit(&ctx);
-#if defined(_MSC_VER) && _MSC_VER >= 1500
-	if (_sopen_s(&fd, filename, O_RDONLY|O_BINARY, SH_DENYWR, 0) != 0) fd = -1;
-#else
-	fd = open(filename, O_RDONLY|O_BINARY);
-#endif
-	if (fd < 0)
-		return NULL;
 	if (ofs != 0) {
 		errno = 0;
 		if (lseek(fd, ofs, SEEK_SET) != ofs ||
@@ -119,12 +112,37 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 		remain -= readrv;
 	} 
 error:
-	e = errno;
-	close(fd);
-	errno = e;
 	if (readrv < 0)
 		return NULL;
 	return (MDXEnd(&ctx, buf));
+}
+
+MDX_API
+char *
+MDXFile(const char *filename, char *buf)
+{
+	return (MDXFileChunk(filename, buf, 0, 0));
+}
+
+MDX_API
+char *
+MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
+{
+	char *ret;
+	int e, fd;
+
+#if defined(_MSC_VER) && _MSC_VER >= 1500
+	if (_sopen_s(&fd, filename, O_RDONLY|O_BINARY, SH_DENYWR, 0) != 0) fd = -1;
+#else
+	fd = open(filename, O_RDONLY|O_BINARY);
+#endif
+	if (fd < 0)
+		return NULL;
+	ret = MDXFdChunk(fd, buf, ofs, len);
+	e = errno;
+	close (fd);
+	errno = e;
+	return ret;
 }
 
 MDX_API

@@ -1,5 +1,5 @@
 #	@(#)Makefile	8.1 (Berkeley) 6/9/93
-# $FreeBSD: release/11.0.0/sbin/md5/Makefile 300921 2016-05-29 01:15:36Z allanjude $
+# $FreeBSD: release/11.1.0/sbin/md5/Makefile 300921 2016-05-29 01:15:36Z allanjude $
 
 PACKAGE=runtime
 PROG=	md5
