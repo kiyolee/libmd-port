@@ -131,7 +131,7 @@ __BEGIN_DECLS
 
 #endif
 
-#ifdef __cplusplus
+#if defined(__cplusplus) || defined(_MSC_VER)
 #define __sha256_min_size(n) n
 #else
 #define __sha256_min_size(n) static n

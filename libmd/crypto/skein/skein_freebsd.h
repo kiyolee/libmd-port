@@ -82,7 +82,7 @@ SKEIN256_API  void SKEIN256_Update(SKEIN256_CTX *ctx, const void *in, size_t len
 SKEIN512_API  void SKEIN512_Update(SKEIN512_CTX *ctx, const void *in, size_t len);
 SKEIN1024_API void SKEIN1024_Update(SKEIN1024_CTX *ctx, const void *in, size_t len);
 
-#ifdef __cplusplus
+#if defined(__cplusplus) || defined(_MSC_VER)
 #define __skein_min_size(n) n
 #else
 #define __skein_min_size(n) static n
