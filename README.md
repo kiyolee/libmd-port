@@ -4,7 +4,7 @@ libmd (from FreeBSD) port for various platforms.
 
 Including Windows build with Visual Studio.
 
-This version is from FreeBSD-11.0.
+This version is from FreeBSD-11.1.
 
 Additional changes:
 * Properly hide the context internal structures.
