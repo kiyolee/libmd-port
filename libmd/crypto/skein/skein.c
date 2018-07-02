@@ -12,7 +12,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.1.0/sys/crypto/skein/skein.c 300921 2016-05-29 01:15:36Z allanjude $");
+__FBSDID("$FreeBSD: release/11.2.0/sys/crypto/skein/skein.c 300921 2016-05-29 01:15:36Z allanjude $");
 #endif
 
 #ifdef __FreeBSD__

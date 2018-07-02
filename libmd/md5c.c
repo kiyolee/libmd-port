@@ -30,7 +30,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.1.0/lib/libmd/md5c.c 282774 2015-05-11 16:45:33Z thomas $");
+__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/md5c.c 282774 2015-05-11 16:45:33Z thomas $");
 #endif
 
 #include <sys/types.h>

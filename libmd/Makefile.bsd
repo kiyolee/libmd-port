@@ -1,4 +1,4 @@
-# $FreeBSD: release/11.1.0/lib/libmd/Makefile 315724 2017-03-22 17:56:46Z bdrewery $
+# $FreeBSD: release/11.2.0/lib/libmd/Makefile 315724 2017-03-22 17:56:46Z bdrewery $
 
 PACKAGE=lib${LIB}
 LIB=	md

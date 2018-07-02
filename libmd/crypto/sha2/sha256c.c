@@ -28,7 +28,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.1.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 17:26:40Z cperciva $");
+__FBSDID("$FreeBSD: release/11.2.0/sys/crypto/sha2/sha256c.c 300966 2016-05-29 17:26:40Z cperciva $");
 #endif
 
 #ifdef __FreeBSD__

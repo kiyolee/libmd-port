@@ -11,7 +11,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.1.0/lib/libmd/mdXhl.c 310372 2016-12-21 18:42:04Z emaste $");
+__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/mdXhl.c 310372 2016-12-21 18:42:04Z emaste $");
 #endif
 
 #include <sys/types.h>

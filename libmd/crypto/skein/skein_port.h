@@ -1,4 +1,4 @@
-/*	$FreeBSD: release/11.1.0/sys/crypto/skein/skein_port.h 310372 2016-12-21 18:42:04Z emaste $	*/
+/*	$FreeBSD: release/11.2.0/sys/crypto/skein/skein_port.h 310372 2016-12-21 18:42:04Z emaste $	*/
 #ifndef _SKEIN_PORT_H_
 #define _SKEIN_PORT_H_
 /*******************************************************************

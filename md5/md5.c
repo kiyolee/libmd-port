@@ -21,7 +21,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.1.0/sbin/md5/md5.c 300921 2016-05-29 01:15:36Z allanjude $");
+__FBSDID("$FreeBSD: release/11.2.0/sbin/md5/md5.c 300921 2016-05-29 01:15:36Z allanjude $");
 #endif
 
 #ifdef _WIN32
