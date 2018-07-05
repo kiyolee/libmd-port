@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,27 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}</ProjectGuid>
-    <RootNamespace>md5</RootNamespace>
+    <ProjectGuid>{C92B3987-3107-4026-AEEA-665E3AF993DE}</ProjectGuid>
+    <RootNamespace>md5-static</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -68,7 +64,7 @@
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -76,7 +72,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)\$(Configuration)\libmd.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\$(Configuration)\libmd-static.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -84,15 +80,15 @@
     <Xdcmake />
     <Bscmake />
     <PostBuildEvent>
-      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
-copy /y $(TargetPath) $(TargetDir)sha1.exe
-copy /y $(TargetPath) $(TargetDir)sha256.exe
-copy /y $(TargetPath) $(TargetDir)sha384.exe
-copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512t256.exe
-copy /y $(TargetPath) $(TargetDir)skein256.exe
-copy /y $(TargetPath) $(TargetDir)skein512.exe
-copy /y $(TargetPath) $(TargetDir)skein1024.exe
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160-static.exe
+copy /y $(TargetPath) $(TargetDir)sha1-static.exe
+copy /y $(TargetPath) $(TargetDir)sha256-static.exe
+copy /y $(TargetPath) $(TargetDir)sha384-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein512-static.exe
+copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -107,7 +103,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <StringPooling>true</StringPooling>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -115,7 +111,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\libmd.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\libmd-static.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
@@ -123,15 +119,15 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <Xdcmake />
     <Bscmake />
     <PostBuildEvent>
-      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
-copy /y $(TargetPath) $(TargetDir)sha1.exe
-copy /y $(TargetPath) $(TargetDir)sha256.exe
-copy /y $(TargetPath) $(TargetDir)sha384.exe
-copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512t256.exe
-copy /y $(TargetPath) $(TargetDir)skein256.exe
-copy /y $(TargetPath) $(TargetDir)skein512.exe
-copy /y $(TargetPath) $(TargetDir)skein1024.exe
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160-static.exe
+copy /y $(TargetPath) $(TargetDir)sha1-static.exe
+copy /y $(TargetPath) $(TargetDir)sha256-static.exe
+copy /y $(TargetPath) $(TargetDir)sha384-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein512-static.exe
+copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -142,7 +138,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBMD_INTERNAL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -151,7 +147,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)\$(Configuration)\libmd.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\$(Configuration)\libmd-static.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -159,15 +155,15 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <Xdcmake />
     <Bscmake />
     <PostBuildEvent>
-      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
-copy /y $(TargetPath) $(TargetDir)sha1.exe
-copy /y $(TargetPath) $(TargetDir)sha256.exe
-copy /y $(TargetPath) $(TargetDir)sha384.exe
-copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512t256.exe
-copy /y $(TargetPath) $(TargetDir)skein256.exe
-copy /y $(TargetPath) $(TargetDir)skein512.exe
-copy /y $(TargetPath) $(TargetDir)skein1024.exe
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160-static.exe
+copy /y $(TargetPath) $(TargetDir)sha1-static.exe
+copy /y $(TargetPath) $(TargetDir)sha256-static.exe
+copy /y $(TargetPath) $(TargetDir)sha384-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein512-static.exe
+copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -181,7 +177,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <AdditionalIncludeDirectories>..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>LIBMD_INTERNAL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -190,7 +186,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\libmd.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\libmd-static.lib;setargv.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
@@ -198,15 +194,15 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <Xdcmake />
     <Bscmake />
     <PostBuildEvent>
-      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
-copy /y $(TargetPath) $(TargetDir)sha1.exe
-copy /y $(TargetPath) $(TargetDir)sha256.exe
-copy /y $(TargetPath) $(TargetDir)sha384.exe
-copy /y $(TargetPath) $(TargetDir)sha512.exe
-copy /y $(TargetPath) $(TargetDir)sha512t256.exe
-copy /y $(TargetPath) $(TargetDir)skein256.exe
-copy /y $(TargetPath) $(TargetDir)skein512.exe
-copy /y $(TargetPath) $(TargetDir)skein1024.exe
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160-static.exe
+copy /y $(TargetPath) $(TargetDir)sha1-static.exe
+copy /y $(TargetPath) $(TargetDir)sha256-static.exe
+copy /y $(TargetPath) $(TargetDir)sha384-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512-static.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein256-static.exe
+copy /y $(TargetPath) $(TargetDir)skein512-static.exe
+copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -228,8 +224,8 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <ClInclude Include="..\..\libmd\sha.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libmd\libmd.vcxproj">
-      <Project>{5cc6b30e-41fd-44b0-8059-e25a68fcd286}</Project>
+    <ProjectReference Include="..\libmd-static\libmd-static.vcxproj">
+      <Project>{75f6fce6-44ec-45f8-9f24-5c58f79508c7}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

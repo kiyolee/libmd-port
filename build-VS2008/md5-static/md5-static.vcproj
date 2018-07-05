@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="md5"
-	ProjectGUID="{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}"
-	RootNamespace="md5"
+	Name="md5-static"
+	ProjectGUID="{C92B3987-3107-4026-AEEA-665E3AF993DE}"
+	RootNamespace="md5-static"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -48,7 +48,7 @@
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
@@ -65,7 +65,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd.lib setargv.obj"
+				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -89,7 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -123,7 +123,7 @@
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				WarningLevel="4"
 				DebugInformationFormat="3"
 				CompileAs="0"
@@ -140,7 +140,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd.lib setargv.obj"
+				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -197,7 +197,7 @@
 				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="LIBMD_INTERNAL;NDEBUG"
 				StringPooling="true"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -215,7 +215,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd.lib setargv.obj"
+				AdditionalDependencies="$(SolutionDir)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -239,7 +239,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -273,7 +273,7 @@
 				AdditionalIncludeDirectories="..\..\libmd;..\..\libmd\crypto\sha2;..\..\libmd\crypto\skein"
 				PreprocessorDefinitions="LIBMD_INTERNAL;NDEBUG"
 				StringPooling="true"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="4"
 				DebugInformationFormat="3"
@@ -291,7 +291,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
-				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd.lib setargv.obj"
+				AdditionalDependencies="$(SolutionDir)$(PlatformName)\$(ConfigurationName)\libmd-static.lib setargv.obj"
 				GenerateDebugInformation="true"
 				TargetMachine="17"
 			/>
@@ -315,7 +315,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
