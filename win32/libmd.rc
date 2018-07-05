@@ -1,0 +1,40 @@
+#include <winver.h>
+#include "libmd_version.h"
+
+#ifdef GCC_WINDRES
+VS_VERSION_INFO		VERSIONINFO
+#else
+VS_VERSION_INFO		VERSIONINFO	MOVEABLE IMPURE LOADONCALL DISCARDABLE
+#endif
+  FILEVERSION		LIBMD_VER_MAJOR,LIBMD_VER_MINOR,LIBMD_VER_REVISION,0
+  PRODUCTVERSION	LIBMD_VER_MAJOR,LIBMD_VER_MINOR,LIBMD_VER_REVISION,0
+  FILEFLAGSMASK		VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+  FILEFLAGS		1
+#else
+  FILEFLAGS		0
+#endif
+  FILEOS		VOS__WINDOWS32
+  FILETYPE		VFT_DLL
+  FILESUBTYPE		0	// not used
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    //language ID = U.S. English, char set = Windows, Multilingual
+    BEGIN
+      VALUE "FileDescription",	"libmd for Windows\0"
+      VALUE "FileVersion",	LIBMD_VERSION_STR "\0"
+      VALUE "InternalName",	"libmd.dll\0"
+      VALUE "LegalCopyright",	"Copyright (c) The FreeBSD Project.\0"
+      VALUE "OriginalFilename",	"libmd.dll\0"
+      VALUE "ProductName",	"LIBMD\0"
+      VALUE "ProductVersion",	LIBMD_VERSION_STR "\0"
+      VALUE "Comments",		"Windows port from <https://github.com/kiyolee/libmd-port/>.\0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 1252
+  END
+END
