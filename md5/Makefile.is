@@ -1,6 +1,7 @@
 TARGET = md5
 TARGET_RMD160 = rmd160
 TARGET_SHA1 = sha1
+TARGET_SHA224 = sha224
 TARGET_SHA256 = sha256
 TARGET_SHA384 = sha384
 TARGET_SHA512 = sha512
@@ -13,6 +14,7 @@ ALL_TARGETS = \
     $(TARGET) \
     $(TARGET_RMD160) \
     $(TARGET_SHA1) \
+    $(TARGET_SHA224) \
     $(TARGET_SHA256) \
     $(TARGET_SHA384) \
     $(TARGET_SHA512) \
@@ -84,6 +86,11 @@ $(TARGET_RMD160): $(TARGET)
 	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
 
 $(TARGET_SHA1): $(TARGET)
+	del $@
+	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
+	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@
+
+$(TARGET_SHA224): $(TARGET)
 	del $@
 	cp `readlink $(TARGET)` `dirname \`readlink $(TARGET)\``/`basename $@`.pgm
 	ln -s `dirname \`readlink $(TARGET)\``/`basename $@`.pgm $@

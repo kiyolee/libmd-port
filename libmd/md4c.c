@@ -5,10 +5,13 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/md4c.c 282774 2015-05-11 16:45:33Z thomas $");
+__FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md4c.c 336539 2018-07-20 07:01:28Z delphij $");
 #endif
 
-/* Copyright (C) 1990-2, RSA Data Security, Inc. All rights reserved.
+/*-
+   SPDX-License-Identifier: RSA-MD
+
+   Copyright (C) 1990-2, RSA Data Security, Inc. All rights reserved.
 
    License to copy and use this software is granted provided that it
    is identified as the "RSA Data Security, Inc. MD4 Message-Digest
@@ -181,7 +184,7 @@ void MD4Final (unsigned char digest[16], MD4_CTX *context)
 
   /* Zeroize sensitive information.
    */
-  memset ((POINTER)context, 0, sizeof (*context));
+  explicit_bzero(context, sizeof(*context));
 }
 
 /* MD4 basic transformation. Transforms state based on block.

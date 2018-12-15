@@ -102,6 +102,9 @@
     <ClCompile Include="..\..\libmd\sha512t256hl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libmd\sha224hl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\libmd\md4.h">

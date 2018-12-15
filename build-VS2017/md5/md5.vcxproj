@@ -86,6 +86,7 @@
     <PostBuildEvent>
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
@@ -125,6 +126,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <PostBuildEvent>
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
@@ -161,6 +163,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <PostBuildEvent>
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
@@ -200,6 +203,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <PostBuildEvent>
       <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
 copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
@@ -239,4 +243,16 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="AfterClean">
+    <Exec Command="if exist $(OutDir)rmd160.exe del $(OutDir)rmd160.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha1.exe del $(OutDir)sha1.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha224.exe del $(OutDir)sha224.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha256.exe del $(OutDir)sha256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha384.exe del $(OutDir)sha384.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512.exe del $(OutDir)sha512.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512t256.exe del $(OutDir)sha512t256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein256.exe del $(OutDir)skein256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein512.exe del $(OutDir)skein512.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein1024.exe del $(OutDir)skein1024.exe /F /Q 2&gt;nul" />
+  </Target>
 </Project>

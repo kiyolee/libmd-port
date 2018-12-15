@@ -60,7 +60,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/sha0c.c 154479 2006-01-17 15:35:57Z phk $");
+__FBSDID("$FreeBSD: release/12.0.0/lib/libmd/sha0c.c 336539 2018-07-20 07:01:28Z delphij $");
 #endif
 
 #include <sys/types.h>
@@ -455,9 +455,7 @@ void SHA_Final(unsigned char *md, SHA_CTX *c)
 	l=c->h3; nl2c(l,cp);
 	l=c->h4; nl2c(l,cp);
 
-	/* clear stuff, sha_block may be leaving some stuff on the stack
-	 * but I'm not worried :-) */
-	c->num=0;
-/*	memset((char *)&c,0,sizeof(c));*/
+	/* Clear the context state */
+	explicit_bzero(&c, sizeof(c));
 	}
 

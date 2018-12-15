@@ -1,6 +1,9 @@
 /* SKEINDRIVER.C - test driver for SKEIN */
 
-/* Copyright (C) 1990-2, RSA Data Security, Inc. Created 1990. All rights
+/*-
+ * SPDX-License-Identifier: RSA-MD
+ *
+ * Copyright (C) 1990-2, RSA Data Security, Inc. Created 1990. All rights
  * reserved.
  * 
  * RSA Data Security, Inc. makes no representations concerning either the
@@ -15,7 +18,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/skeindriver.c 300921 2016-05-29 01:15:36Z allanjude $");
+__FBSDID("$FreeBSD: release/12.0.0/lib/libmd/skeindriver.c 326828 2017-12-13 16:30:39Z pfg $");
 #endif
 
 #include <sys/types.h>

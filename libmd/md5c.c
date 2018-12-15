@@ -1,4 +1,6 @@
-/*
+/*-
+ * SPDX-License-Identifier: RSA-MD
+ *
  * MD5C.C - RSA Data Security, Inc., MD5 message-digest algorithm
  *
  * Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
@@ -30,7 +32,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/md5c.c 282774 2015-05-11 16:45:33Z thomas $");
+__FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md5c.c 336539 2018-07-20 07:01:28Z delphij $");
 #endif
 
 #include <sys/types.h>
@@ -236,7 +238,7 @@ MD5Final (unsigned char digest[16], MD5_CTX *context)
 	Encode (digest, context->state, 16);
 
 	/* Zeroize sensitive information. */
-	memset ((void *)context, 0, sizeof (*context));
+	explicit_bzero(context, sizeof(*context));
 }
 
 /* MD5 basic transformation. Transforms state based on block. */

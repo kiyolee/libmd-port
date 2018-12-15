@@ -1,4 +1,6 @@
-/* mdXhl.c
+/*- mdXhl.c
+ * SPDX-License-Identifier: Beerware
+ *
  * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
  * <phk@FreeBSD.org> wrote this file.  As long as you retain this notice you
@@ -11,7 +13,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/lib/libmd/mdXhl.c 310372 2016-12-21 18:42:04Z emaste $");
+__FBSDID("$FreeBSD: release/12.0.0/lib/libmd/mdXhl.c 334105 2018-05-23 17:01:28Z markj $");
 #endif
 
 #include <sys/types.h>
@@ -106,11 +108,11 @@ MDXFdChunk(int fd, char *buf, off_t ofs, off_t len)
 			readrv = read(fd, buffer, sizeof(buffer));
 		else
 			readrv = read(fd, buffer, remain);
-		if (readrv <= 0) 
+		if (readrv <= 0)
 			break;
 		MDXUpdate(&ctx, buffer, readrv);
 		remain -= readrv;
-	} 
+	}
 error:
 	if (readrv < 0)
 		return NULL;
@@ -132,7 +134,7 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 	int e, fd;
 
 #if defined(_MSC_VER) && _MSC_VER >= 1500
-	if (_sopen_s(&fd, filename, O_RDONLY|O_BINARY, SH_DENYWR, 0) != 0) fd = -1;
+	if (_sopen_s(&fd, filename, _O_RDONLY|_O_BINARY, _SH_DENYWR, 0) != 0) fd = -1;
 #else
 	fd = open(filename, O_RDONLY|O_BINARY);
 #endif

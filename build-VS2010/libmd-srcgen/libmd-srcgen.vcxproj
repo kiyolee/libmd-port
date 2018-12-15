@@ -72,6 +72,7 @@
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha1hl.c
+sed -e "s/mdX/sha224/g" -e "s/MDX/SHA224_/g" -e  "s/SHA224__/SHA224_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha224hl.c
 sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha256hl.c
 sed -e "s/mdX/sha384/g" -e "s/MDX/SHA384_/g" -e  "s/SHA384__/SHA384_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha384hl.c
 sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha512hl.c
@@ -87,6 +88,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" 
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha1hl.c
+sed -e "s/mdX/sha224/g" -e "s/MDX/SHA224_/g" -e  "s/SHA224__/SHA224_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha224hl.c
 sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha256hl.c
 sed -e "s/mdX/sha384/g" -e "s/MDX/SHA384_/g" -e  "s/SHA384__/SHA384_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha384hl.c
 sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha512hl.c
@@ -102,6 +104,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" 
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha1hl.c
+sed -e "s/mdX/sha224/g" -e "s/MDX/SHA224_/g" -e  "s/SHA224__/SHA224_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha224hl.c
 sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha256hl.c
 sed -e "s/mdX/sha384/g" -e "s/MDX/SHA384_/g" -e  "s/SHA384__/SHA384_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha384hl.c
 sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha512hl.c
@@ -117,6 +120,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" 
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA1_/g" -e "s/SHA1__/SHA1_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha1hl.c
+sed -e "s/mdX/sha224/g" -e "s/MDX/SHA224_/g" -e  "s/SHA224__/SHA224_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha224hl.c
 sed -e "s/mdX/sha256/g" -e "s/MDX/SHA256_/g" -e  "s/SHA256__/SHA256_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha256hl.c
 sed -e "s/mdX/sha384/g" -e "s/MDX/SHA384_/g" -e  "s/SHA384__/SHA384_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha384hl.c
 sed -e "s/mdX/sha512/g" -e "s/MDX/SHA512_/g" -e  "s/SHA512__/SHA512_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha512hl.c

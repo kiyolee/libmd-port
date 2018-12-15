@@ -6,6 +6,7 @@
 #
 # This code is released to the public domain.
 #----------------------------------------------------------------
+# $FreeBSD: release/12.0.0/sys/crypto/skein/amd64/skein_block_asm.s 333883 2018-05-19 18:27:14Z mmacy $
 #
     .text
     .altmacro
@@ -26,7 +27,7 @@ _SKEIN_LOOP       =   2                     #default is fully unrolled for 256/5
 .else
 _SKEIN_LOOP       = SKEIN_LOOP
   .irp _NN_,%_SKEIN_LOOP                #only display loop unrolling if default changed on command line
-.print  "+++ SKEIN_LOOP = \_NN_"
+#.print  "+++ SKEIN_LOOP = \_NN_"
   .endr
 .endif
 # the unroll counts (0 --> fully unrolled)
@@ -883,7 +884,7 @@ _UNROLL_CNT =   ROUNDS_512/8
 .else
 _UNROLL_CNT =   SKEIN_UNROLL_512
   .if ((ROUNDS_512/8) % _UNROLL_CNT)
-    .err "Invalid SKEIN_UNROLL_512"
+    .error "Invalid SKEIN_UNROLL_512"
   .endif
     xorq    %rdi,%rdi                 #rdi = round counter
 Skein_512_round_loop:

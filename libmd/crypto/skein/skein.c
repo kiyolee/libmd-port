@@ -12,7 +12,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/sys/crypto/skein/skein.c 300921 2016-05-29 01:15:36Z allanjude $");
+__FBSDID("$FreeBSD: release/12.0.0/sys/crypto/skein/skein.c 336539 2018-07-20 07:01:28Z delphij $");
 #endif
 
 #ifdef __FreeBSD__
@@ -847,6 +847,7 @@ SKEIN256_Final(unsigned char digest[SKEIN_256_BLOCK_BYTES], SKEIN256_CTX *ctx)
 {
 
 	Skein_256_Final(ctx, digest);
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 void
@@ -854,6 +855,7 @@ SKEIN512_Final(unsigned char digest[SKEIN_512_BLOCK_BYTES], SKEIN512_CTX *ctx)
 {
 
 	Skein_512_Final(ctx, digest);
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 void
@@ -861,6 +863,7 @@ SKEIN1024_Final(unsigned char digest[SKEIN1024_BLOCK_BYTES], SKEIN1024_CTX *ctx)
 {
 
 	Skein1024_Final(ctx, digest);
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 #ifdef WEAK_REFS

@@ -1,8 +1,11 @@
 /* MD4.H - header file for MD4C.C
- * $FreeBSD: release/11.2.0/lib/libmd/md4.h 310372 2016-12-21 18:42:04Z emaste $
+ * $FreeBSD: release/12.0.0/lib/libmd/md4.h 326828 2017-12-13 16:30:39Z pfg $
  */
 
-/* Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
+/*-
+   SPDX-License-Identifier: RSA-MD
+
+   Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
    rights reserved.
 
    License to copy and use this software is granted provided that it

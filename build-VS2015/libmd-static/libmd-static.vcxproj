@@ -145,6 +145,7 @@
     <ClCompile Include="..\..\libmd\sha0hl.c" />
     <ClCompile Include="..\..\libmd\sha1c.c" />
     <ClCompile Include="..\..\libmd\sha1hl.c" />
+    <ClCompile Include="..\..\libmd\sha224hl.c" />
     <ClCompile Include="..\..\libmd\sha256hl.c" />
     <ClCompile Include="..\..\libmd\sha384hl.c" />
     <ClCompile Include="..\..\libmd\sha512hl.c" />

@@ -89,7 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -239,7 +239,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -315,7 +315,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512-static.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024-static.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

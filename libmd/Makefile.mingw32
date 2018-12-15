@@ -40,7 +40,7 @@ OBJS = \
     md4c.o md5c.o md4hl.o md5hl.o \
     rmd160c.o rmd160hl.o \
     sha0c.o sha0hl.o sha1c.o sha1hl.o \
-    sha256c.o sha256hl.o \
+    sha224hl.o sha256c.o sha256hl.o \
     sha512c.o sha512hl.o sha512t224hl.o sha512t256hl.o sha384hl.o \
     skein.o skein_block.o \
     skein256hl.o skein512hl.o skein1024hl.o \
@@ -51,7 +51,7 @@ SRCS_HL = \
     md4hl.c md5hl.c \
     rmd160hl.c \
     sha0hl.c sha1hl.c \
-    sha256hl.c \
+    sha224hl.c sha256hl.c \
     sha512hl.c sha512t224hl.c sha512t256hl.c sha384hl.c \
     skein256hl.c skein512hl.c skein1024hl.c
 
@@ -59,7 +59,7 @@ REFS = \
     md4.ref md5.ref \
     rmd160.ref \
     sha0.ref sha1.ref \
-    sha256.ref sha384.ref sha512.ref sha512t256.ref \
+    sha224.ref sha256.ref sha384.ref sha512.ref sha512t256.ref \
     skein256.ref skein512.ref skein1024.ref
 
 all: $(TARGET_STATIC)
@@ -97,6 +97,9 @@ sha0hl.c: mdXhl.c
 
 sha1hl.c: mdXhl.c
 	sed -e 's/mdX/sha/g' -e 's/MDX/SHA1_/g' -e 's/SHA1__/SHA1_/g' $< > $@
+
+sha224hl.c: mdXhl.c
+	sed -e 's/mdX/sha224/g' -e 's/MDX/SHA224_/g' -e 's/SHA224__/SHA224_/g' $< > $@
 
 sha256hl.c: mdXhl.c
 	sed -e 's/mdX/sha256/g' -e 's/MDX/SHA256_/g' -e 's/SHA256__/SHA256_/g' $< > $@
@@ -137,6 +140,7 @@ sha0hl.o: sha0hl.c
 sha1c.o: sha1c.c
 sha1hl.o: sha1hl.c
 sha.o: i386/sha.S
+sha224hl.o: sha224hl.c
 sha256c.o: crypto/sha2/sha256c.c
 sha256hl.o: sha256hl.c
 sha512c.o: crypto/sha2/sha512c.c
@@ -197,6 +201,20 @@ sha1.ref:
 		'761c457bf73b14d27e9e9265c46f4b4dda11f940' >> $@
 	@echo 'SHA-1 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =' \
 		'50abf5706a150990a08b2c5ea40fa0e585554732' >> $@
+
+sha224.ref:
+	echo 'SHA-224 test suite:' > $@
+	@echo 'SHA-224 ("") = d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f' >> $@
+	@echo 'SHA-224 ("abc") =' \
+		'23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7' >> $@
+	@echo 'SHA-224 ("message digest") =' \
+		'2cb21c83ae2f004de7e81c3c7019cbcb65b71ab656b22d6d0c39b8eb' >> $@
+	@echo 'SHA-224 ("abcdefghijklmnopqrstuvwxyz") =' \
+		'45a5f72c39c5cff2522eb3429799e49e5f44b356ef926bcf390dccc2' >> $@
+	@echo 'SHA-224 ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") =' \
+		'bff72b4fcb7d75e5632900ac5f90d219e05e97a7bde72e740db393d9' >> $@
+	@echo 'SHA-224 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =' \
+		'b50aecbe4e9bb0b57bc5f3ae760a8e01db24f203fb3cdcd13148046e' >> $@
 
 sha256.ref:
 	echo 'SHA-256 test suite:' > $@
@@ -333,6 +351,9 @@ test: $(TARGET_STATIC) $(REFS)
 	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=1 -o shadriver shadriver.c $(TARGET_STATIC)
 	./shadriver | dos2unix | cmp sha1.ref -
 	@echo SHA-1 passed test
+	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=224 -o shadriver shadriver.c $(TARGET_STATIC)
+	./shadriver | dos2unix | cmp sha224.ref -
+	@echo SHA-224 passed test
 	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=256 -o shadriver shadriver.c $(TARGET_STATIC)
 	./shadriver | dos2unix | cmp sha256.ref -
 	@echo SHA-256 passed test

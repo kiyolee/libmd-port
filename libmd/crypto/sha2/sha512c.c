@@ -29,7 +29,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/11.2.0/sys/crypto/sha2/sha512c.c 300966 2016-05-29 17:26:40Z cperciva $");
+__FBSDID("$FreeBSD: release/12.0.0/sys/crypto/sha2/sha512c.c 336539 2018-07-20 07:01:28Z delphij $");
 #endif
 
 #ifdef __FreeBSD__
@@ -370,7 +370,7 @@ SHA512_Final(unsigned char digest[SHA512_DIGEST_LENGTH], SHA512_CTX *ctx)
 	be64enc_vect(digest, ctx->state, SHA512_DIGEST_LENGTH);
 
 	/* Clear the context state */
-	memset(ctx, 0, sizeof(*ctx));
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 /*** SHA-512t: *********************************************************/
@@ -416,7 +416,7 @@ SHA512_224_Final(unsigned char digest[SHA512_224_DIGEST_LENGTH], SHA512_CTX * ct
 	be64enc_vect(digest, ctx->state, SHA512_224_DIGEST_LENGTH);
 
 	/* Clear the context state */
-	memset(ctx, 0, sizeof(*ctx));
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 SHA512_API
@@ -458,7 +458,7 @@ SHA512_256_Final(unsigned char digest[SHA512_256_DIGEST_LENGTH], SHA512_CTX * ct
 	be64enc_vect(digest, ctx->state, SHA512_256_DIGEST_LENGTH);
 
 	/* Clear the context state */
-	memset(ctx, 0, sizeof(*ctx));
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 /*** SHA-384: *********************************************************/
@@ -511,7 +511,7 @@ SHA384_Final(unsigned char digest[SHA384_DIGEST_LENGTH], SHA384_CTX *ctx)
 	be64enc_vect(digest, ctx->state, SHA384_DIGEST_LENGTH);
 
 	/* Clear the context state */
-	memset(ctx, 0, sizeof(*ctx));
+	explicit_bzero(ctx, sizeof(*ctx));
 }
 
 #ifdef WEAK_REFS

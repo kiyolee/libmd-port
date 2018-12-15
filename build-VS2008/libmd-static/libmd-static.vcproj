@@ -328,6 +328,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\libmd\sha224hl.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\libmd\sha256hl.c"
 				>
 			</File>
