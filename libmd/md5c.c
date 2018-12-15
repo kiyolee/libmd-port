@@ -49,6 +49,8 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md5c.c 336539 2018-07-20 07:01:28Z 
 #endif
 #include "md5.h"
 
+#include "supp/explicit_bzero.h"
+
 static void MD5Transform(u_int32_t [4], const unsigned char [64]);
 
 #ifdef _KERNEL

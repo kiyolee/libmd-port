@@ -33,6 +33,8 @@ __FBSDID("$FreeBSD: release/12.0.0/sys/crypto/skein/skein.c 336539 2018-07-20 07
 #include "skein.h"       /* get the Skein API definitions   */
 #include "skein_iv.h"    /* get precomputed IVs */
 
+#include "supp/explicit_bzero.h"
+
 /*****************************************************************/
 /* External function to process blkCnt (nonzero) full block(s) of data. */
 void    Skein_256_Process_Block(Skein_256_Ctxt_t *ctx,const u08b_t *blkPtr,size_t blkCnt,size_t byteCntAdd);

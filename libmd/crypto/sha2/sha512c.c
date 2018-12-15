@@ -64,6 +64,8 @@ __FBSDID("$FreeBSD: release/12.0.0/sys/crypto/sha2/sha512c.c 336539 2018-07-20 0
 #else /* BYTE_ORDER != BIG_ENDIAN */
 
 #include "supp/bswap.h"
+#include "supp/explicit_bzero.h"
+
 
 #ifdef __FreeBSD__
 /*

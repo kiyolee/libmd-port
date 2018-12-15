@@ -77,6 +77,8 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/rmd160c.c 336539 2018-07-20 07:01:2
 
 #include "rmd_locl.h"
 
+#include "supp/explicit_bzero.h"
+
 /*
  * The assembly-language code is not position-independent, so don't
  * try to use it in a shared library.

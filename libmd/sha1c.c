@@ -80,6 +80,8 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/sha1c.c 336539 2018-07-20 07:01:28Z
 #include "sha.h"
 #include "sha_locl.h"
 
+#include "supp/explicit_bzero.h"
+
 /*
  * The assembly-language code is not position-independent, so don't
  * try to use it in a shared library.

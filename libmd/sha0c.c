@@ -80,6 +80,8 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/sha0c.c 336539 2018-07-20 07:01:28Z
 #include "sha.h"
 #include "sha_locl.h"
 
+#include "supp/explicit_bzero.h"
+
 const char *const SHA_version="SHA part of SSLeay 0.9.0b 11-Oct-1998";
 
 /* Implemented from SHA-0 document - The Secure Hash Algorithm

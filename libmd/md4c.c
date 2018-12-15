@@ -36,6 +36,8 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md4c.c 336539 2018-07-20 07:01:28Z 
 #include <string.h>
 #include "md4.h"
 
+#include "supp/explicit_bzero.h"
+
 typedef unsigned char *POINTER;
 typedef const unsigned char *CONST_POINTER;
 typedef u_int16_t UINT2;
