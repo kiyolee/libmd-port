@@ -1,9 +1,17 @@
 #ifndef LIBMD_SUPP_EXPLICIT_BZERO_H
 #define LIBMD_SUPP_EXPLICIT_BZERO_H
 
+#ifdef __linux__
+#include <features.h>
+#endif
+
 #undef __LIBMD_HAVE_EXPLICIT_BZERO
-#if defined(__FreeBSD__) || (defined(__GLIBC__) && __GLIBC_PREREQ(2, 25))
+#if defined(__FreeBSD__) || defined(__CYGWIN__)
 #define __LIBMD_HAVE_EXPLICIT_BZERO
+#elif defined(__GLIBC__)
+#if __GLIBC_PREREQ(2, 25)
+#define __LIBMD_HAVE_EXPLICIT_BZERO
+#endif
 #endif
 
 #ifndef __LIBMD_HAVE_EXPLICIT_BZERO
