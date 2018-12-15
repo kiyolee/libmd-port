@@ -2,7 +2,7 @@
 
 [ ! -f ../`basename "$0"` ] && exit 1
 
-REL=${1:-11.2.0}
+REL=${1:-12.0.0}
 
 svn co --depth empty svn://svn.freebsd.org/base/release/$REL .
 svn update --depth empty lib
