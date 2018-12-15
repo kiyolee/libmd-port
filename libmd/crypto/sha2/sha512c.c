@@ -51,6 +51,8 @@ __FBSDID("$FreeBSD: release/12.0.0/sys/crypto/sha2/sha512c.c 336539 2018-07-20 0
 #include "sha512t.h"
 #include "sha384.h"
 
+#include "supp/explicit_bzero.h"
+
 #if BYTE_ORDER == BIG_ENDIAN
 
 /* Copy a vector of big-endian uint64_t into a vector of bytes */
@@ -64,8 +66,6 @@ __FBSDID("$FreeBSD: release/12.0.0/sys/crypto/sha2/sha512c.c 336539 2018-07-20 0
 #else /* BYTE_ORDER != BIG_ENDIAN */
 
 #include "supp/bswap.h"
-#include "supp/explicit_bzero.h"
-
 
 #ifdef __FreeBSD__
 /*
