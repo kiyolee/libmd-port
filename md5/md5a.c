@@ -101,6 +101,7 @@ __FBSDID("$FreeBSD: release/12.0.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z ar
 #if defined(_MSC_VER)
 #if _MSC_VER >= 1400
 #define open _open
+#define close _close
 #define strcasecmp  _stricmp
 #define strncasecmp _strnicmp
 #else
