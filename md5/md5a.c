@@ -399,6 +399,7 @@ main(int argc, char *argv[])
 				}
 				printf("\n");
 			}
+			close(fd);
 		} while (*++argv);
 	} else if (!sflag && (optind == 1 || qflag || rflag)) {
 #ifdef HAVE_CAPSICUM
