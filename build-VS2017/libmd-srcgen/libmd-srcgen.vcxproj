@@ -87,7 +87,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN256_/g" -e  "s/SKEIN256__/SKEIN256_/g" %(F
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN512_/g" -e  "s/SKEIN512__/SKEIN512_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein512hl.c
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein1024hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha224hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) &gt; %(RootDir)%(Directory)md4hl.c
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
@@ -103,7 +103,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN256_/g" -e  "s/SKEIN256__/SKEIN256_/g" %(F
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN512_/g" -e  "s/SKEIN512__/SKEIN512_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein512hl.c
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein1024hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha224hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) &gt; %(RootDir)%(Directory)md4hl.c
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
@@ -119,7 +119,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN256_/g" -e  "s/SKEIN256__/SKEIN256_/g" %(F
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN512_/g" -e  "s/SKEIN512__/SKEIN512_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein512hl.c
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein1024hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha224hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">sed -e "s/mdX/md4/g" -e "s/MDX/MD4/g" %(FullPath) &gt; %(RootDir)%(Directory)md4hl.c
 sed -e "s/mdXhl/md5hl/g" -e "s/mdX/md5/g" -e "s/MDX/MD5/g" %(FullPath) &gt; %(RootDir)%(Directory)md5hl.c
 sed -e "s/mdX/sha/g" -e "s/MDX/SHA_/g" -e "s/SHA__/SHA_/g" %(FullPath) &gt; %(RootDir)%(Directory)sha0hl.c
@@ -135,7 +135,7 @@ sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN256_/g" -e  "s/SKEIN256__/SKEIN256_/g" %(F
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN512_/g" -e  "s/SKEIN512__/SKEIN512_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein512hl.c
 sed -e "s/mdX/skein/g" -e "s/MDX/SKEIN1024_/g" -e  "s/SKEIN1024__/SKEIN1024_/g" %(FullPath) &gt; %(RootDir)%(Directory)skein1024hl.c
 </Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RootDir)%(Directory)md4hl.c;%(RootDir)%(Directory)md5hl.c;%(RootDir)%(Directory)sha0hl.c;%(RootDir)%(Directory)sha1hl.c;%(RootDir)%(Directory)sha224hl.c;%(RootDir)%(Directory)sha256hl.c;%(RootDir)%(Directory)sha384hl.c;%(RootDir)%(Directory)sha512hl.c;%(RootDir)%(Directory)sha512t224hl.c;%(RootDir)%(Directory)sha512t256hl.c;%(RootDir)%(Directory)rmd160hl.c;%(RootDir)%(Directory)skein256hl.c;%(RootDir)%(Directory)skein512hl.c;%(RootDir)%(Directory)skein1024hl.c;%(Outputs)</Outputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
