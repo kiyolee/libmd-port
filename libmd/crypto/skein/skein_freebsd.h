@@ -101,9 +101,9 @@ SKEIN1024_API void SKEIN1024_Final(unsigned char digest[__skein_min_size(SKEIN10
 SKEIN256_API  char  *SKEIN256_End(SKEIN256_CTX *, char *);
 SKEIN512_API  char  *SKEIN512_End(SKEIN512_CTX *, char *);
 SKEIN1024_API char  *SKEIN1024_End(SKEIN1024_CTX *, char *);
-SKEIN256_API  char  *SKEIN256_Data(const void *, unsigned int, char *);
-SKEIN512_API  char  *SKEIN512_Data(const void *, unsigned int, char *);
-SKEIN1024_API char  *SKEIN1024_Data(const void *, unsigned int, char *);
+SKEIN256_API  char  *SKEIN256_Data(const void *, size_t, char *);
+SKEIN512_API  char  *SKEIN512_Data(const void *, size_t, char *);
+SKEIN1024_API char  *SKEIN1024_Data(const void *, size_t, char *);
 SKEIN256_API  char  *SKEIN256_Fd(int, char *);
 SKEIN512_API  char  *SKEIN512_Fd(int, char *);
 SKEIN1024_API char  *SKEIN1024_Fd(int, char *);
@@ -122,15 +122,18 @@ SKEIN256_API  int    SKEIN256_ContextSize(void);
 SKEIN256_API  SKEIN256_CTX *SKEIN256_Create(void);
 SKEIN256_API  void   SKEIN256_Destroy(SKEIN256_CTX *);
 SKEIN256_API  int    SKEIN256_DigestSize(void);
+SKEIN256_API  void   SKEIN256_DigestFree(char *);
 
 SKEIN512_API  int    SKEIN512_ContextSize(void);
 SKEIN512_API  SKEIN512_CTX *SKEIN512_Create(void);
 SKEIN512_API  void   SKEIN512_Destroy(SKEIN512_CTX *);
 SKEIN512_API  int    SKEIN512_DigestSize(void);
+SKEIN512_API  void   SKEIN512_DigestFree(char *);
 
 SKEIN1024_API int    SKEIN1024_ContextSize(void);
 SKEIN1024_API SKEIN1024_CTX *SKEIN1024_Create(void);
 SKEIN1024_API void   SKEIN1024_Destroy(SKEIN1024_CTX *);
 SKEIN1024_API int    SKEIN1024_DigestSize(void);
+SKEIN1024_API void   SKEIN1024_DigestFree(char *);
 
 #endif	/* ifndef _SKEIN_FREEBSD_H_ */

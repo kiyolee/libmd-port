@@ -125,18 +125,19 @@ __BEGIN_DECLS
 #endif
 
 MD4_API void   MD4Init(MD4_CTX *);
-MD4_API void   MD4Update(MD4_CTX *, const void *, unsigned int);
+MD4_API void   MD4Update(MD4_CTX *, const void *, size_t);
 MD4_API void   MD4Final(unsigned char [MD4_DIGEST_LENGTH], MD4_CTX *);
 MD4_API char * MD4End(MD4_CTX *, char *);
 MD4_API char * MD4Fd(int, char *);
 MD4_API char * MD4FdChunk(int, char *, off_t, off_t);
 MD4_API char * MD4File(const char *, char *);
 MD4_API char * MD4FileChunk(const char *, char *, off_t, off_t);
-MD4_API char * MD4Data(const void *, unsigned int, char *);
+MD4_API char * MD4Data(const void *, size_t, char *);
 MD4_API int    MD4ContextSize(void);
 MD4_API MD4_CTX * MD4Create(void);
 MD4_API void   MD4Destroy(MD4_CTX *);
 MD4_API int    MD4DigestSize(void);
+MD4_API void   MD4DigestFree(char *);
 
 #ifdef __FreeBSD__
 __END_DECLS

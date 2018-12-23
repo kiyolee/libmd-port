@@ -179,7 +179,7 @@ void RIPEMD160_Update(RIPEMD160_CTX *c, const void *in, size_t len)
 	/* we now can process the input data in blocks of RIPEMD160_CBLOCK
 	 * chars and save the leftovers to c->data. */
 #if BYTE_ORDER == LITTLE_ENDIAN
-	if ((((unsigned long)data)%sizeof(u_int32_t)) == 0)
+	if ((((size_t)data)%sizeof(u_int32_t)) == 0)
 		{
 		sw=(int)len/RIPEMD160_CBLOCK;
 		if (sw > 0)

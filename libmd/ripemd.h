@@ -179,11 +179,12 @@ RIPEMD160_API char  *RIPEMD160_Fd(int, char *);
 RIPEMD160_API char  *RIPEMD160_FdChunk(int, char *, off_t, off_t);
 RIPEMD160_API char  *RIPEMD160_File(const char *, char *);
 RIPEMD160_API char  *RIPEMD160_FileChunk(const char *, char *, off_t, off_t);
-RIPEMD160_API char  *RIPEMD160_Data(const void *, unsigned int, char *);
+RIPEMD160_API char  *RIPEMD160_Data(const void *, size_t, char *);
 RIPEMD160_API int    RIPEMD160_ContextSize(void);
 RIPEMD160_API RIPEMD160_CTX *RIPEMD160_Create(void);
 RIPEMD160_API void   RIPEMD160_Destroy(RIPEMD160_CTX *);
 RIPEMD160_API int    RIPEMD160_DigestSize(void);
+RIPEMD160_API void   RIPEMD160_DigestFree(char *);
 
 #ifdef __FreeBSD__
 __END_DECLS

@@ -137,7 +137,7 @@ __BEGIN_DECLS
 #endif
 
 MD5_API void   MD5Init (MD5_CTX *);
-MD5_API void   MD5Update (MD5_CTX *, const void *, unsigned int);
+MD5_API void   MD5Update (MD5_CTX *, const void *, size_t);
 MD5_API void   MD5Final (unsigned char[__md5_min_size(MD5_DIGEST_LENGTH)], MD5_CTX *);
 #ifndef _KERNEL
 MD5_API char * MD5End(MD5_CTX *, char *);
@@ -145,12 +145,13 @@ MD5_API char * MD5Fd(int, char *);
 MD5_API char * MD5FdChunk(int, char *, off_t, off_t);
 MD5_API char * MD5File(const char *, char *);
 MD5_API char * MD5FileChunk(const char *, char *, off_t, off_t);
-MD5_API char * MD5Data(const void *, unsigned int, char *);
+MD5_API char * MD5Data(const void *, size_t, char *);
 #endif
 MD5_API int    MD5ContextSize(void);
 MD5_API MD5_CTX * MD5Create(void);
 MD5_API void   MD5Destroy(MD5_CTX *);
 MD5_API int    MD5DigestSize(void);
+MD5_API void   MD5DigestFree(char *);
 
 #undef __md5_min_size
 

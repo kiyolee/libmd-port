@@ -140,7 +140,7 @@ SHA224_API void   SHA224_Final(unsigned char [__sha224_min_size(SHA224_DIGEST_LE
     SHA224_CTX *);
 #ifndef _KERNEL
 SHA224_API char  *SHA224_End(SHA224_CTX *, char *);
-SHA224_API char  *SHA224_Data(const void *, unsigned int, char *);
+SHA224_API char  *SHA224_Data(const void *, size_t, char *);
 SHA224_API char  *SHA224_Fd(int, char *);
 SHA224_API char  *SHA224_FdChunk(int, char *, off_t, off_t);
 SHA224_API char  *SHA224_File(const char *, char *);
@@ -150,6 +150,7 @@ SHA224_API int    SHA224_ContextSize(void);
 SHA224_API SHA224_CTX *SHA224_Create(void);
 SHA224_API void   SHA224_Destroy(SHA224_CTX *);
 SHA224_API int    SHA224_DigestSize(void);
+SHA224_API void   SHA224_DigestFree(char *);
 
 #undef __sha224_min_size
 

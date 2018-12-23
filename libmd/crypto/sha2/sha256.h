@@ -143,7 +143,7 @@ SHA256_API void   SHA256_Final(unsigned char [__sha256_min_size(SHA256_DIGEST_LE
     SHA256_CTX *);
 #ifndef _KERNEL
 SHA256_API char  *SHA256_End(SHA256_CTX *, char *);
-SHA256_API char  *SHA256_Data(const void *, unsigned int, char *);
+SHA256_API char  *SHA256_Data(const void *, size_t, char *);
 SHA256_API char  *SHA256_Fd(int, char *);
 SHA256_API char  *SHA256_FdChunk(int, char *, off_t, off_t);
 SHA256_API char  *SHA256_File(const char *, char *);
@@ -153,6 +153,7 @@ SHA256_API int    SHA256_ContextSize(void);
 SHA256_API SHA256_CTX *SHA256_Create(void);
 SHA256_API void   SHA256_Destroy(SHA256_CTX *);
 SHA256_API int    SHA256_DigestSize(void);
+SHA256_API void   SHA256_DigestFree(char *);
 
 #undef __sha256_min_size
 

@@ -150,7 +150,7 @@ typedef struct Algorithm_t {
 	DIGEST_Init *Init;
 	DIGEST_Update *Update;
 	DIGEST_End *End;
-	char *(*Data)(const void *, unsigned int, char *);
+	char *(*Data)(const void *, size_t, char *);
 	char *(*Fd)(int, char *);
 } Algorithm_t;
 
@@ -687,7 +687,7 @@ static void
 MDFilter(const Algorithm_t *alg, int tee)
 {
 	DIGEST_CTX context;
-	unsigned int len;
+	size_t len;
 	unsigned char buffer[BUFSIZ];
 	char buf[HEX_DIGEST_LENGTH];
 

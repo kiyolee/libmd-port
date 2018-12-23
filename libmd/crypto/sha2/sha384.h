@@ -140,7 +140,7 @@ SHA384_API void   SHA384_Final(unsigned char [__sha384_min_size(SHA384_DIGEST_LE
     SHA384_CTX *);
 #ifndef _KERNEL
 SHA384_API char  *SHA384_End(SHA384_CTX *, char *);
-SHA384_API char  *SHA384_Data(const void *, unsigned int, char *);
+SHA384_API char  *SHA384_Data(const void *, size_t, char *);
 SHA384_API char  *SHA384_Fd(int, char *);
 SHA384_API char  *SHA384_FdChunk(int, char *, off_t, off_t);
 SHA384_API char  *SHA384_File(const char *, char *);
@@ -150,6 +150,7 @@ SHA384_API int    SHA384_ContextSize(void);
 SHA384_API SHA384_CTX *SHA384_Create(void);
 SHA384_API void   SHA384_Destroy(SHA384_CTX *);
 SHA384_API int    SHA384_DigestSize(void);
+SHA384_API void   SHA384_DigestFree(char *);
 
 #undef __sha384_min_size
 

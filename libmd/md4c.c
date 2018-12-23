@@ -117,10 +117,28 @@ void MD4Init (MD4_CTX *context)
      context.
  */
 MD4_API
-void MD4Update (MD4_CTX *context, const void *in, unsigned int inputLen)
+void MD4Update (MD4_CTX *context, const void *in, size_t inputLen)
 {
-  unsigned int i, idx, partLen;
+  size_t i, idx, partLen;
   const unsigned char *input = in;
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable: 4127) /* conditional expression is constant */
+#endif
+  if (sizeof(size_t) > sizeof(unsigned int) && inputLen > (size_t)UINT_MAX)
+  {
+    size_t blksz = (size_t)UINT_MAX & ~(sizeof(size_t) - 1);
+    while (inputLen > blksz)
+    {
+      MD4Update(context, input, blksz);
+      input += blksz;
+      inputLen -= blksz;
+    }
+  }
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
   /* Compute number of bytes mod 64 */
   idx = (unsigned int)((context->count[0] >> 3) & 0x3F);

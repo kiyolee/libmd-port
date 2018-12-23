@@ -236,11 +236,12 @@ SHA_API char   *SHA_Fd(int, char *);
 SHA_API char   *SHA_FdChunk(int, char *, off_t, off_t);
 SHA_API char   *SHA_File(const char *, char *);
 SHA_API char   *SHA_FileChunk(const char *, char *, off_t, off_t);
-SHA_API char   *SHA_Data(const void *, unsigned int, char *);
+SHA_API char   *SHA_Data(const void *, size_t, char *);
 SHA_API int     SHA_ContextSize(void);
 SHA_API SHA_CTX *SHA_Create(void);
 SHA_API void    SHA_Destroy(SHA_CTX *);
 SHA_API int     SHA_DigestSize(void);
+SHA_API void    SHA_DigestFree(char *);
 SHA1_API void   SHA1_Init(SHA_CTX *c);
 SHA1_API void   SHA1_Update(SHA_CTX *c, const void *data, size_t len);
 SHA1_API void   SHA1_Final(unsigned char *md, SHA_CTX *c);
@@ -249,11 +250,12 @@ SHA1_API char  *SHA1_Fd(int, char *);
 SHA1_API char  *SHA1_FdChunk(int, char *, off_t, off_t);
 SHA1_API char  *SHA1_File(const char *, char *);
 SHA1_API char  *SHA1_FileChunk(const char *, char *, off_t, off_t);
-SHA1_API char  *SHA1_Data(const void *, unsigned int, char *);
+SHA1_API char  *SHA1_Data(const void *, size_t, char *);
 SHA1_API int    SHA1_ContextSize(void);
 SHA1_API SHA_CTX *SHA1_Create(void);
 SHA1_API void   SHA1_Destroy(SHA_CTX *);
 SHA1_API int    SHA1_DigestSize(void);
+SHA1_API void   SHA1_DigestFree(char *);
 
 #ifdef __FreeBSD__
 __END_DECLS

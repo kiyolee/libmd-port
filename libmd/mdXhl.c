@@ -149,7 +149,7 @@ MDXFileChunk(const char *filename, char *buf, off_t ofs, off_t len)
 
 MDX_API
 char *
-MDXData (const void *data, unsigned int len, char *buf)
+MDXData (const void *data, size_t len, char *buf)
 {
 	MDX_CTX ctx;
 
@@ -182,6 +182,12 @@ MDX_API
 int MDXDigestSize(void)
 {
 	return MDX_DIGEST_LENGTH;
+}
+
+MDX_API
+void MDXDigestFree(char *buf)
+{
+    free(buf);
 }
 
 #ifdef WEAK_REFS

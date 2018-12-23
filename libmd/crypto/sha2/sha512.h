@@ -143,7 +143,7 @@ SHA512_API void   SHA512_Final(unsigned char [__sha512_min_size(SHA512_DIGEST_LE
     SHA512_CTX *);
 #ifndef _KERNEL
 SHA512_API char  *SHA512_End(SHA512_CTX *, char *);
-SHA512_API char  *SHA512_Data(const void *, unsigned int, char *);
+SHA512_API char  *SHA512_Data(const void *, size_t, char *);
 SHA512_API char  *SHA512_Fd(int, char *);
 SHA512_API char  *SHA512_FdChunk(int, char *, off_t, off_t);
 SHA512_API char  *SHA512_File(const char *, char *);
@@ -153,6 +153,7 @@ SHA512_API int    SHA512_ContextSize(void);
 SHA512_API SHA512_CTX *SHA512_Create(void);
 SHA512_API void   SHA512_Destroy(SHA512_CTX *);
 SHA512_API int    SHA512_DigestSize(void);
+SHA512_API void   SHA512_DigestFree(char *);
 
 #undef __sha512_min_size
 
