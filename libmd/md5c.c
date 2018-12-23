@@ -47,6 +47,7 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md5c.c 336539 2018-07-20 07:01:28Z 
 #include <machine/endian.h>
 #include <sys/endian.h>
 #endif
+#include <limits.h>
 #include "md5.h"
 
 #include "supp/explicit_bzero.h"

@@ -34,6 +34,7 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/md4c.c 336539 2018-07-20 07:01:28Z 
 
 #include <sys/types.h>
 #include <string.h>
+#include <limits.h>
 #include "md4.h"
 
 #include "supp/explicit_bzero.h"
