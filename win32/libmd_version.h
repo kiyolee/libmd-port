@@ -1,4 +1,4 @@
-#define LIBMD_VERSION_STR   "11.2"
-#define LIBMD_VER_MAJOR     11
-#define LIBMD_VER_MINOR     2
+#define LIBMD_VERSION_STR   "12.0"
+#define LIBMD_VER_MAJOR     12
+#define LIBMD_VER_MINOR     0
 #define LIBMD_VER_REVISION  0
