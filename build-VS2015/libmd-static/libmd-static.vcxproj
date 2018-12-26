@@ -156,6 +156,7 @@
     <ClCompile Include="..\..\libmd\skein512hl.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha224.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h" />
@@ -172,6 +173,9 @@
     <ClInclude Include="..\..\libmd\rmdconst.h" />
     <ClInclude Include="..\..\libmd\sha.h" />
     <ClInclude Include="..\..\libmd\sha_locl.h" />
+    <ClInclude Include="..\..\libmd\supp\bswap.h" />
+    <ClInclude Include="..\..\libmd\supp\explicit_bzero.h" />
+    <ClInclude Include="..\..\libmd\supp\isdefs.h" />
     <ClInclude Include="..\..\libmd\supp\w32defs.h" />
   </ItemGroup>
   <ItemGroup>

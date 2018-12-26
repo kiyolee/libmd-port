@@ -158,5 +158,17 @@
     <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h">
       <Filter>Header Files\crypto\skein</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha224.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\bswap.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\explicit_bzero.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\isdefs.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

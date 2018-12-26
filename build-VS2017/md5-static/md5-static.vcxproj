@@ -217,6 +217,7 @@ copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
     <ClCompile Include="..\..\md5\getopt\getopt.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha224.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h" />
     <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h" />
@@ -224,6 +225,9 @@ copy /y $(TargetPath) $(TargetDir)skein1024-static.exe
     <ClInclude Include="..\..\libmd\crypto\skein\skein.h" />
     <ClInclude Include="..\..\libmd\crypto\skein\skein_freebsd.h" />
     <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h" />
+    <ClInclude Include="..\..\libmd\supp\e2a.h" />
+    <ClInclude Include="..\..\libmd\supp\isdefs.h" />
+    <ClInclude Include="..\..\libmd\supp\w32defs.h" />
     <ClInclude Include="..\..\md5\getopt\getopt.h" />
     <ClInclude Include="..\..\libmd\md5.h" />
     <ClInclude Include="..\..\libmd\ripemd.h" />

@@ -368,10 +368,66 @@
 					RelativePath="..\..\libmd\sha.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\libmd\sha256.h"
+				<Filter
+					Name="supp"
 					>
-				</File>
+					<File
+						RelativePath="..\..\libmd\supp\e2a.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\supp\isdefs.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\supp\w32defs.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="crypto"
+				>
+				<Filter
+					Name="sha2"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha224.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha256.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha384.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha512.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha512t.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="skein"
+					>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_freebsd.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\libmd\crypto\skein\skein_port.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

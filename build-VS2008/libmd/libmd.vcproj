@@ -455,6 +455,18 @@
 				Name="supp"
 				>
 				<File
+					RelativePath="..\..\libmd\supp\bswap.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\libmd\supp\explicit_bzero.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\libmd\supp\isdefs.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\libmd\supp\w32defs.h"
 					>
 				</File>
@@ -465,6 +477,10 @@
 				<Filter
 					Name="sha2"
 					>
+					<File
+						RelativePath="..\..\libmd\crypto\sha2\sha224.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\libmd\crypto\sha2\sha256.h"
 						>
