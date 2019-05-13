@@ -84,7 +84,7 @@ __FBSDID("$FreeBSD: release/12.0.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z ar
 #if defined(_WIN32) || defined(__OS400__)
 #include "getopt/getopt.h"
 #elif defined(__APPLE__)
-#include "getopt.h"
+#include <getopt.h>
 #endif
 
 #if defined(__OS400__)
