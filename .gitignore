@@ -1,7 +1,11 @@
 *.VC.db
+*.a
+*.dylib
 *.log
+*.o
 *.opensdf
 *.sdf
+*.so
 *~
 /build-*/*/Debug
 /build-*/*/Release

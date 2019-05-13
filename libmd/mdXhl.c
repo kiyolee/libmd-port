@@ -19,7 +19,7 @@ __FBSDID("$FreeBSD: release/12.0.0/lib/libmd/mdXhl.c 334105 2018-05-23 17:01:28Z
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#ifdef unix
+#if defined(unix) || defined(__APPLE__)
 #include <unistd.h>
 #endif
 #ifdef _MSC_VER

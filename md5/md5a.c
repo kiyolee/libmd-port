@@ -46,12 +46,12 @@ __FBSDID("$FreeBSD: release/12.0.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z ar
 
 #include <sys/types.h>
 #include <fcntl.h>
-#if defined(unix) || defined(__OS400__)
+#if defined(unix) || defined(__OS400__) || defined(__APPLE__)
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
 #endif
-#ifdef unix
+#if defined(unix) || defined(__APPLE__)
 #include <err.h>
 #include <strings.h>
 #endif
@@ -83,6 +83,8 @@ __FBSDID("$FreeBSD: release/12.0.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z ar
 
 #if defined(_WIN32) || defined(__OS400__)
 #include "getopt/getopt.h"
+#elif defined(__APPLE__)
+#include "getopt.h"
 #endif
 
 #if defined(__OS400__)

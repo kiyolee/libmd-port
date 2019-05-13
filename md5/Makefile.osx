@@ -1,0 +1,102 @@
+TARGET = md5
+TARGET_RMD160 = rmd160
+TARGET_SHA1 = sha1
+TARGET_SHA224 = sha224
+TARGET_SHA256 = sha256
+TARGET_SHA384 = sha384
+TARGET_SHA512 = sha512
+TARGET_SHA512t256 = sha512t256
+TARGET_SKEIN256 = skein256
+TARGET_SKEIN512 = skein512
+TARGET_SKEIN1024 = skein1024
+
+ALL_TARGETS = \
+    $(TARGET) \
+    $(TARGET_RMD160) \
+    $(TARGET_SHA1) \
+    $(TARGET_SHA224) \
+    $(TARGET_SHA256) \
+    $(TARGET_SHA384) \
+    $(TARGET_SHA512) \
+    $(TARGET_SHA512t256) \
+    $(TARGET_SKEIN256) \
+    $(TARGET_SKEIN512) \
+    $(TARGET_SKEIN1024)
+
+ifeq ($(NO_INTERNAL),)
+CFLAGS_INTERNAL = -DLIBMD_INTERNAL
+endif
+
+OSX_CFLAGS = -mmacosx-version-min=10.11
+OSX_LDFLAGS = -macosx_version_min 10.11
+
+CFLAGS = -pipe -O3 -Wall \
+    -I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein $(CFLAGS_INTERNAL) \
+    $(OSX_CFLAGS)
+LDFLAGS = $(OSX_LDFLAGS)
+
+ifeq ($(NO_INTERNAL),)
+OBJS = md5.o
+else
+OBJS = md5a.o
+endif
+
+LIBMD = ../libmd/libmd.a
+
+all: $(ALL_TARGETS)
+
+clean:
+	$(RM) *.o $(ALL_TARGETS)
+
+cleanx: clean
+	( cd ../libmd; gmake -f Makefile.unx clean )
+
+test: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
+
+timetrial: $(ALL_TARGETS)
+	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
+
+$(LIBMD): ../libmd/Makefile.unx
+	( cd ../libmd; gmake -f Makefile.unx )
+
+$(TARGET): $(OBJS) $(LIBMD)
+	$(LD) $(LDFLAGS) $^ -o $@ -lc
+
+$(TARGET_RMD160): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA1): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA224): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA256): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA384): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512t256): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN256): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN512): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN1024): $(TARGET)
+	ln -s $(TARGET) $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+md5.o: md5.c
+md5a.o: md5a.c
+
+#---eof---
