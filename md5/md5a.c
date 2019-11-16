@@ -31,7 +31,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.0.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z arichardson $");
+__FBSDID("$FreeBSD: release/12.1.0/sbin/md5/md5.c 338267 2018-08-23 18:19:01Z arichardson $");
 #endif
 
 #ifdef _WIN32
