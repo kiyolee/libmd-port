@@ -1,3 +1,7 @@
+#if (!defined(_MSVC_LANG) && __cplusplus < 201402L) || (defined(_MSVC_LANG) && _MSVC_LANG < 201402L)
+#error Requires C++14.
+#endif
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
