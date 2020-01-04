@@ -1,7 +1,7 @@
 #ifndef _INCL_LIBMDPP_H
 #define _INCL_LIBMDPP_H
 
-#ifdef __CYGWIN__
+#ifdef __unix__
 #include <sys/types.h>
 #endif
 
