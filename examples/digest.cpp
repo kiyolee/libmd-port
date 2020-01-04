@@ -65,7 +65,7 @@ void _get_sums(const char* fn)
 
     for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
         auto const sum = pdg->final();
-        cout << pdg->name() << '(' << fn << ") = " << _hex_printer<decltype(sum)>(sum) << endl;
+        cout << pdg->name() << " (" << fn << ") = " << _hex_printer<decltype(sum)>(sum) << endl;
         });
 }
 
@@ -85,7 +85,11 @@ int main(int argc, char *argv[])
         //_get_sum<libmd::digest_type::MD5>(fn);
         //_get_sum<libmd::digest_type::SHA1>(fn);
         //_get_sum<libmd::digest_type::SHA256>(fn);
-        _get_sums<libmd::digest_type::MD5, libmd::digest_type::SHA1, libmd::digest_type::SHA256, libmd::digest_type::SKEIN512, libmd::digest_type::RIPEMD160>(fn);
+        _get_sums<libmd::digest_type::MD5,
+                  libmd::digest_type::SHA1,
+                  libmd::digest_type::SHA256,
+                  libmd::digest_type::SKEIN512,
+                  libmd::digest_type::RIPEMD160>(fn);
     }
     return 0;
 }
