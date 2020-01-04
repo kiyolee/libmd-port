@@ -56,7 +56,7 @@ void _get_sums(const char* fn)
             return;
         }
         for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
-            pdg->update(pbuf->data(), in.gcount()); });
+            pdg->update(pbuf->data(), size_t(in.gcount())); });
     }
 
     for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
