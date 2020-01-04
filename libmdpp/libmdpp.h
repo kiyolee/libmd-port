@@ -77,6 +77,8 @@ _DEF_DIGEST_TYPE(SKEIN1024, SKEIN1024_)
 class digest_base
 {
 public:
+    virtual ~digest_base() {}
+
     virtual bool operator!() const = 0;
 
     virtual digest_type type() const = 0;
@@ -103,7 +105,7 @@ public:
     digest(digest&& _rhs) : ctx_(std::move(_rhs.ctx_)) {
         _rhs.ctx_ = nullptr;
     }
-    virtual ~digest() {
+    ~digest() final {
         if (ctx_) { _traits_type::destroy(ctx_); ctx_ = nullptr; }
     }
 
