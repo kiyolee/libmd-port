@@ -62,6 +62,11 @@ struct Skein_512_Ctxt_t;
 struct Skein1024_Ctxt_t;
 #endif
 
+/* Make the context types look like the other hashes on FreeBSD */
+typedef Skein_256_Ctxt_t    SKEIN256_CTX;
+typedef Skein_512_Ctxt_t    SKEIN512_CTX;
+typedef Skein1024_Ctxt_t    SKEIN1024_CTX;
+
 #ifndef SKEIN256_API
 #define SKEIN256_API
 #endif
@@ -72,10 +77,9 @@ struct Skein1024_Ctxt_t;
 #define SKEIN1024_API
 #endif
 
-/* Make the context types look like the other hashes on FreeBSD */
-typedef Skein_256_Ctxt_t    SKEIN256_CTX;
-typedef Skein_512_Ctxt_t    SKEIN512_CTX;
-typedef Skein1024_Ctxt_t    SKEIN1024_CTX;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Make the prototypes look like the other hashes */
 SKEIN256_API  void SKEIN256_Init  (SKEIN256_CTX *ctx);
@@ -139,5 +143,9 @@ SKEIN1024_API SKEIN1024_CTX *SKEIN1024_Create(void);
 SKEIN1024_API void   SKEIN1024_Destroy(SKEIN1024_CTX *);
 SKEIN1024_API int    SKEIN1024_DigestSize(void);
 SKEIN1024_API void   SKEIN1024_DigestFree(char *);
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif	/* ifndef _SKEIN_FREEBSD_H_ */
