@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}</ProjectGuid>
     <RootNamespace>md5</RootNamespace>
   </PropertyGroup>

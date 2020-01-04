@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}</ProjectGuid>
     <RootNamespace>libmd-srcgen</RootNamespace>
   </PropertyGroup>

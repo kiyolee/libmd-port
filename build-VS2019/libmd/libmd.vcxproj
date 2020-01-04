@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{5CC6B30E-41FD-44B0-8059-E25A68FCD286}</ProjectGuid>
     <RootNamespace>libmd</RootNamespace>
   </PropertyGroup>
