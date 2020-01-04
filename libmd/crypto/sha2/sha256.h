@@ -38,10 +38,10 @@
 #endif
 
 #ifdef _WIN32
-#include "supp/w32defs.h"
+#include "../../supp/w32defs.h"
 #endif
 #ifdef __OS400__
-#include "supp/isdefs.h"
+#include "../../supp/isdefs.h"
 #endif
 
 #define SHA256_DIGEST_LENGTH		32

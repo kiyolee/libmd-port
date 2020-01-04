@@ -26,10 +26,10 @@
 #endif
 
 #ifdef _WIN32
-#include "supp/w32defs.h"
+#include "../../supp/w32defs.h"
 #endif
 #ifdef __OS400__
-#include "supp/isdefs.h"
+#include "../../supp/isdefs.h"
 #endif
 
 #ifndef _OPENSOLARIS_SYS_TYPES_H_ /* Avoid redefining this typedef */

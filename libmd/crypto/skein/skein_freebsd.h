@@ -56,6 +56,10 @@
 #define SKEIN1024_API __declspec(dllexport)
 #endif
 
+#else
+struct Skein_256_Ctxt_t;
+struct Skein_512_Ctxt_t;
+struct Skein1024_Ctxt_t;
 #endif
 
 #ifndef SKEIN256_API

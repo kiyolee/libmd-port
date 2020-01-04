@@ -40,10 +40,10 @@
 #endif
 
 #ifdef _WIN32
-#include "supp/w32defs.h"
+#include "../../supp/w32defs.h"
 #endif
 #ifdef __OS400__
-#include "supp/isdefs.h"
+#include "../../supp/isdefs.h"
 #endif
 
 #define SHA512_224_DIGEST_LENGTH	28
@@ -61,6 +61,9 @@
 #endif
 
 #endif
+
+typedef SHA512_CTX SHA512_224_CTX;
+typedef SHA512_CTX SHA512_256_CTX;
 
 #ifndef SHA512_224_API
 #define SHA512_224_API
