@@ -74,9 +74,35 @@ _DEF_DIGEST_TYPE(SKEIN256, SKEIN256_)
 _DEF_DIGEST_TYPE(SKEIN512, SKEIN512_)
 _DEF_DIGEST_TYPE(SKEIN1024, SKEIN1024_)
 
+constexpr const char*
+digest_name_of(digest_type type)
+{
+    switch (type) {
+    #define _DEF_CASE(t) case digest_type::t: return digest_traits<digest_type::t>::name;
+    _DEF_CASE(MD4)
+    _DEF_CASE(MD5)
+    _DEF_CASE(RIPEMD160)
+    _DEF_CASE(SHA)
+    _DEF_CASE(SHA1)
+    _DEF_CASE(SHA224)
+    _DEF_CASE(SHA256)
+    _DEF_CASE(SHA384)
+    _DEF_CASE(SHA512)
+    _DEF_CASE(SHA512_224)
+    _DEF_CASE(SHA512_256)
+    _DEF_CASE(SKEIN256)
+    _DEF_CASE(SKEIN512)
+    _DEF_CASE(SKEIN1024)
+    #undef _DEF_CASE
+    }
+    return "_UNKNOWN_";
+}
+
 class digest_base
 {
 public:
+    typedef std::vector<uint8_t> value_type;
+
     virtual ~digest_base() {}
 
     virtual bool operator!() const = 0;
@@ -87,11 +113,13 @@ public:
 
     virtual void reset() = 0;
     virtual void update(const void* data, size_t datalen) = 0;
-    virtual std::vector<uint8_t> final() = 0;
+    virtual value_type final() = 0;
 };
 
+typedef digest_base::value_type digest_value;
+
 template<digest_type _DT>
-class digest : public digest_base
+class digest final : public digest_base
 {
 private:
     typedef digest_traits<_DT> _traits_type;
@@ -128,6 +156,11 @@ public:
         return *this;
     }
 
+    void swap(digest&& _rhs) {
+        if (this == &_rhs) return;
+        std::swap(ctx_, _rhs.ctx_);
+    }
+
     virtual bool operator!() const final { return !ctx_; }
 
     virtual digest_type type() const final { return _traits_type::type; }
@@ -140,7 +173,7 @@ public:
     void update(const void* data, size_t datalen) final {
         if (ctx_) _traits_type::update(ctx_, data, datalen);
     }
-    std::vector<uint8_t> final() final {
+    value_type final() final {
         if (!ctx_) return {};
         decltype(this->final()) dg(size());
         _traits_type::final(dg.data(), ctx_);

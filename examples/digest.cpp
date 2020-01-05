@@ -8,6 +8,7 @@
 #include <memory>
 #include <array>
 #include <vector>
+#include <utility>
 #include <algorithm>
 
 #include "libmdpp/libmdpp.h"
@@ -32,12 +33,12 @@ ostream& operator<<(ostream& ostm, _hex_printer<_T> const& hp)
 }
 
 template<libmd::digest_type ..._DT>
-void _get_sums(const char* fn)
+vector<pair<libmd::digest_type, libmd::digest_value> > _get_sums(const char* fn)
 {
     ifstream in(fn, ios_base::in|ios_base::binary);
     if (!in) {
         cerr << ">>> failed to open \"" << fn << "\"." << endl;
-        return;
+        return {};
     }
 
     vector<unique_ptr<libmd::digest_base> > dgv;
@@ -48,7 +49,7 @@ void _get_sums(const char* fn)
         for (auto const& pdg : dgv) {
             if (!(*pdg)) cerr << ">>> failed to create " << pdg->name() << " context for \"" << fn << "\"." << endl;
         }
-        return;
+        return {};
     }
 
     auto pbuf = make_unique<array<char, 16*1024> >();
@@ -57,22 +58,23 @@ void _get_sums(const char* fn)
         in.read(pbuf->data(), pbuf->size());
         if (!in && !in.eof()) {
             cerr << ">>> failed to read \"" << fn << "\"." << endl;
-            return;
+            return {};
         }
         for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
             pdg->update(pbuf->data(), size_t(in.gcount())); });
     }
 
+    decltype(_get_sums(fn)) sums;
     for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
-        auto const sum = pdg->final();
-        cout << pdg->name() << " (" << fn << ") = " << _hex_printer<decltype(sum)>(sum) << endl;
-        });
+        sums.push_back(make_pair(pdg->type(), pdg->final())); });
+    return sums;
 }
 
 template<libmd::digest_type _DT>
-void _get_sum(const char* fn)
+libmd::digest_value _get_sum(const char* fn)
 {
-    _get_sums<_DT>(fn);
+    auto sums = _get_sums<_DT>(fn);
+    return !sums.empty() ? sums[0].second : libmd::digest_value{};
 }
 
 } // namespace
@@ -84,12 +86,15 @@ int main(int argc, char *argv[])
         const char* const fn = argv[i];
         //_get_sum<libmd::digest_type::MD5>(fn);
         //_get_sum<libmd::digest_type::SHA1>(fn);
-        //_get_sum<libmd::digest_type::SHA256>(fn);
-        _get_sums<libmd::digest_type::MD5,
-                  libmd::digest_type::SHA1,
-                  libmd::digest_type::SHA256,
-                  libmd::digest_type::SKEIN512,
-                  libmd::digest_type::RIPEMD160>(fn);
+        (void)_get_sum<libmd::digest_type::SHA256>(fn);
+        auto sums = _get_sums<libmd::digest_type::MD5,
+                              libmd::digest_type::SHA1,
+                              libmd::digest_type::SHA256,
+                              libmd::digest_type::SKEIN512,
+                              libmd::digest_type::RIPEMD160>(fn);
+        for_each(sums.cbegin(), sums.cend(), [&](auto const& sum) {
+            cout << libmd::digest_name_of(sum.first) << " (" << fn << ") = " << _hex_printer<libmd::digest_value>(sum.second) << endl;
+            });
     }
     return 0;
 }
