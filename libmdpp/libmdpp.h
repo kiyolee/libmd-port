@@ -161,11 +161,11 @@ public:
         std::swap(ctx_, _rhs.ctx_);
     }
 
-    virtual bool operator!() const final { return !ctx_; }
+    bool operator!() const final { return !ctx_; }
 
-    virtual digest_type type() const final { return _traits_type::type; }
-    virtual const char* name() const final { return _traits_type::name; }
-    virtual size_t size() const final { return _traits_type::digest_size; }
+    digest_type type() const final { return _traits_type::type; }
+    const char* name() const final { return _traits_type::name; }
+    size_t size() const final { return _traits_type::digest_size; }
 
     void reset() final {
         if (ctx_) _traits_type::init(ctx_);
