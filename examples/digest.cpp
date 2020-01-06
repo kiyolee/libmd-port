@@ -86,12 +86,12 @@ int main(int argc, char *argv[])
         const char* const fn = argv[i];
         //_get_sum<libmd::digest_type::MD5>(fn);
         //_get_sum<libmd::digest_type::SHA1>(fn);
-        (void)_get_sum<libmd::digest_type::SHA256>(fn);
+        //_get_sum<libmd::digest_type::SHA256>(fn);
         auto sums = _get_sums<libmd::digest_type::MD5,
+                              libmd::digest_type::RIPEMD160,
                               libmd::digest_type::SHA1,
                               libmd::digest_type::SHA256,
-                              libmd::digest_type::SKEIN512,
-                              libmd::digest_type::RIPEMD160>(fn);
+                              libmd::digest_type::SKEIN512>(fn);
         for_each(sums.cbegin(), sums.cend(), [&](auto const& sum) {
             cout << libmd::digest_name_of(sum.first) << " (" << fn << ") = " << _hex_printer<libmd::digest_value>(sum.second) << endl;
             });
