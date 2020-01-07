@@ -1,5 +1,8 @@
-#ifndef _INCL_LIBMDPP_H
-#define _INCL_LIBMDPP_H
+// SPDX-License-Identifier: MIT
+// Copyright (c) Kelvin Lee.
+
+#ifndef LIBMDPP_LIBMDPP_H
+#define LIBMDPP_LIBMDPP_H
 
 #ifdef __unix__
 #include <sys/types.h>
@@ -186,4 +189,4 @@ private:
 
 } // namespace libmd
 
-#endif // _INCL_LIBMDPP_H
+#endif // LIBMDPP_LIBMDPP_H

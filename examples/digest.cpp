@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) Kelvin Lee.
+
 #if (!defined(_MSVC_LANG) && __cplusplus < 201402L) || (defined(_MSVC_LANG) && _MSVC_LANG < 201402L)
 #error Requires C++14.
 #endif

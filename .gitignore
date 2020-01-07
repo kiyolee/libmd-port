@@ -25,6 +25,7 @@
 /build-*/tests/*/x64/Release
 /build-*/x64/Debug
 /build-*/x64/Release
+/examples/digest
 /libmd/*.ref
 /libmd/md4hl.c
 /libmd/md5hl.c

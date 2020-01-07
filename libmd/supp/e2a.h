@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) Kelvin Lee.
+
 #ifndef LIBMD_SUPP_E2A_H
 #define LIBMD_SUPP_E2A_H
 
