@@ -31,7 +31,7 @@ ostream& operator<<(ostream& ostm, _hex_printer<_T> const& hp)
 {
     for_each(hp.data_.cbegin(), hp.data_.cend(), [&](auto const& b){
         ostm << setw(2) << setfill('0') << hex << (unsigned int)(b);
-        });
+    });
     return ostm;
 }
 
@@ -64,12 +64,14 @@ vector<pair<libmd::digest_type, libmd::digest_value> > _get_sums(const char* fn)
             return {};
         }
         for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
-            pdg->update(pbuf->data(), size_t(in.gcount())); });
+            pdg->update(pbuf->data(), size_t(in.gcount()));
+        });
     }
 
     decltype(_get_sums(fn)) sums;
     for_each(dgv.begin(), dgv.end(), [&](auto const& pdg) {
-        sums.push_back(make_pair(pdg->type(), pdg->final())); });
+        sums.push_back(make_pair(pdg->type(), pdg->final()));
+    });
     return sums;
 }
 
@@ -97,7 +99,7 @@ int main(int argc, char *argv[])
                               libmd::digest_type::SKEIN512>(fn);
         for_each(sums.cbegin(), sums.cend(), [&](auto const& sum) {
             cout << libmd::digest_name_of(sum.first) << " (" << fn << ") = " << _hex_printer<libmd::digest_value>(sum.second) << endl;
-            });
+        });
     }
     return 0;
 }
