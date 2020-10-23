@@ -44,7 +44,7 @@ clean:
 	$(RM) *.o $(ALL_TARGETS)
 
 cleanx: clean
-	( cd ../libmd; gmake -f Makefile.unx clean )
+	( cd ../libmd; $(MAKE) -f Makefile.unx clean )
 
 test: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
@@ -53,7 +53,7 @@ timetrial: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
 
 $(LIBMD): ../libmd/Makefile.unx
-	( cd ../libmd; gmake -f Makefile.unx )
+	( cd ../libmd; $(MAKE) -f Makefile.unx )
 
 $(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@

@@ -48,7 +48,7 @@ clean:
 	$(RM) *.o $(ALL_TARGETS)
 
 cleanx: clean
-	( cd ../libmd; gmake -f Makefile.mingw32 clean )
+	( cd ../libmd; $(MAKE) -f Makefile.mingw32 clean )
 
 test: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
@@ -57,7 +57,7 @@ timetrial: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
 
 $(LIBMD): ../libmd/Makefile.mingw32
-	( cd ../libmd; gmake -f Makefile.mingw32 )
+	( cd ../libmd; $(MAKE) -f Makefile.mingw32 )
 
 $(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@

@@ -46,7 +46,7 @@ clean:
 	$(RM) *.o $(ALL_TARGETS)
 
 cleanx: clean
-	( cd ../libmd; gmake -f Makefile.cyg clean )
+	( cd ../libmd; $(MAKE) -f Makefile.cyg clean )
 
 test: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
@@ -55,7 +55,7 @@ timetrial: $(ALL_TARGETS)
 	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
 
 $(LIBMD): ../libmd/Makefile.cyg
-	( cd ../libmd; gmake -f Makefile.cyg )
+	( cd ../libmd; $(MAKE) -f Makefile.cyg )
 
 $(TARGET): $(OBJS) $(LIBMD)
 	$(CC) $(LDFLAGS) $^ -o $@
