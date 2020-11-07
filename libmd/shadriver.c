@@ -18,7 +18,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.1.0/lib/libmd/shadriver.c 336126 2018-07-09 08:19:04Z cem $");
+__FBSDID("$FreeBSD: release/12.2.0/lib/libmd/shadriver.c 336126 2018-07-09 08:19:04Z cem $");
 #endif
 
 #include <sys/types.h>

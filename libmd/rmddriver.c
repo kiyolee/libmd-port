@@ -15,7 +15,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.1.0/lib/libmd/rmddriver.c 220496 2011-04-09 13:56:29Z markm $");
+__FBSDID("$FreeBSD: release/12.2.0/lib/libmd/rmddriver.c 220496 2011-04-09 13:56:29Z markm $");
 #endif
 
 #include <sys/types.h>

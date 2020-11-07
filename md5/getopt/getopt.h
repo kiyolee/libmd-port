@@ -1,5 +1,5 @@
 /*	$NetBSD: getopt.h,v 1.4 2000/07/07 10:43:54 ad Exp $	*/
-/*	$FreeBSD: release/12.1.0/include/getopt.h 326192 2017-11-25 17:09:43Z pfg $ */
+/*	$FreeBSD: release/12.2.0/include/getopt.h 326192 2017-11-25 17:09:43Z pfg $ */
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause-NetBSD

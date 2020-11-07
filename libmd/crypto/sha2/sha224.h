@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/12.1.0/sys/crypto/sha2/sha224.h 336123 2018-07-09 07:24:05Z cem $
+ * $FreeBSD: release/12.2.0/sys/crypto/sha2/sha224.h 336123 2018-07-09 07:24:05Z cem $
  */
 
 #ifndef _SHA224_H_
