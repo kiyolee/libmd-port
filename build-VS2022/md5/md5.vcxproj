@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}</ProjectGuid>
+    <RootNamespace>md5</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_props\md5.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_props\md5.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_props\md5.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\_props\md5.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Link />
+    <Manifest />
+    <Xdcmake />
+    <Bscmake />
+    <PostBuildEvent>
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
+copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
+copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha384.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
+copy /y $(TargetPath) $(TargetDir)skein256.exe
+copy /y $(TargetPath) $(TargetDir)skein512.exe
+copy /y $(TargetPath) $(TargetDir)skein1024.exe
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Link />
+    <Manifest />
+    <Xdcmake />
+    <Bscmake />
+    <PostBuildEvent>
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
+copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
+copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha384.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
+copy /y $(TargetPath) $(TargetDir)skein256.exe
+copy /y $(TargetPath) $(TargetDir)skein512.exe
+copy /y $(TargetPath) $(TargetDir)skein1024.exe
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Link />
+    <Manifest />
+    <Xdcmake />
+    <Bscmake />
+    <PostBuildEvent>
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
+copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
+copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha384.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
+copy /y $(TargetPath) $(TargetDir)skein256.exe
+copy /y $(TargetPath) $(TargetDir)skein512.exe
+copy /y $(TargetPath) $(TargetDir)skein1024.exe
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Link />
+    <Manifest />
+    <Xdcmake />
+    <Bscmake />
+    <PostBuildEvent>
+      <Command>copy /y $(TargetPath) $(TargetDir)rmd160.exe
+copy /y $(TargetPath) $(TargetDir)sha1.exe
+copy /y $(TargetPath) $(TargetDir)sha224.exe
+copy /y $(TargetPath) $(TargetDir)sha256.exe
+copy /y $(TargetPath) $(TargetDir)sha384.exe
+copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256.exe
+copy /y $(TargetPath) $(TargetDir)skein256.exe
+copy /y $(TargetPath) $(TargetDir)skein512.exe
+copy /y $(TargetPath) $(TargetDir)skein1024.exe
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\md5\md5.c" />
+    <ClCompile Include="..\..\md5\getopt\getopt.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha224.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h" />
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512t.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_freebsd.h" />
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h" />
+    <ClInclude Include="..\..\libmd\supp\e2a.h" />
+    <ClInclude Include="..\..\libmd\supp\isdefs.h" />
+    <ClInclude Include="..\..\libmd\supp\w32defs.h" />
+    <ClInclude Include="..\..\md5\getopt\getopt.h" />
+    <ClInclude Include="..\..\libmd\md5.h" />
+    <ClInclude Include="..\..\libmd\ripemd.h" />
+    <ClInclude Include="..\..\libmd\sha.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libmd\libmd.vcxproj">
+      <Project>{5cc6b30e-41fd-44b0-8059-e25a68fcd286}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\win32\libmd.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <Target Name="AfterClean">
+    <Exec Command="if exist $(OutDir)rmd160.exe del $(OutDir)rmd160.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha1.exe del $(OutDir)sha1.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha224.exe del $(OutDir)sha224.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha256.exe del $(OutDir)sha256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha384.exe del $(OutDir)sha384.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512.exe del $(OutDir)sha512.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512t256.exe del $(OutDir)sha512t256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein256.exe del $(OutDir)skein256.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein512.exe del $(OutDir)skein512.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein1024.exe del $(OutDir)skein1024.exe /F /Q 2&gt;nul" />
+  </Target>
+</Project>
