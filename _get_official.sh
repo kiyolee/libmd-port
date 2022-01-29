@@ -2,26 +2,67 @@
 
 [ ! -f ../`basename "$0"` ] && exit 1
 
-REL=${1:-12.2.0}
+REL=${1:-13.0}
 
-svn co --depth empty svn://svn.freebsd.org/base/release/$REL .
-svn update --depth empty lib
-svn update lib/libmd
-svn update --depth empty sys
-svn update --depth empty sys/crypto
-svn update sys/crypto/sha2
-svn update sys/crypto/skein
-svn update --depth empty sys/sys
-svn update sys/sys/md5.h
-svn update --depth empty lib/libc
-svn update --depth empty lib/libc/stdlib
-svn update lib/libc/stdlib/getopt.c
-svn update --depth empty include
-svn update include/getopt.h
-svn update --depth empty sbin
-svn update sbin/md5
-
-rm -rf .svn
+for i in \
+  include/getopt.h \
+  lib/libc/stdlib/getopt.c \
+  lib/libmd/i386/rmd160.S \
+  lib/libmd/i386/sha.S \
+  lib/libmd/Makefile \
+  lib/libmd/Makefile.depend \
+  lib/libmd/md4.copyright \
+  lib/libmd/md4.h \
+  lib/libmd/md4c.c \
+  lib/libmd/md5.copyright \
+  lib/libmd/md5.h \
+  lib/libmd/md5c.c \
+  lib/libmd/mddriver.c \
+  lib/libmd/mdX.3 \
+  lib/libmd/mdXhl.c \
+  lib/libmd/ripemd.3 \
+  lib/libmd/ripemd.h \
+  lib/libmd/rmd_locl.h \
+  lib/libmd/rmd160c.c \
+  lib/libmd/rmdconst.h \
+  lib/libmd/rmddriver.c \
+  lib/libmd/sha_locl.h \
+  lib/libmd/sha.3 \
+  lib/libmd/sha.h \
+  lib/libmd/sha0c.c \
+  lib/libmd/sha1c.c \
+  lib/libmd/sha256.3 \
+  lib/libmd/sha512.3 \
+  lib/libmd/shadriver.c \
+  lib/libmd/skein.3 \
+  lib/libmd/skeindriver.c \
+  sbin/md5/Makefile \
+  sbin/md5/Makefile.depend \
+  sbin/md5/md5.1 \
+  sbin/md5/md5.c \
+  sys/crypto/sha2/sha224.h \
+  sys/crypto/sha2/sha256.h \
+  sys/crypto/sha2/sha256c.c \
+  sys/crypto/sha2/sha384.h \
+  sys/crypto/sha2/sha512.h \
+  sys/crypto/sha2/sha512c.c \
+  sys/crypto/sha2/sha512t.h \
+  sys/crypto/skein/amd64/skein_block_asm.S \
+  sys/crypto/skein/skein_block.c \
+  sys/crypto/skein/skein_debug.c \
+  sys/crypto/skein/skein_debug.h \
+  sys/crypto/skein/skein_freebsd.h \
+  sys/crypto/skein/skein_iv.h \
+  sys/crypto/skein/skein_port.h \
+  sys/crypto/skein/skein.c \
+  sys/crypto/skein/skein.h \
+  sys/sys/md5.h \
+  ;
+do
+  d=`dirname $i`
+  mkdir -pv $d
+  wget -4 -P $d https://raw.githubusercontent.com/freebsd/freebsd-src/releng/${REL}/$i
+done
 
 mv lib/libmd .
 mv sys/crypto libmd/
