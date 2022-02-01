@@ -4,7 +4,7 @@ TARGET_STATIC = libmd.a
 RANLIB = ranlib
 
 NO_X86_ASM=Y
-NO_X64_ASM=Y
+#NO_X64_ASM=Y
 
 MACHINE_ARCH=$(shell uname -m)
 ifeq ($(MACHINE_ARCH),i686)
@@ -101,7 +101,7 @@ skein_block.o: crypto/skein/skein_block.c
 	$(CC) $(CFLAGS) $(CFLAGS_skein_block_c) -c -o $@ $<
 
 skein_block_asm.o: crypto/skein/amd64/skein_block_asm.S
-	$(CC) $(CFLAGS) $(CFLAGS_skein_block_asm_S) -DELF -Wa,--noexecstack -c -o $@ $<
+	$(CC) $(CFLAGS) $(CFLAGS_skein_block_asm_S) -DSKEIN_OSX=1 -DELF -Wa,--noexecstack -c -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@

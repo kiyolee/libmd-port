@@ -1342,7 +1342,7 @@ _SP_OFFS_ = _SP_OFFS_-8
     ret
 .endif
 #----------------------------------------------------------------
-#ifndef SKEIN_CYGWIN
+#if !defined(SKEIN_CYGWIN) && !defined(SKEIN_OSX)
     .section .note.GNU-stack,"",@progbits
 #endif
 
