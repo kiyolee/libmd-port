@@ -33,7 +33,12 @@ OBJS_X64 = skein_block_asm.o
 endif
 endif
 
-CFLAGS = -pipe -O3 -Wall -I. -Icrypto/sha2 -Icrypto/skein -DLIBMD_INTERNAL $(CFLAGS_X86) $(CFLAGS_X64)
+ifneq ($(SKEIN_USE_ASM),)
+CFLAGS_skein_block_c = -DSKEIN_LOOP=995
+CFLAGS_skein_block_asm_S = -DSKEIN_LOOP=0
+endif
+
+CFLAGS = -fPIC -pipe -O3 -Wall -I. -Icrypto/sha2 -Icrypto/skein -DLIBMD_INTERNAL $(CFLAGS_X86) $(CFLAGS_X64)
 LDFLAGS_STATIC =
 
 OBJS = \
@@ -83,8 +88,11 @@ $(TARGET_STATIC): $(OBJS)
 %.o: i386/%.S
 	$(CC) $(CFLAGS) -DCYGWIN -c -o $@ $<
 
-%.o: crypto/skein/amd64/%.s
-	$(AS) --defsym SKEIN_USE_ASM=$(SKEIN_USE_ASM) --defsym SKEIN_CYGWIN=1 -o $@ $<
+skein_block.o: crypto/skein/skein_block.c
+	$(CC) $(CFLAGS) $(CFLAGS_skein_block_c) -c -o $@ $<
+
+skein_block_asm.o: crypto/skein/amd64/skein_block_asm.S
+	$(CC) $(CFLAGS) $(CFLAGS_skein_block_asm_S) -DSKEIN_CYGWIN=1 -c -o $@ $<
 
 md4hl.c: mdXhl.c
 	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $< > $@

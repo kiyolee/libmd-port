@@ -13,7 +13,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.2.0/lib/libmd/mdXhl.c 334105 2018-05-23 17:01:28Z markj $");
+__FBSDID("$FreeBSD$");
 #endif
 
 #include <sys/types.h>

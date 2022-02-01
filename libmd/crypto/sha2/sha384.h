@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: release/12.2.0/sys/crypto/sha2/sha384.h 307584 2016-10-18 23:20:49Z asomers $
+ * $FreeBSD$
  */
 
 #ifndef _SHA384_H_

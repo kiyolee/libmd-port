@@ -60,7 +60,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.2.0/lib/libmd/sha0c.c 336539 2018-07-20 07:01:28Z delphij $");
+__FBSDID("$FreeBSD$");
 #endif
 
 #include <sys/types.h>

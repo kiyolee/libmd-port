@@ -5,7 +5,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.2.0/lib/libmd/md4c.c 336539 2018-07-20 07:01:28Z delphij $");
+__FBSDID("$FreeBSD$");
 #endif
 
 /*-
@@ -101,7 +101,8 @@ static const unsigned char PADDING[64] = {
 /* MD4 initialization. Begins an MD4 operation, writing a new context.
  */
 MD4_API
-void MD4Init (MD4_CTX *context)
+void
+MD4Init(MD4_CTX *context)
 {
   context->count[0] = context->count[1] = 0;
 
@@ -118,7 +119,8 @@ void MD4Init (MD4_CTX *context)
      context.
  */
 MD4_API
-void MD4Update (MD4_CTX *context, const void *in, size_t inputLen)
+void
+MD4Update(MD4_CTX *context, const void *in, size_t inputLen)
 {
   size_t i, idx, partLen;
   const unsigned char *input = in;
@@ -172,8 +174,8 @@ void MD4Update (MD4_CTX *context, const void *in, size_t inputLen)
 }
 
 /* MD4 padding. */
-static
-void MD4Pad (MD4_CTX *context)
+static void
+MD4Pad(MD4_CTX *context)
 {
   unsigned char bits[8];
   unsigned int idx, padLen;
@@ -195,7 +197,8 @@ void MD4Pad (MD4_CTX *context)
      the message digest and zeroizing the context.
  */
 MD4_API
-void MD4Final (unsigned char digest[16], MD4_CTX *context)
+void
+MD4Final(unsigned char digest[16], MD4_CTX *context)
 {
   /* Do padding */
   MD4Pad (context);
@@ -210,7 +213,8 @@ void MD4Final (unsigned char digest[16], MD4_CTX *context)
 
 /* MD4 basic transformation. Transforms state based on block.
  */
-static void MD4Transform (UINT4 state[4], const unsigned char block[64])
+static void
+MD4Transform(UINT4 state[4], const unsigned char block[64])
 {
   UINT4 a = state[0], b = state[1], c = state[2], d = state[3], x[16];
 
@@ -283,7 +287,8 @@ static void MD4Transform (UINT4 state[4], const unsigned char block[64])
 /* Encodes input (UINT4) into output (unsigned char). Assumes len is
      a multiple of 4.
  */
-static void Encode (unsigned char *output, UINT4 *input, unsigned int len)
+static void
+Encode(unsigned char *output, UINT4 *input, unsigned int len)
 {
   unsigned int i, j;
 
@@ -298,7 +303,8 @@ static void Encode (unsigned char *output, UINT4 *input, unsigned int len)
 /* Decodes input (unsigned char) into output (UINT4). Assumes len is
      a multiple of 4.
  */
-static void Decode (UINT4 *output, const unsigned char *input, unsigned int len)
+static void
+Decode(UINT4 *output, const unsigned char *input, unsigned int len)
 {
   unsigned int i, j;
 

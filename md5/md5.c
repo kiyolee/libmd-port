@@ -21,7 +21,7 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD: release/12.2.0/sbin/md5/md5.c 363698 2020-07-30 14:41:41Z emaste $");
+__FBSDID("$FreeBSD$");
 #endif
 
 #ifdef _WIN32
@@ -711,6 +711,3 @@ usage(const Algorithm_t *alg)
 	fprintf(stderr, "usage: %s [-pqrtx] [-c string] [-s string] [files ...]\n", alg->progname);
 	exit(1);
 }
-
-/* vim: ts=4:sts=4:sw=4:noet
- */

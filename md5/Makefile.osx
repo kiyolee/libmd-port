@@ -28,12 +28,12 @@ CFLAGS_INTERNAL = -DLIBMD_INTERNAL
 endif
 
 OSX_CFLAGS = -mmacosx-version-min=10.11
-OSX_LDFLAGS = -macosx_version_min 10.11
+OSX_LDFLAGS = -mmacosx-version-min=10.11
 
-CFLAGS = -pipe -O3 -Wall \
+CFLAGS = -fPIC -pipe -O3 -Wall \
     -I../libmd -I../libmd/crypto/sha2 -I../libmd/crypto/skein $(CFLAGS_INTERNAL) \
     $(OSX_CFLAGS)
-LDFLAGS = $(OSX_LDFLAGS)
+LDFLAGS = -fPIC $(OSX_LDFLAGS)
 
 ifeq ($(NO_INTERNAL),)
 OBJS = md5.o
@@ -61,7 +61,7 @@ $(LIBMD): ../libmd/Makefile.osx
 	( cd ../libmd; $(MAKE) -f Makefile.osx )
 
 $(TARGET): $(OBJS) $(LIBMD)
-	$(LD) $(LDFLAGS) $^ -o $@ -lc
+	$(CC) $(LDFLAGS) $^ -o $@
 
 $(TARGET_RMD160): $(TARGET)
 	ln -s $(TARGET) $@
