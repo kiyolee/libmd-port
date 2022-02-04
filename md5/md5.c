@@ -226,10 +226,10 @@ static const struct Algorithm_t Algorithm[] = {
 #if defined(_WIN32) || defined(__OS400__)
 
 static void
-warn(const char *fmt, ...)
+vwarn(const char *fmt, va_list va)
 {
-	va_list va;
-	va_start(va, fmt);
+	if (opt_progname && *opt_progname)
+		fprintf(stderr, "%s: ", opt_progname);
 	if (fmt != NULL) {
 		vfprintf(stderr, fmt, va);
 		fprintf(stderr, ": ");
@@ -245,6 +245,14 @@ warn(const char *fmt, ...)
 #else
 	fprintf(stderr, "%s\n", strerror(errno));
 #endif
+}
+
+static void
+warn(const char *fmt, ...)
+{
+	va_list va;
+	va_start(va, fmt);
+	vwarn(fmt, va);
 	va_end(va);
 }
 
@@ -253,21 +261,7 @@ err(int eval, const char *fmt, ...)
 {
 	va_list va;
 	va_start(va, fmt);
-	if (fmt != NULL) {
-		vfprintf(stderr, fmt, va);
-		fprintf(stderr, ": ");
-	}
-#if defined(_MSC_VER) && _MSC_VER >= 1500
-	{
-		char err[256];
-		if (strerror_s(err, sizeof(err), errno) == 0)
-			fprintf(stderr, "%s\n", err);
-		else
-			fprintf(stderr, "errno(%d)\n", errno);
-	}
-#else
-	fprintf(stderr, "%s\n", strerror(errno));
-#endif
+	vwarn(fmt, va);
 	va_end(va);
 	exit(eval);
 }
@@ -306,6 +300,9 @@ main(int argc, char *argv[])
 #endif
 	else
 		progname = argv[0];
+#if defined(_WIN32) || defined(__OS400__)
+	opt_progname = progname;
+#endif
 
 	for (digest = 0; digest < sizeof(Algorithm)/sizeof(*Algorithm); digest++)
 		if (strncasecmp(Algorithm[digest].progname, progname, Algorithm[digest].prognamelen) == 0)

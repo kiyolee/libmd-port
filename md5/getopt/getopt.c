@@ -68,6 +68,10 @@ int	opterr = 1,		/* if error message should be printed */
 	optreset;		/* reset getopt */
 char	*optarg;		/* argument associated with option */
 
+#ifndef __FreeBSD__
+const char *opt_progname = NULL;
+#endif
+
 #define	BADCH	(int)'?'
 #define	BADARG	(int)':'
 static char EMSG[] = "";
@@ -116,7 +120,9 @@ getopt(int nargc, char * const nargv[], const char *ostr)
 #ifdef __FreeBSD__
 			    "%s: illegal option -- %c\n", _getprogname(),
 #else
-			    "illegal option -- %c\n",
+			    "%s%sillegal option -- %c\n",
+			    (opt_progname && *opt_progname) ? opt_progname : "",
+			    (opt_progname && *opt_progname) ? ": " : "",
 #endif
 			    optopt);
 		return (BADCH);
@@ -151,9 +157,11 @@ getopt(int nargc, char * const nargv[], const char *ostr)
 #ifdef __FreeBSD__
 				    "%s: option requires an argument -- %c\n", _getprogname(),
 #else
-				    "option requires an argument -- %c\n",
+				    "%s%soption requires an argument -- %c\n",
+				    (opt_progname && *opt_progname) ? opt_progname : "",
+				    (opt_progname && *opt_progname) ? ": " : "",
 #endif
-                                    optopt);
+				    optopt);
 			return (BADCH);
 		}
 		place = EMSG;

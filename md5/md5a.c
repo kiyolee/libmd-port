@@ -4,11 +4,6 @@
  * MDDRIVER.C - test driver for MD2, MD4 and MD5
  */
 
-#ifdef HAVE_CAPSICUM
-#include <sys/capsicum.h>
-#include <capsicum_helpers.h>
-#endif
-
 /*
  *  Copyright (C) 1990-2, RSA Data Security, Inc. Created 1990. All
  *  rights reserved.
@@ -81,6 +76,11 @@ __FBSDID("$FreeBSD$");
 #include <string.h>
 #include <time.h>
 
+#ifdef HAVE_CAPSICUM
+#include <sys/capsicum.h>
+#include <capsicum_helpers.h>
+#endif
+
 #if defined(_WIN32) || defined(__OS400__)
 #include "getopt/getopt.h"
 #elif defined(__APPLE__)
@@ -127,11 +127,14 @@ __FBSDID("$FreeBSD$");
 #define TEST_BLOCK_COUNT 100000
 #define MDTESTCOUNT 8
 
+static int pflag;
 static int qflag;
 static int rflag;
 static int sflag;
+static int skip;
 static char* checkAgainst;
 static int checksFailed;
+static int failed;
 
 typedef struct DIGEST_CTX_t DIGEST_CTX;
 
@@ -165,10 +168,10 @@ typedef struct Algorithm_t {
 	char *(*Fd)(int, char *);
 } Algorithm_t;
 
-static void MDString(const Algorithm_t *, const char *);
+static void MDOutput(const Algorithm_t *, char *, char **);
 static void MDTimeTrial(const Algorithm_t *);
-static int  MDTestSuite(const Algorithm_t *);
-static void MDFilter(const Algorithm_t *, int);
+static void MDTestSuite(const Algorithm_t *);
+static char *MDFilter(const Algorithm_t *, char*, int);
 static void usage(const Algorithm_t *);
 
 /* max(MD5_DIGEST_LENGTH, SHA_DIGEST_LENGTH,
@@ -230,10 +233,10 @@ static const struct Algorithm_t Algorithm[] = {
 #if defined(_WIN32) || defined(__OS400__)
 
 static void
-warn(const char *fmt, ...)
+vwarn(const char *fmt, va_list va)
 {
-	va_list va;
-	va_start(va, fmt);
+	if (opt_progname && *opt_progname)
+		fprintf(stderr, "%s: ", opt_progname);
 	if (fmt != NULL) {
 		vfprintf(stderr, fmt, va);
 		fprintf(stderr, ": ");
@@ -249,6 +252,14 @@ warn(const char *fmt, ...)
 #else
 	fprintf(stderr, "%s\n", strerror(errno));
 #endif
+}
+
+static void
+warn(const char *fmt, ...)
+{
+	va_list va;
+	va_start(va, fmt);
+	vwarn(fmt, va);
 	va_end(va);
 }
 
@@ -257,21 +268,7 @@ err(int eval, const char *fmt, ...)
 {
 	va_list va;
 	va_start(va, fmt);
-	if (fmt != NULL) {
-		vfprintf(stderr, fmt, va);
-		fprintf(stderr, ": ");
-	}
-#if defined(_MSC_VER) && _MSC_VER >= 1500
-	{
-		char err[256];
-		if (strerror_s(err, sizeof(err), errno) == 0)
-			fprintf(stderr, "%s\n", err);
-		else
-			fprintf(stderr, "errno(%d)\n", errno);
-	}
-#else
-	fprintf(stderr, "%s\n", strerror(errno));
-#endif
+	vwarn(fmt, va);
 	va_end(va);
 	exit(eval);
 }
@@ -294,12 +291,11 @@ main(int argc, char *argv[])
 	cap_rights_t	rights;
 #endif
 	int	ch, fd;
-	char   *p;
+	char   *p, *string;
 	char	buf[HEX_DIGEST_LENGTH];
-	int	failed;
+	size_t	len;
  	unsigned	digest;
  	const char*	progname;
-	int testres = -1;
 
 	if ((progname = strrchr(argv[0], '/')) != NULL)
 		progname++;
@@ -311,6 +307,9 @@ main(int argc, char *argv[])
 #endif
 	else
 		progname = argv[0];
+#if defined(_WIN32) || defined(__OS400__)
+	opt_progname = progname;
+#endif
 
 	for (digest = 0; digest < sizeof(Algorithm)/sizeof(*Algorithm); digest++)
 		if (strncasecmp(Algorithm[digest].progname, progname, Algorithm[digest].prognamelen) == 0)
@@ -322,13 +321,19 @@ main(int argc, char *argv[])
 	failed = 0;
 	checkAgainst = NULL;
 	checksFailed = 0;
+	pflag = 0;
+	qflag = 0;
+	rflag = 0;
+	sflag = 0;
+	string = NULL;
+	skip = 0;
 	while ((ch = getopt(argc, argv, "c:pqrs:tx")) != -1)
 		switch (ch) {
 		case 'c':
 			checkAgainst = optarg;
 			break;
 		case 'p':
-			MDFilter(&Algorithm[digest], 1);
+			pflag = 1;
 			break;
 		case 'q':
 			qflag = 1;
@@ -338,13 +343,15 @@ main(int argc, char *argv[])
 			break;
 		case 's':
 			sflag = 1;
-			MDString(&Algorithm[digest], optarg);
+			string = optarg;
 			break;
 		case 't':
 			MDTimeTrial(&Algorithm[digest]);
+			skip = 1;
 			break;
 		case 'x':
-			testres = (MDTestSuite(&Algorithm[digest]) == 0) ? 0 : 1;
+			MDTestSuite(&Algorithm[digest]);
+			skip = 1;
 			break;
 		default:
 			usage(&Algorithm[digest]);
@@ -378,42 +385,27 @@ main(int argc, char *argv[])
 			if (*(argv + 1) == NULL) {
 #ifdef HAVE_CAPSICUM
 				cap_rights_init(&rights, CAP_READ);
-				if ((cap_rights_limit(fd, &rights) < 0 &&
-				    errno != ENOSYS) || caph_enter() < 0)
+				if (caph_rights_limit(fd, &rights) < 0 ||
+				    caph_enter() < 0)
 					err(1, "capsicum");
 #endif
 			}
-			if ((p = Algorithm[digest].Fd(fd, buf)) == NULL) {
-				warn("%s", *argv);
-				failed++;
-			} else {
-				if (qflag)
-					printf("%s", p);
-				else if (rflag)
-					printf("%s  %s", p, *argv);
-				else
-					printf("%s (%s) = %s",
-					    Algorithm[digest].name, *argv, p);
-				if (checkAgainst && strcasecmp(checkAgainst, p) != 0)
-				{
-					checksFailed++;
-					if (!qflag)
-						printf(" [ Failed ]");
-				}
-				printf("\n");
-			}
-			close(fd);
+			p = Algorithm[digest].Fd(fd, buf);
+			(void)close(fd);
+			MDOutput(&Algorithm[digest], p, argv);
 		} while (*++argv);
-	} else if (!sflag && (optind == 1 || qflag || rflag)) {
+	} else if (!sflag && !skip) {
 #ifdef HAVE_CAPSICUM
 		if (caph_limit_stdin() < 0 || caph_enter() < 0)
 			err(1, "capsicum");
 #endif
-		MDFilter(&Algorithm[digest], 0);
+		p = MDFilter(&Algorithm[digest], (char *)&buf, pflag);
+		MDOutput(&Algorithm[digest], p, NULL);
+	} else if (sflag) {
+		len = strlen(string);
+		p = Algorithm[digest].Data(string, len, buf);
+		MDOutput(&Algorithm[digest], p, &string);
 	}
-
-	if (testres > 0)
-		return 255;
 
 	if (failed != 0)
 		return (1);
@@ -422,30 +414,38 @@ main(int argc, char *argv[])
 
 	return (0);
 }
+
 /*
- * Digests a string and prints the result.
+ * Common output handling
  */
 static void
-MDString(const Algorithm_t *alg, const char *string)
+MDOutput(const Algorithm_t *alg, char *p, char *argv[])
 {
-	size_t len = strlen(string);
-	char buf[HEX_DIGEST_LENGTH];
-
-	alg->Data(string,len,buf);
-	if (qflag)
-		printf("%s", buf);
-	else if (rflag)
-		printf("%s \"%s\"", buf, string);
-	else
-		printf("%s (\"%s\") = %s", alg->name, string, buf);
-	if (checkAgainst && strcasecmp(buf,checkAgainst) != 0)
-	{
-		checksFailed++;
-		if (!qflag)
-			printf(" [ failed ]");
+	if (p == NULL) {
+		warn("%s", *argv);
+		failed++;
+	} else {
+		/*
+		 * If argv is NULL we are reading from stdin, where the output
+		 * format has always been just the hash.
+		 */
+		if (qflag || argv == NULL)
+			printf("%s", p);
+		else if (rflag)
+			printf("%s  %s", p, *argv);
+		else
+			printf("%s (%s) = %s",
+			    alg->name, *argv, p);
+		if (checkAgainst && strcasecmp(checkAgainst, p) != 0)
+		{
+			checksFailed++;
+			if (!qflag)
+				printf(" [ Failed ]");
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
+
 /*
  * Measures the time to digest TEST_BLOCK_COUNT TEST_BLOCK_LEN-byte blocks.
  */
@@ -493,18 +493,14 @@ MDTimeTrial(const Algorithm_t *alg)
 
 	/* Digest blocks */
 	pcontext = alg->Create();
-	if (pcontext)
-	{
-		for (i = 0; i < TEST_BLOCK_COUNT; i++)
-			alg->Update(pcontext, block, TEST_BLOCK_LEN);
-		p = alg->End(pcontext, buf);
-		alg->Destroy(pcontext);
-		pcontext = NULL;
-	}
-	else
-	{
-		p = NULL;
-	}
+	if (!pcontext)
+		err(1, "create context failed");
+
+	for (i = 0; i < TEST_BLOCK_COUNT; i++)
+		alg->Update(pcontext, block, TEST_BLOCK_LEN);
+	p = alg->End(pcontext, buf);
+	alg->Destroy(pcontext);
+	pcontext = NULL;
 
 	/* Stop timer */
 #ifdef _WIN32
@@ -523,21 +519,14 @@ MDTimeTrial(const Algorithm_t *alg)
 	seconds = total.tv_sec + (float) total.tv_usec / 1000000;
 #endif
 
-	if (p)
-	{
-		printf(" done\n");
-		printf("Digest = %s", p);
-		if (hastime) {
-			printf("\nTime = %f seconds\n", seconds);
-			printf("Speed = %f MiB/second\n", (float) TEST_BLOCK_LEN * 
-				(float) TEST_BLOCK_COUNT / seconds / (1 << 20));
-		} else {
-			printf("Timing not available\n");
-		}
-	}
-	else
-	{
-		printf("Failed to create context\n");
+	printf(" done\n");
+	printf("Digest = %s", p);
+	if (hastime) {
+		printf("\nTime = %f seconds\n", seconds);
+		printf("Speed = %f MiB/second\n", (float) TEST_BLOCK_LEN * 
+			(float) TEST_BLOCK_COUNT / seconds / (1 << 20));
+	} else {
+		printf("Timing not available\n");
 	}
 }
 /*
@@ -677,10 +666,9 @@ const char *SKEIN1024_TestOutput[MDTESTCOUNT] = {
 	"e6799b78db54085a2be7ff4c8007f147fa88d326abab30be0560b953396d8802feee9a15419b48a467574e9283be15685ca8a079ee52b27166b64dd70b124b1d4e4f6aca37224c3f2685e67e67baef9f94b905698adc794a09672aba977a61b20966912acdb08c21a2c37001785355dc884751a21f848ab36e590331ff938138"
 };
 
-static int
+static void
 MDTestSuite(const Algorithm_t *alg)
 {
-	int res = 0;
 	int i;
 	char buffer[HEX_DIGEST_LENGTH];
 
@@ -694,44 +682,40 @@ MDTestSuite(const Algorithm_t *alg)
 		(*alg->Data)((const unsigned char *)(MDTestInput[i]), strlen(MDTestInput[i]), buffer);
 #endif
 		printf("%s (\"%s\") = %s", alg->name, MDTestInput[i], buffer);
-		if (strcmp(buffer, (*alg->TestOutput)[i]) == 0)
+		if (strcmp(buffer, (*alg->TestOutput)[i]) == 0) {
 			printf(" - verified correct\n");
-		else {
-			res = -1;
+		} else {
 			printf(" - INCORRECT RESULT!\n");
+			failed++;
 		}
 	}
-
-	return res;
 }
 
 /*
  * Digests the standard input and prints the result.
  */
-static void
-MDFilter(const Algorithm_t *alg, int tee)
+static char *
+MDFilter(const Algorithm_t *alg, char *buf, int tee)
 {
 	DIGEST_CTX *pcontext;
 	size_t len;
 	unsigned char buffer[BUFSIZ];
-	char buf[HEX_DIGEST_LENGTH];
+	char *p;
 
 	pcontext = alg->Create();
-	if (pcontext)
-	{
-		while ((len = fread(buffer, 1, BUFSIZ, stdin)) > 0) {
-			if (tee && len != fwrite(buffer, 1, len, stdout))
-				err(1, "stdout");
-			alg->Update(pcontext, buffer, len);
-		}
-		printf("%s\n", alg->End(pcontext, buf));
-		alg->Destroy(pcontext);
-		pcontext = NULL;
+	if (!pcontext)
+		err(1, "create context failed");
+
+	while ((len = fread(buffer, 1, BUFSIZ, stdin)) > 0) {
+		if (tee && len != fwrite(buffer, 1, len, stdout))
+			err(1, "stdout");
+		alg->Update(pcontext, buffer, len);
 	}
-	else
-	{
-		printf("Failed to create context\n");
-	}
+	p = alg->End(pcontext, buf);
+	alg->Destroy(pcontext);
+	pcontext = NULL;
+
+	return (p);
 }
 
 static void

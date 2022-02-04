@@ -83,6 +83,9 @@ extern int optind, opterr, optopt;
 #define	_OPTRESET_DECLARED
 extern int optreset;			/* getopt(3) external variable */
 #endif
+#ifndef __FreeBSD__
+extern const char *opt_progname;
+#endif
 #ifdef __FreeBSD__
 __END_DECLS
 #endif
