@@ -2,37 +2,37 @@
 
 [ ! -f ../`basename "$0"` ] && exit 1
 
-REL=${1:-13.0}
+REL=${1:-13.1}
 
 for i in \
   include/getopt.h \
   lib/libc/stdlib/getopt.c \
-  lib/libmd/i386/rmd160.S \
-  lib/libmd/i386/sha.S \
   lib/libmd/Makefile \
   lib/libmd/Makefile.depend \
+  lib/libmd/i386/rmd160.S \
+  lib/libmd/i386/sha.S \
   lib/libmd/md4.copyright \
   lib/libmd/md4.h \
   lib/libmd/md4c.c \
   lib/libmd/md5.copyright \
   lib/libmd/md5.h \
   lib/libmd/md5c.c \
-  lib/libmd/mddriver.c \
   lib/libmd/mdX.3 \
   lib/libmd/mdXhl.c \
+  lib/libmd/mddriver.c \
   lib/libmd/ripemd.3 \
   lib/libmd/ripemd.h \
-  lib/libmd/rmd_locl.h \
   lib/libmd/rmd160c.c \
+  lib/libmd/rmd_locl.h \
   lib/libmd/rmdconst.h \
   lib/libmd/rmddriver.c \
-  lib/libmd/sha_locl.h \
   lib/libmd/sha.3 \
   lib/libmd/sha.h \
   lib/libmd/sha0c.c \
   lib/libmd/sha1c.c \
   lib/libmd/sha256.3 \
   lib/libmd/sha512.3 \
+  lib/libmd/sha_locl.h \
   lib/libmd/shadriver.c \
   lib/libmd/skein.3 \
   lib/libmd/skeindriver.c \
@@ -43,19 +43,23 @@ for i in \
   sys/crypto/sha2/sha224.h \
   sys/crypto/sha2/sha256.h \
   sys/crypto/sha2/sha256c.c \
+  sys/crypto/sha2/sha256c_arm64.c \
+  sys/crypto/sha2/sha256c_impl.h \
   sys/crypto/sha2/sha384.h \
   sys/crypto/sha2/sha512.h \
   sys/crypto/sha2/sha512c.c \
+  sys/crypto/sha2/sha512c_arm64.c \
+  sys/crypto/sha2/sha512c_impl.h \
   sys/crypto/sha2/sha512t.h \
   sys/crypto/skein/amd64/skein_block_asm.S \
+  sys/crypto/skein/skein.c \
+  sys/crypto/skein/skein.h \
   sys/crypto/skein/skein_block.c \
   sys/crypto/skein/skein_debug.c \
   sys/crypto/skein/skein_debug.h \
   sys/crypto/skein/skein_freebsd.h \
   sys/crypto/skein/skein_iv.h \
   sys/crypto/skein/skein_port.h \
-  sys/crypto/skein/skein.c \
-  sys/crypto/skein/skein.h \
   sys/sys/md5.h \
   ;
 do

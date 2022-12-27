@@ -37,6 +37,7 @@ __FBSDID("$FreeBSD$");
 #include <sys/types.h>
 #include <fcntl.h>
 #if defined(unix) || defined(__OS400__) || defined(__APPLE__)
+#include <sys/param.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
@@ -66,6 +67,13 @@ __FBSDID("$FreeBSD$");
 #include "sha512t.h"
 #include "skein.h"
 
+#if defined(_MSC_VER) && _MSC_VER < 1800
+typedef int bool;
+#define true 1
+#define false 0
+#else
+#include <stdbool.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -101,6 +109,7 @@ __FBSDID("$FreeBSD$");
 #define close _close
 #define strcasecmp  _stricmp
 #define strncasecmp _strnicmp
+#define strdup _strdup
 #else
 #define strcasecmp  stricmp
 #define strncasecmp strnicmp
@@ -122,6 +131,8 @@ __FBSDID("$FreeBSD$");
 #define TEST_BLOCK_COUNT 100000
 #define MDTESTCOUNT 8
 
+static int bflag;
+static int cflag;
 static int pflag;
 static int qflag;
 static int rflag;
@@ -226,7 +237,7 @@ static const struct Algorithm_t Algorithm[] = {
 #if defined(_WIN32) || defined(__OS400__)
 
 static void
-vwarn(const char *fmt, va_list va)
+_vwarn(const char *fmt, va_list va)
 {
 	if (opt_progname && *opt_progname)
 		fprintf(stderr, "%s: ", opt_progname);
@@ -252,7 +263,7 @@ warn(const char *fmt, ...)
 {
 	va_list va;
 	va_start(va, fmt);
-	vwarn(fmt, va);
+	_vwarn(fmt, va);
 	va_end(va);
 }
 
@@ -261,12 +272,131 @@ err(int eval, const char *fmt, ...)
 {
 	va_list va;
 	va_start(va, fmt);
-	vwarn(fmt, va);
+	_vwarn(fmt, va);
+	va_end(va);
+	exit(eval);
+}
+
+static void
+_vwarnx(const char *fmt, va_list va)
+{
+	if (opt_progname && *opt_progname)
+		fprintf(stderr, "%s: ", opt_progname);
+	if (fmt != NULL)
+		vfprintf(stderr, fmt, va);
+	putc('\n', stderr);
+}
+
+static void
+warnx(const char *fmt, ...)
+{
+	va_list va;
+	va_start(va, fmt);
+	_vwarnx(fmt, va);
+	va_end(va);
+}
+
+static void
+errx(int eval, const char *fmt, ...)
+{
+	va_list va;
+	va_start(va, fmt);
+	_vwarnx(fmt, va);
 	va_end(va);
 	exit(eval);
 }
 
 #endif
+
+static unsigned	digest;
+static unsigned	malformed;
+static bool	gnu_emu = false;
+
+struct chksumrec {
+	char	*filename;
+	char	*chksum;
+	struct	chksumrec	*next;
+};
+
+static struct chksumrec *head = NULL;
+static struct chksumrec **next = &head;
+
+#ifdef _WIN32
+#define MAXPATHLEN MAX_PATH
+#endif
+
+#define PADDING	7	/* extra padding for "SHA512t256 (...) = ...\n" style */
+#define CHKFILELINELEN	(HEX_DIGEST_LENGTH + MAXPATHLEN + PADDING)
+
+static int gnu_check(const char *checksumsfile)
+{
+	FILE	*inp;
+	char	linebuf[CHKFILELINELEN];
+	int	linelen;
+	int	lineno;
+	char	*filename;
+	char	*hashstr;
+	struct chksumrec	*rec;
+	const char	*digestname;
+	int	digestnamelen;
+	int	hashstrlen;
+
+#ifdef _MSC_VER
+	if (fopen_s(&inp, checksumsfile, "r") != 0)
+		err(1, "%s", checksumsfile);
+#else
+	if ((inp = fopen(checksumsfile, "r")) == NULL)
+		err(1, "%s", checksumsfile);
+#endif
+	digestname = Algorithm[digest].name;
+	digestnamelen = strlen(digestname);
+	hashstrlen = strlen(*(Algorithm[digest].TestOutput[0]));
+	lineno = 1;
+	while (fgets(linebuf, sizeof(linebuf), inp) != NULL) {
+		linelen = strlen(linebuf) - 1;
+		if (linelen <= 0)
+			break;
+		if (linebuf[linelen] != '\n')
+			errx(1, "malformed input line %d (len=%d)", lineno, linelen);
+		linebuf[linelen] = '\0';
+		filename = linebuf + digestnamelen + 2;
+		hashstr = linebuf + linelen - hashstrlen;
+		/*
+		 * supported formats:
+		 * BSD: <DigestName> (<Filename>): <Digest>
+		 * GNU: <Digest> [ *]<Filename>
+		 */
+		if (linelen >= digestnamelen + hashstrlen + 6 &&
+		    strncmp(linebuf, digestname, digestnamelen) == 0 &&
+		    strncmp(filename - 2, " (", 2) == 0 &&
+		    strncmp(hashstr - 4, ") = ", 4) == 0) {
+			*(hashstr - 4) = '\0';
+		} else if (linelen >= hashstrlen + 3 &&
+		    linebuf[hashstrlen] == ' ') {
+			linebuf[hashstrlen] = '\0';
+			hashstr = linebuf;
+			filename = linebuf + hashstrlen + 1;
+			if (*filename == ' ' || *filename == '*')
+				filename++;
+		} else {
+			malformed++;
+			continue;
+		}
+		rec = malloc(sizeof (*rec));
+		if (rec == NULL)
+			errx(1, "malloc failed");
+		rec->chksum = strdup(hashstr);
+		rec->filename = strdup(filename);
+		if (rec->chksum == NULL || rec->filename == NULL)
+			errx(1, "malloc failed");
+		rec->next = NULL;
+		*next = rec;
+		next = &rec->next;
+		lineno++;
+	}
+	fclose(inp);
+	return (lineno - 1);
+}
 
 /* Main driver.
 
@@ -287,8 +417,9 @@ main(int argc, char *argv[])
 	char   *p, *string;
 	char	buf[HEX_DIGEST_LENGTH];
 	size_t	len;
- 	unsigned	digest;
- 	const char*	progname;
+	char	*progname;
+	struct chksumrec	*rec = NULL;
+	int	numrecs = 0;
 
 	if ((progname = strrchr(argv[0], '/')) != NULL)
 		progname++;
@@ -304,12 +435,31 @@ main(int argc, char *argv[])
 	opt_progname = progname;
 #endif
 
+	/*
+	 * GNU coreutils has a number of programs named *sum. These produce
+	 * similar results to the BSD version, but in a different format,
+	 * similar to BSD's -r flag. We install links to this program with
+	 * ending 'sum' to provide this compatibility. Check here to see if the
+	 * name of the program ends in 'sum', set the flag and drop the 'sum' so
+	 * the digest lookup works. Also, make -t a nop when running in this mode
+	 * since that means 'text file' there (though it's a nop in coreutils
+	 * on unix-like systems). The -c flag conflicts, so it's just disabled
+	 * in this mode (though in the future it might be implemented).
+	 */
+	len = strlen(progname);
+	if (len > 3 && strcmp(progname + len - 3, "sum") == 0) {
+		len -= 3;
+		rflag = 1;
+		gnu_emu = true;
+	}
+
 	for (digest = 0; digest < sizeof(Algorithm)/sizeof(*Algorithm); digest++)
-		if (strncasecmp(Algorithm[digest].progname, progname, Algorithm[digest].prognamelen) == 0)
+		if (len >= Algorithm[digest].prognamelen
+				&& strncasecmp(Algorithm[digest].progname, progname, Algorithm[digest].prognamelen) == 0)
 			break;
 
- 	if (digest == sizeof(Algorithm)/sizeof(*Algorithm))
- 		digest = 0;
+	if (digest == sizeof(Algorithm)/sizeof(*Algorithm))
+		digest = 0;
 
 	failed = 0;
 	checkAgainst = NULL;
@@ -320,10 +470,17 @@ main(int argc, char *argv[])
 	sflag = 0;
 	string = NULL;
 	skip = 0;
-	while ((ch = getopt(argc, argv, "c:pqrs:tx")) != -1)
+	while ((ch = getopt(argc, argv, "bc:pqrs:tx")) != -1)
 		switch (ch) {
+		case 'b':
+			bflag = 1;
+			break;
 		case 'c':
-			checkAgainst = optarg;
+			cflag = 1;
+			if (gnu_emu)
+				numrecs = gnu_check(optarg);
+			else
+				checkAgainst = optarg;
 			break;
 		case 'p':
 			pflag = 1;
@@ -339,8 +496,10 @@ main(int argc, char *argv[])
 			string = optarg;
 			break;
 		case 't':
-			MDTimeTrial(&Algorithm[digest]);
-			skip = 1;
+			if (!gnu_emu) {
+				MDTimeTrial(&Algorithm[digest]);
+				skip = 1;
+			} /* else: text mode is a nop */
 			break;
 		case 'x':
 			MDTestSuite(&Algorithm[digest]);
@@ -356,6 +515,20 @@ main(int argc, char *argv[])
 	if (caph_limit_stdout() < 0 || caph_limit_stderr() < 0)
 		err(1, "unable to limit rights for stdio");
 #endif
+
+	if (cflag && gnu_emu) {
+		/*
+		 * Replace argv by an array of filenames from the digest file
+		 */
+		argc = 0;
+		argv = (char**)calloc(sizeof(char *), numrecs + 1);
+		for (rec = head; rec != NULL; rec = rec->next) {
+			argv[argc] = rec->filename;
+			argc++;
+		}
+		argv[argc] = NULL;
+		rec = head;
+	}
 
 	if (*argv) {
 		do {
@@ -383,11 +556,15 @@ main(int argc, char *argv[])
 					err(1, "capsicum");
 #endif
 			}
+			if (cflag && gnu_emu) {
+				checkAgainst = rec->chksum;
+				rec = rec->next;
+			}
 			p = Algorithm[digest].Fd(fd, buf);
 			(void)close(fd);
 			MDOutput(&Algorithm[digest], p, argv);
 		} while (*++argv);
-	} else if (!sflag && !skip) {
+	} else if (!cflag && !sflag && !skip) {
 #ifdef HAVE_CAPSICUM
 		if (caph_limit_stdin() < 0 || caph_enter() < 0)
 			err(1, "capsicum");
@@ -399,7 +576,12 @@ main(int argc, char *argv[])
 		p = Algorithm[digest].Data(string, len, buf);
 		MDOutput(&Algorithm[digest], p, &string);
 	}
-
+	if (gnu_emu) {
+		if (malformed > 0)
+			warnx("WARNING: %d lines are improperly formatted", malformed);
+		if (checksFailed > 0)
+			warnx("WARNING: %d computed checksums did NOT match", checksFailed);
+	}
 	if (failed != 0)
 		return (1);
 	if (checksFailed != 0)
@@ -414,6 +596,8 @@ main(int argc, char *argv[])
 static void
 MDOutput(const Algorithm_t *alg, char *p, char *argv[])
 {
+	bool checkfailed = false;
+
 	if (p == NULL) {
 		warn("%s", *argv);
 		failed++;
@@ -422,21 +606,33 @@ MDOutput(const Algorithm_t *alg, char *p, char *argv[])
 		 * If argv is NULL we are reading from stdin, where the output
 		 * format has always been just the hash.
 		 */
-		if (qflag || argv == NULL)
-			printf("%s", p);
-		else if (rflag)
-			printf("%s  %s", p, *argv);
-		else
-			printf("%s (%s) = %s",
-			    alg->name, *argv, p);
-		if (checkAgainst && strcasecmp(checkAgainst, p) != 0)
-		{
-			checksFailed++;
-			if (!qflag)
-				printf(" [ Failed ]");
+		if (cflag && gnu_emu) {
+			checkfailed = strcasecmp(checkAgainst, p) != 0;
+			if (!qflag || checkfailed)
+				printf("%s: %s\n", *argv, checkfailed ? "FAILED" : "OK");
+		} else if (qflag || argv == NULL) {
+			printf("%s\n", p);
+		} else {
+			if (rflag)
+				if (gnu_emu)
+					if (bflag)
+						printf("%s *%s", p, *argv);
+					else
+						printf("%s  %s", p, *argv);
+				else
+					printf("%s  %s", p, *argv);
+			else
+				printf("%s (%s) = %s", alg->name, *argv, p);
+			if (checkAgainst) {
+				checkfailed = strcasecmp(checkAgainst, p) != 0;
+				if (!qflag && checkfailed)
+					printf(" [ Failed ]");
+			}
+			printf("\n");
 		}
-		printf("\n");
 	}
+	if (checkfailed)
+		checksFailed++;
 }
 
 /*
@@ -511,7 +707,7 @@ MDTimeTrial(const Algorithm_t *alg)
 	printf("Digest = %s", p);
 	if (hastime) {
 		printf("\nTime = %f seconds\n", seconds);
-		printf("Speed = %f MiB/second\n", (float) TEST_BLOCK_LEN * 
+		printf("Speed = %f MiB/second\n", (float) TEST_BLOCK_LEN *
 			(float) TEST_BLOCK_COUNT / seconds / (1 << 20));
 	} else {
 		printf("Timing not available\n");
@@ -705,6 +901,9 @@ static void
 usage(const Algorithm_t *alg)
 {
 
-	fprintf(stderr, "usage: %s [-pqrtx] [-c string] [-s string] [files ...]\n", alg->progname);
+	if (gnu_emu)
+		fprintf(stderr, "usage: %ssum [-pqrtx] [-c file] [-s string] [files ...]\n", alg->progname);
+	else
+		fprintf(stderr, "usage: %s [-pqrtx] [-c string] [-s string] [files ...]\n", alg->progname);
 	exit(1);
 }
