@@ -114,6 +114,7 @@ typedef int bool;
 #define close _close
 #define strcasecmp  _stricmp
 #define strncasecmp _strnicmp
+#define strdup _strdup
 #else
 #define strcasecmp  stricmp
 #define strncasecmp strnicmp
@@ -135,16 +136,16 @@ typedef int bool;
 #define TEST_BLOCK_COUNT 100000
 #define MDTESTCOUNT 8
 
-static int bflag;
-static int cflag;
-static int pflag;
-static int qflag;
-static int rflag;
-static int sflag;
-static int skip;
-static char* checkAgainst;
-static int checksFailed;
-static int failed;
+static int bflag = 0;
+static int cflag = 0;
+static int pflag = 0;
+static int qflag = 0;
+static int rflag = 0;
+static int sflag = 0;
+static int skip = 0;
+static char* checkAgainst = NULL;
+static int checksFailed = 0;
+static int failed = 0;
 
 typedef struct DIGEST_CTX_t DIGEST_CTX;
 
@@ -420,7 +421,7 @@ main(int argc, char *argv[])
 	cap_rights_t	rights;
 #endif
 	int	ch, fd;
-	char   *p, *string;
+	char   *p, *string = NULL;
 	char	buf[HEX_DIGEST_LENGTH];
 	size_t	len;
 	char	*progname;
@@ -453,7 +454,19 @@ main(int argc, char *argv[])
 	 * in this mode (though in the future it might be implemented).
 	 */
 	len = strlen(progname);
-	if (len > 3 && strcmp(progname + len - 3, "sum") == 0) {
+#ifdef _WIN32
+	if (len > 4 && strncasecmp(progname + len - 4, ".exe", 4) == 0)
+		len -= 4;
+	if (len > 7 && strncasecmp(progname + len - 7, "-static", 7) == 0)
+		len -= 7;
+#endif
+	if (len > 3 &&
+#ifdef _WIN32
+		strncasecmp(progname + len - 3, "sum", 3) == 0
+#else
+		strcmp(progname + len - 3, "sum") == 0
+#endif
+		) {
 		len -= 3;
 		rflag = 1;
 		gnu_emu = true;
@@ -467,15 +480,6 @@ main(int argc, char *argv[])
 	if (digest == sizeof(Algorithm)/sizeof(*Algorithm))
 		digest = 0;
 
-	failed = 0;
-	checkAgainst = NULL;
-	checksFailed = 0;
-	pflag = 0;
-	qflag = 0;
-	rflag = 0;
-	sflag = 0;
-	string = NULL;
-	skip = 0;
 	while ((ch = getopt(argc, argv, "bc:pqrs:tx")) != -1)
 		switch (ch) {
 		case 'b':
