@@ -81,7 +81,7 @@ rmdir lib/libc
 rmdir lib
 mv include/getopt.h md5/getopt/
 rmdir include
-mv libmd/Makefile libmd/Makefile.bsd
-mv libmd/Makefile.depend libmd/Makefile.depend.bsd
-mv md5/Makefile md5/Makefile.bsd
-mv md5/Makefile.depend md5/Makefile.depend.bsd
+mv libmd/Makefile libmd/_Makefile.freebsd
+mv libmd/Makefile.depend libmd/_Makefile.depend.freebsd
+mv md5/Makefile md5/_Makefile.freebsd
+mv md5/Makefile.depend md5/_Makefile.depend.freebsd
