@@ -83,10 +83,24 @@ copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224.exe
 copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
+copy /y $(TargetPath) $(TargetDir)md5sum.exe
+copy /y $(TargetPath) $(TargetDir)rmd160sum.exe
+copy /y $(TargetPath) $(TargetDir)sha1sum.exe
+copy /y $(TargetPath) $(TargetDir)sha224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha256sum.exe
+copy /y $(TargetPath) $(TargetDir)sha384sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein512sum.exe
+copy /y $(TargetPath) $(TargetDir)skein1024sum.exe
+copy /y $(TargetPath) $(TargetDir)shasum.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -112,10 +126,24 @@ copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224.exe
 copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
+copy /y $(TargetPath) $(TargetDir)md5sum.exe
+copy /y $(TargetPath) $(TargetDir)rmd160sum.exe
+copy /y $(TargetPath) $(TargetDir)sha1sum.exe
+copy /y $(TargetPath) $(TargetDir)sha224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha256sum.exe
+copy /y $(TargetPath) $(TargetDir)sha384sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein512sum.exe
+copy /y $(TargetPath) $(TargetDir)skein1024sum.exe
+copy /y $(TargetPath) $(TargetDir)shasum.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -138,10 +166,24 @@ copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224.exe
 copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
+copy /y $(TargetPath) $(TargetDir)md5sum.exe
+copy /y $(TargetPath) $(TargetDir)rmd160sum.exe
+copy /y $(TargetPath) $(TargetDir)sha1sum.exe
+copy /y $(TargetPath) $(TargetDir)sha224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha256sum.exe
+copy /y $(TargetPath) $(TargetDir)sha384sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein512sum.exe
+copy /y $(TargetPath) $(TargetDir)skein1024sum.exe
+copy /y $(TargetPath) $(TargetDir)shasum.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -167,14 +209,29 @@ copy /y $(TargetPath) $(TargetDir)sha224.exe
 copy /y $(TargetPath) $(TargetDir)sha256.exe
 copy /y $(TargetPath) $(TargetDir)sha384.exe
 copy /y $(TargetPath) $(TargetDir)sha512.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224.exe
 copy /y $(TargetPath) $(TargetDir)sha512t256.exe
 copy /y $(TargetPath) $(TargetDir)skein256.exe
 copy /y $(TargetPath) $(TargetDir)skein512.exe
 copy /y $(TargetPath) $(TargetDir)skein1024.exe
+copy /y $(TargetPath) $(TargetDir)md5sum.exe
+copy /y $(TargetPath) $(TargetDir)rmd160sum.exe
+copy /y $(TargetPath) $(TargetDir)sha1sum.exe
+copy /y $(TargetPath) $(TargetDir)sha224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha256sum.exe
+copy /y $(TargetPath) $(TargetDir)sha384sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe
+copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein256sum.exe
+copy /y $(TargetPath) $(TargetDir)skein512sum.exe
+copy /y $(TargetPath) $(TargetDir)skein1024sum.exe
+copy /y $(TargetPath) $(TargetDir)shasum.exe
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\md5\getopt\getopt_long.c" />
     <ClCompile Include="..\..\md5\md5.c" />
     <ClCompile Include="..\..\md5\getopt\getopt.c" />
   </ItemGroup>
@@ -194,6 +251,8 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <ClInclude Include="..\..\libmd\md5.h" />
     <ClInclude Include="..\..\libmd\ripemd.h" />
     <ClInclude Include="..\..\libmd\sha.h" />
+    <ClInclude Include="..\..\md5\supp\err.h" />
+    <ClInclude Include="..\..\md5\supp\getline.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libmd\libmd.vcxproj">
@@ -214,9 +273,23 @@ copy /y $(TargetPath) $(TargetDir)skein1024.exe
     <Exec Command="if exist $(OutDir)sha256.exe del $(OutDir)sha256.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)sha384.exe del $(OutDir)sha384.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)sha512.exe del $(OutDir)sha512.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512t224.exe del $(OutDir)sha512t224.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)sha512t256.exe del $(OutDir)sha512t256.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)skein256.exe del $(OutDir)skein256.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)skein512.exe del $(OutDir)skein512.exe /F /Q 2&gt;nul" />
     <Exec Command="if exist $(OutDir)skein1024.exe del $(OutDir)skein1024.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)md5sum.exe del $(OutDir)md5sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)rmd160sum.exe del $(OutDir)rmd160sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha1sum.exe del $(OutDir)sha1sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha224sum.exe del $(OutDir)sha224sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha256sum.exe del $(OutDir)sha256sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha384sum.exe del $(OutDir)sha384sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512sum.exe del $(OutDir)sha512sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512t224sum.exe del $(OutDir)sha512t224sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)sha512t256sum.exe del $(OutDir)sha512t256sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein256sum.exe del $(OutDir)skein256sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein512sum.exe del $(OutDir)skein512sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)skein1024sum.exe del $(OutDir)skein1024sum.exe /F /Q 2&gt;nul" />
+    <Exec Command="if exist $(OutDir)shasum.exe del $(OutDir)shasum.exe /F /Q 2&gt;nul" />
   </Target>
 </Project>

@@ -22,6 +22,14 @@ typedef uint16_t u_int16_t;
 typedef uint32_t u_int32_t;
 typedef uint64_t u_int64_t;
 
+#ifdef _MSC_VER
+#ifdef _WIN64
+typedef __int64 ssize_t;
+#else
+typedef int ssize_t;
+#endif
+#endif
+
 #define BYTE_ORDER      1234
 #define LITTLE_ENDIAN   1234
 #define BIG_ENDIAN      4321

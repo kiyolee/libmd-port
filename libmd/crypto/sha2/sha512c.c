@@ -29,10 +29,6 @@
 #include <sys/cdefs.h>
 #endif
 #ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
-#ifdef __FreeBSD__
 #include <sys/endian.h>
 #endif
 #include <sys/types.h>
@@ -81,9 +77,16 @@ __FBSDID("$FreeBSD$");
  *  For CPUs having alignment problem, these may need to change
  *  to follow what FreeBSD does.
  */
+#define be32enc _libmd_be32enc
 #define be64enc _libmd_be64enc
 #define be64dec _libmd_be64dec
 #endif
+
+static __inline void
+be32enc(void *pp, uint32_t u)
+{
+	*((uint32_t *)pp) = _libmd_bswap32(u);
+}
 
 static __inline void
 be64enc(void *pp, uint64_t u)
@@ -98,23 +101,26 @@ be64dec(const void *pp)
 }
 
 /*
- * Encode a length len/4 vector of (uint64_t) into a length len vector of
- * (unsigned char) in big-endian form.  Assumes len is a multiple of 8.
+ * Encode a length (len + 7) / 8 vector of (uint64_t) into a length len
+ * vector of (unsigned char) in big-endian form.  Assumes len is a
+ * multiple of 4.
  */
-static void
+static __inline void
 be64enc_vect(unsigned char *dst, const uint64_t *src, size_t len)
 {
 	size_t i;
 
 	for (i = 0; i < len / 8; i++)
 		be64enc(dst + i * 8, src[i]);
+	if (len % 8 == 4)
+		be32enc(dst + i * 8, src[i] >> 32);
 }
 
 /*
  * Decode a big-endian length len vector of (unsigned char) into a length
- * len/4 vector of (uint64_t).  Assumes len is a multiple of 8.
+ * len/8 vector of (uint64_t).  Assumes len is a multiple of 8.
  */
-static void
+static __inline void
 be64dec_vect(uint64_t *dst, const unsigned char *src, size_t len)
 {
 	size_t i;

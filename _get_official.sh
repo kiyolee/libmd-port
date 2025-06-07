@@ -2,11 +2,12 @@
 
 [ ! -f ../`basename "$0"` ] && exit 1
 
-REL=${1:-13.1}
+REL=${1:-14.3}
 
 for i in \
   include/getopt.h \
   lib/libc/stdlib/getopt.c \
+  lib/libc/stdlib/getopt_long.c \
   lib/libmd/Makefile \
   lib/libmd/Makefile.depend \
   lib/libmd/i386/rmd160.S \

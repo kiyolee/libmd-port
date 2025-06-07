@@ -38,13 +38,6 @@
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)getopt.c	8.3 (Berkeley) 4/27/95";
 #endif /* LIBC_SCCS and not lint */
-#ifdef unix
-#include <sys/cdefs.h>
-#endif
-#ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
 #ifdef __FreeBSD__
 #include "namespace.h"
 #endif
@@ -60,6 +53,10 @@ __FBSDID("$FreeBSD$");
 
 #ifdef __FreeBSD__
 #include "libc_private.h"
+#endif
+
+#if defined(_WIN32) || defined(__OS400__)
+#include "../getopt/getopt.h"
 #endif
 
 int	opterr = 1,		/* if error message should be printed */

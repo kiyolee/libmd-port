@@ -5,12 +5,26 @@ TARGET_SHA224 = sha224
 TARGET_SHA256 = sha256
 TARGET_SHA384 = sha384
 TARGET_SHA512 = sha512
-TARGET_SHA512t256 = sha512t256
+TARGET_SHA512T224 = sha512t224
+TARGET_SHA512T256 = sha512t256
 TARGET_SKEIN256 = skein256
 TARGET_SKEIN512 = skein512
 TARGET_SKEIN1024 = skein1024
+TARGET_MD5SUM = md5sum
+TARGET_RMD160SUM = rmd160sum
+TARGET_SHA1SUM = sha1sum
+TARGET_SHA224SUM = sha224sum
+TARGET_SHA256SUM = sha256sum
+TARGET_SHA384SUM = sha384sum
+TARGET_SHA512SUM = sha512sum
+TARGET_SHA512T224SUM = sha512t224sum
+TARGET_SHA512T256SUM = sha512t256sum
+TARGET_SKEIN256SUM = skein256sum
+TARGET_SKEIN512SUM = skein512sum
+TARGET_SKEIN1024SUM = skein1024sum
+TARGET_SHASUM = shasum
 
-ALL_TARGETS = \
+TEST_TARGETS = \
     $(TARGET) \
     $(TARGET_RMD160) \
     $(TARGET_SHA1) \
@@ -18,10 +32,27 @@ ALL_TARGETS = \
     $(TARGET_SHA256) \
     $(TARGET_SHA384) \
     $(TARGET_SHA512) \
-    $(TARGET_SHA512t256) \
+    $(TARGET_SHA512T224) \
+    $(TARGET_SHA512T256) \
     $(TARGET_SKEIN256) \
     $(TARGET_SKEIN512) \
     $(TARGET_SKEIN1024)
+
+ALL_TARGETS = \
+    $(TEST_TARGETS) \
+    $(TARGET_MD5SUM) \
+    $(TARGET_RMD160SUM) \
+    $(TARGET_SHA1SUM) \
+    $(TARGET_SHA224SUM) \
+    $(TARGET_SHA256SUM) \
+    $(TARGET_SHA384SUM) \
+    $(TARGET_SHA512SUM) \
+    $(TARGET_SHA512T224SUM) \
+    $(TARGET_SHA512T256SUM) \
+    $(TARGET_SKEIN256SUM) \
+    $(TARGET_SKEIN512SUM) \
+    $(TARGET_SKEIN1024SUM) \
+    $(TARGET_SHASUM)
 
 ifeq ($(NO_INTERNAL),)
 CFLAGS_INTERNAL = -DLIBMD_INTERNAL
@@ -51,11 +82,11 @@ clean:
 cleanx: clean
 	( cd ../libmd; $(MAKE) -f Makefile.osx clean )
 
-test: $(ALL_TARGETS)
-	@for i in $(ALL_TARGETS); do ./$$i -x || exit 1; done
+test: $(TEST_TARGETS)
+	@for i in $(TEST_TARGETS); do ./$$i -x || exit 1; done
 
-timetrial: $(ALL_TARGETS)
-	@for i in $(ALL_TARGETS); do ./$$i -t || exit 1; done
+timetrial: $(TEST_TARGETS)
+	@for i in $(TEST_TARGETS); do ./$$i -t || exit 1; done
 
 $(LIBMD): ../libmd/Makefile.osx
 	( cd ../libmd; $(MAKE) -f Makefile.osx )
@@ -81,7 +112,10 @@ $(TARGET_SHA384): $(TARGET)
 $(TARGET_SHA512): $(TARGET)
 	ln -s $(TARGET) $@
 
-$(TARGET_SHA512t256): $(TARGET)
+$(TARGET_SHA512T224): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512T256): $(TARGET)
 	ln -s $(TARGET) $@
 
 $(TARGET_SKEIN256): $(TARGET)
@@ -91,6 +125,45 @@ $(TARGET_SKEIN512): $(TARGET)
 	ln -s $(TARGET) $@
 
 $(TARGET_SKEIN1024): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_MD5SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_RMD160SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA1SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA224SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA256SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA384SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512T224SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHA512T256SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN256SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN512SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SKEIN1024SUM): $(TARGET)
+	ln -s $(TARGET) $@
+
+$(TARGET_SHASUM): $(TARGET)
 	ln -s $(TARGET) $@
 
 %.o: %.c

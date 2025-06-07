@@ -4,10 +4,6 @@
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
-#ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
 /*-
    SPDX-License-Identifier: RSA-MD
 

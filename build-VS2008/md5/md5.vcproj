@@ -89,7 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)md5sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)rmd160sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -164,7 +164,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)md5sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)rmd160sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -239,7 +239,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)md5sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)rmd160sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -315,7 +315,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;"
+				CommandLine="copy /y $(TargetPath) $(TargetDir)rmd160.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)md5sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)rmd160sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha384sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t224sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha512t256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein256sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein512sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)skein1024sum.exe&#x0D;&#x0A;copy /y $(TargetPath) $(TargetDir)sha1sum.exe&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -336,6 +336,10 @@
 				>
 				<File
 					RelativePath="..\..\md5\getopt\getopt.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\md5\getopt\getopt_long.c"
 					>
 				</File>
 			</Filter>
@@ -428,6 +432,18 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="supp"
+				>
+				<File
+					RelativePath="..\..\md5\supp\err.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\md5\supp\getline.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

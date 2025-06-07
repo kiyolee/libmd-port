@@ -45,8 +45,8 @@ OBJS = \
     md4c.o md5c.o md4hl.o md5hl.o \
     rmd160c.o rmd160hl.o \
     sha0c.o sha0hl.o sha1c.o sha1hl.o \
-    sha224hl.o sha256c.o sha256hl.o \
-    sha512c.o sha512hl.o sha512t224hl.o sha512t256hl.o sha384hl.o \
+    sha224hl.o sha256c.o sha256hl.o sha384hl.o \
+    sha512c.o sha512hl.o sha512t224hl.o sha512t256hl.o \
     skein.o skein_block.o \
     skein256hl.o skein512hl.o skein1024hl.o \
     $(OBJS_X86) \
@@ -56,15 +56,16 @@ SRCS_HL = \
     md4hl.c md5hl.c \
     rmd160hl.c \
     sha0hl.c sha1hl.c \
-    sha224hl.c sha256hl.c \
-    sha512hl.c sha512t224hl.c sha512t256hl.c sha384hl.c \
+    sha224hl.c sha256hl.c sha384hl.c \
+    sha512hl.c sha512t224hl.c sha512t256hl.c \
     skein256hl.c skein512hl.c skein1024hl.c
 
 REFS = \
     md4.ref md5.ref \
     rmd160.ref \
     sha0.ref sha1.ref \
-    sha224.ref sha256.ref sha384.ref sha512.ref sha512t256.ref \
+    sha224.ref sha256.ref sha384.ref \
+    sha512.ref sha512t224.ref sha512t256.ref \
     skein256.ref skein512.ref skein1024.ref
 
 all: $(TARGET_STATIC)
@@ -268,6 +269,21 @@ sha512.ref:
 	@echo 'SHA-512 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =' \
 		'72ec1ef1124a45b047e8b7c75a932195135bb61de24ec0d1914042246e0aec3a2354e093d76f3048b456764346900cb130d2a4fd5dd16abb5e30bcb850dee843' >> $@
 
+sha512t224.ref:
+	echo 'SHA-512224 test suite:' > $@
+	@echo 'SHA-512224 ("") =' \
+		'6ed0dd02806fa89e25de060c19d3ac86cabb87d6a0ddd05c333b84f4' >> $@
+	@echo 'SHA-512224 ("abc") =' \
+		'4634270f707b6a54daae7530460842e20e37ed265ceee9a43e8924aa' >> $@
+	@echo 'SHA-512224 ("message digest") =' \
+		'ad1a4db188fe57064f4f24609d2a83cd0afb9b398eb2fcaeaae2c564' >> $@
+	@echo 'SHA-512224 ("abcdefghijklmnopqrstuvwxyz") =' \
+		'ff83148aa07ec30655c1b40aff86141c0215fe2a54f767d3f38743d8' >> $@
+	@echo 'SHA-512224 ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") =' \
+		'a8b4b9174b99ffc67d6f49be9981587b96441051e16e6dd036b140d3' >> $@
+	@echo 'SHA-512224 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") =' \
+		'ae988faaa47e401a45f704d1272d99702458fea2ddc6582827556dd2' >> $@
+
 sha512t256.ref:
 	echo 'SHA-512256 test suite:' > $@
 	@echo 'SHA-512256 ("") =' \
@@ -371,6 +387,9 @@ test: $(TARGET_STATIC) $(REFS)
 	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=512 -o shadriver shadriver.c $(TARGET_STATIC)
 	./shadriver | cmp sha512.ref -
 	@echo SHA-512 passed test
+	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=512224 -o shadriver shadriver.c $(TARGET_STATIC)
+	./shadriver | cmp sha512t224.ref -
+	@echo SHA-512t224 passed test
 	$(CC) $(CFLAGS) $(LDFLAGS_STATIC) -DSHA=512256 -o shadriver shadriver.c $(TARGET_STATIC)
 	./shadriver | cmp sha512t256.ref -
 	@echo SHA-512t256 passed test

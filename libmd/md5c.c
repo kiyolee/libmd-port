@@ -31,10 +31,6 @@
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
-#ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
 #include <sys/types.h>
 
 #ifdef _KERNEL

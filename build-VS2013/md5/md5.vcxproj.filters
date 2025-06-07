@@ -34,12 +34,18 @@
     <Filter Include="Header Files\libmd\supp">
       <UniqueIdentifier>{5dde4c26-ef9d-4afd-85b8-ec0af6b5adb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\supp">
+      <UniqueIdentifier>{ffdb3e8f-68e3-4738-8bf0-2b15432c61ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\md5\md5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\md5\getopt\getopt.c">
+      <Filter>Source Files\getopt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\md5\getopt\getopt_long.c">
       <Filter>Source Files\getopt</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="..\..\libmd\supp\w32defs.h">
       <Filter>Header Files\libmd\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5\supp\getline.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5\supp\err.h">
+      <Filter>Header Files\supp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

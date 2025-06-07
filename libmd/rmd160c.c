@@ -32,7 +32,7 @@
  *    must display the following acknowledgement:
  *    "This product includes cryptographic software written by
  *     Eric Young (eay@cryptsoft.com)"
- *    The word 'cryptographic' can be left out if the rouines from the library
+ *    The word 'cryptographic' can be left out if the routines from the library
  *    being used are not cryptographic related :-).
  * 4. If you include any Windows specific code (or a derivative thereof) from 
  *    the apps directory (application code) you must include an acknowledgement:
@@ -59,10 +59,6 @@
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
-#ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
 #include <sys/types.h>
 
 #include <stdio.h>
@@ -240,6 +236,7 @@ void RIPEMD160_Update(RIPEMD160_CTX *c, const void *in, size_t len)
 	}
 
 #ifdef LIBMD_INCL_UNUSED
+RIPEMD160_API
 void RIPEMD160_Transform(RIPEMD160_CTX *c, unsigned char *b)
 	{
 	u_int32_t p[16];

@@ -32,7 +32,7 @@
  *    must display the following acknowledgement:
  *    "This product includes cryptographic software written by
  *     Eric Young (eay@cryptsoft.com)"
- *    The word 'cryptographic' can be left out if the rouines from the library
+ *    The word 'cryptographic' can be left out if the routines from the library
  *    being used are not cryptographic related :-).
  * 4. If you include any Windows specific code (or a derivative thereof) from 
  *    the apps directory (application code) you must include an acknowledgement:
@@ -59,10 +59,6 @@
 #ifdef unix
 #include <sys/cdefs.h>
 #endif
-#ifdef __FreeBSD__
-__FBSDID("$FreeBSD$");
-#endif
-
 #include <sys/types.h>
 
 #include <stdio.h>
@@ -265,6 +261,7 @@ void SHA_Update(SHA_CTX *c, const void *in, size_t len)
 #endif
 
 #ifdef LIBMD_INCL_UNUSED
+SHA_API
 void SHA_Transform(SHA_CTX *c, unsigned char *b)
 	{
 	u_int32_t p[16];
