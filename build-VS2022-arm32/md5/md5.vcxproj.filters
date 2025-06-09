@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\getopt">
+      <UniqueIdentifier>{cdca7400-22f9-4db7-89fa-22e0c822989c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\getopt">
+      <UniqueIdentifier>{5205089f-4c6f-426c-bbb5-39414b6dd125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libmd">
+      <UniqueIdentifier>{2d8b80af-0580-47f8-8d95-8e64485feb7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Header Files\crypto">
+      <UniqueIdentifier>{e13dbdc7-7a86-4a4c-b3dc-a115f65324b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\crypto\sha2">
+      <UniqueIdentifier>{66e5838a-7def-4503-977e-53bf9c928174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\crypto\skein">
+      <UniqueIdentifier>{582f7420-c829-4df3-ad84-95a85b4b9618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libmd\supp">
+      <UniqueIdentifier>{5dde4c26-ef9d-4afd-85b8-ec0af6b5adb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\supp">
+      <UniqueIdentifier>{ffdb3e8f-68e3-4738-8bf0-2b15432c61ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\md5\md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\md5\getopt\getopt.c">
+      <Filter>Source Files\getopt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\md5\getopt\getopt_long.c">
+      <Filter>Source Files\getopt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\md5\getopt\getopt.h">
+      <Filter>Header Files\getopt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\md5.h">
+      <Filter>Header Files\libmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\ripemd.h">
+      <Filter>Header Files\libmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\sha.h">
+      <Filter>Header Files\libmd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha256.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha384.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha512t.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein.h">
+      <Filter>Header Files\crypto\skein</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_freebsd.h">
+      <Filter>Header Files\crypto\skein</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\skein\skein_port.h">
+      <Filter>Header Files\crypto\skein</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\crypto\sha2\sha224.h">
+      <Filter>Header Files\crypto\sha2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\e2a.h">
+      <Filter>Header Files\libmd\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\isdefs.h">
+      <Filter>Header Files\libmd\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libmd\supp\w32defs.h">
+      <Filter>Header Files\libmd\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5\supp\getline.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\md5\supp\err.h">
+      <Filter>Header Files\supp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\win32\libmd.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

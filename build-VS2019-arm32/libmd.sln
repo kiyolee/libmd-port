@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28721.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd-static", "libmd-static\libmd-static.vcxproj", "{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd", "libmd\libmd.vcxproj", "{5CC6B30E-41FD-44B0-8059-E25A68FCD286}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmd-srcgen", "libmd-srcgen\libmd-srcgen.vcxproj", "{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5", "md5\md5.vcxproj", "{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5-static", "md5-static\md5-static.vcxproj", "{C92B3987-3107-4026-AEEA-665E3AF993DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}.Debug|ARM.ActiveCfg = Debug|ARM
+		{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}.Debug|ARM.Build.0 = Debug|ARM
+		{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}.Release|ARM.ActiveCfg = Release|ARM
+		{75F6FCE6-44EC-45F8-9F24-5C58F79508C7}.Release|ARM.Build.0 = Release|ARM
+		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Debug|ARM.Build.0 = Debug|ARM
+		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Release|ARM.ActiveCfg = Release|ARM
+		{5CC6B30E-41FD-44B0-8059-E25A68FCD286}.Release|ARM.Build.0 = Release|ARM
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Debug|ARM.Build.0 = Debug|ARM
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|ARM.ActiveCfg = Release|ARM
+		{EEFC26A6-9B94-4B66-964C-69F3CDCC2E66}.Release|ARM.Build.0 = Release|ARM
+		{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}.Debug|ARM.Build.0 = Debug|ARM
+		{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}.Release|ARM.ActiveCfg = Release|ARM
+		{B2EFBE3A-03C0-47AD-B9C0-BEE55380C01F}.Release|ARM.Build.0 = Release|ARM
+		{C92B3987-3107-4026-AEEA-665E3AF993DE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C92B3987-3107-4026-AEEA-665E3AF993DE}.Debug|ARM.Build.0 = Debug|ARM
+		{C92B3987-3107-4026-AEEA-665E3AF993DE}.Release|ARM.ActiveCfg = Release|ARM
+		{C92B3987-3107-4026-AEEA-665E3AF993DE}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5CFDBB8-7A23-4BAA-BE1C-5D00EC6BD624}
+	EndGlobalSection
+EndGlobal
